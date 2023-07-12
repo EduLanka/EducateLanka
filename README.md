@@ -1,0 +1,2 @@
+# EducateLanka
+EduLanka web application
