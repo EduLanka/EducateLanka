@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +43,11 @@ Route::get('parent',function(){
 Route::get('developer',function(){
     return view('developer');
 })->name('developer')->middleware('developer');
+
+//to get the database deatils shown when the admin dashboard open
+Route::get('admin', [App\Http\Controllers\HomeController::class, 'admin'])->name('admin');
+
+//Admin:- to go to course page in admin
+Route::get("/course",[AdminController::class,"addcourse"]);
+
+
