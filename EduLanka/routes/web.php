@@ -50,4 +50,19 @@ Route::get('admin', [App\Http\Controllers\HomeController::class, 'admin'])->name
 //Admin:- to go to course page in admin
 Route::get("/course",[AdminController::class,"addcourse"]);
 
+Route::get("/students",[AdminController::class,"addstudent"]);
 
+Route::get("/teachers",[AdminController::class,"addteacher"]);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

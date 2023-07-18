@@ -34,7 +34,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a  class="brand">
-			<img src="assets/images/Logo.svg" alt="" style=" height:80px; min-width: 90px; display: flex; justify-content: center; ">
+			<img src="assets/images/Logo.jpg" alt="" style=" height:80px; min-width: 90px; display: flex; justify-content: center; ">
 			<span class="text"  style=" padding:10px; ">EduLanka</span>
 		</a>
 		<ul class="side-menu top">
@@ -51,13 +51,13 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{url('/students')}}">
 					<i class='bx bx-group' ></i>
 					<span class="text">Students</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{url('/teachers')}}">
 					<i class='bx bxs-user' ></i>
 					<span class="text">Teacher</span>
 				</a>
@@ -128,11 +128,11 @@
 					<h1>Dashboard</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Dashboard</a>
+							<a href="{{url('admin')}}">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Home</a>
+							<a class="active" href="">Home</a>
 						</li>
 					</ul>
 				</div>
@@ -151,7 +151,7 @@
 					<i class='bx bxs-user' ></i>
 					<span class="text">
 						<h3>{{ $studentCount }}</h3>
-						<p>Teacher</p>
+						<p>Student</p>
 					</span>
 				</li>
                 
@@ -159,7 +159,7 @@
 					<i class='bx bx-group' ></i>
 					<span class="text">
 						<h3>{{ $teacherCount }}</h3>
-						<p>Student</p>
+						<p>Teacher</p>
 					</span>
 				</li>
                 <li>
@@ -190,59 +190,40 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Orders</h3>
+						<h3>All Users</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
 					<table>
 						<thead>
 							<tr>
-								<th>User</th>
-								<th>Date Order</th>
-								<th>Status</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Role</th>
 							</tr>
 						</thead>
 						<tbody>
+                        @foreach ($users as $user)
 							<tr>
 								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
+									<p>{{ $user->name }}</p>
 								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
+								<td>{{ $user->email }}</td>
+								<td> @if ($user->role == 1)
+                    Admin
+                @elseif ($user->role == 2)
+                    Student
+                @elseif ($user->role == 3)
+                    Teacher
+                @elseif ($user->role == 4)
+                    Parent
+                @elseif ($user->role == 5)
+                    Developer
+                @endif</td>
 							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
+						
+                            @endforeach
+							
 						</tbody>
 					</table>
 				</div>

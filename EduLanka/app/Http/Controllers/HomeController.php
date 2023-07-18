@@ -26,20 +26,16 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function admin()
-    {
+    public function admin(){
         $studentCount = User::where('role', 2)->count();
         $teacherCount = User::where('role', 3)->count();
         $adminCount = User::where('role', 1)->count();
         $parentCount = User::where('role', 4)->count();
-        $developerCount = User::where('role', 4)->count();
+        $developerCount = User::where('role', 5)->count();
 
-        return view('admin', [
-            'studentCount' => $studentCount,
-            'teacherCount' => $teacherCount,
-            'adminCount' => $adminCount,
-            'parentCount' => $parentCount,
-            'developerCount' => $developerCount,
-        ]);
+        $users = User::all(); // Retrieve all users
+
+        return view('admin', compact('studentCount', 'teacherCount', 'adminCount', 'parentCount', 'developerCount', 'users'));
+
     }
 }

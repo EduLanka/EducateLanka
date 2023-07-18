@@ -45,19 +45,19 @@
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li class="active">
+			<li >
 				<a href="{{url('/course')}}">
 					<i class='bx bx-book' ></i>
 					<span class="text">Course</span>
 				</a>
 			</li>
-			<li>
+			<li >
 				<a href="{{url('/students')}}">
 					<i class='bx bx-group' ></i>
 					<span class="text">Students</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="{{url('/teachers')}}">
 					<i class='bx bxs-user' ></i>
 					<span class="text">Teacher</span>
@@ -103,7 +103,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
+			<a href="" class="nav-link">Categories</a>
 			<form action="">
 				
 			</form>
@@ -126,15 +126,15 @@
 					<h1>Dashboard</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="">Dashboard</a>
+							<a href="#">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
 							<a class="active" href="{{url('admin')}}">Home</a>
 						</li>
-                        <li><i class='bx bx-chevron-right' ></i></li>
+						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="{{url('/course')}}">Course</a>
+							<a class="active" href="{{url('/teachers')}}">Teacher</a>
 						</li>
 					</ul>
 				</div>
@@ -145,47 +145,40 @@
 				<div class="order">
 					<div class="head">
 						<h3>Courses</h3>
+
+                        <form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+                    
 						<!-- Button trigger modal pop up -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Add Course
+  Register Teacher
 </button>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Add Course</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-	<!--  form start -->
       <div class="modal-body">
-        <form action="" method="POST" enctype="multipart/from-data">
-			@csrf
-          <div class="mb-3">
-		  <label for="recipient-name" class="col-form-label">Level:</label>
-         <select class="form-control" id="recipient-name" name="title" required>
-  <option value="grade5">Grade 5</option>
-  <option value="grade6">Grade 6</option>
-  <option value="grade7">Grade 7</option>
-  <option value="grade8">Grade 8</option>
-  <option value="grade9">Grade 9</option>
-  <option value="grade10">Grade 10</option>
-  <option value="grade11">Grade 11</option>
-  <option value="grade12">Grade 12</option>
-  <option value="grade13">Grade 13</option>
-  <!-- Add more options as needed -->
-</select>
-          </div>
-          <div class="mb-3">
-		  <label for="exampleFormControlInput1" class="form-label">Subject:</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Biological Science" name="subject" required>
-          </div>
+        <!--form start -->
+      <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+                <!-- end of form -->
 
-	
-        </form>
       </div>
-	  <!-- end form start -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save</button>
@@ -256,11 +249,6 @@
 	</section>
 	<!-- CONTENT -->
 	
-
-
-
-
-
 
 
 

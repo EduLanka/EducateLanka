@@ -44,7 +44,7 @@ class LoginController extends Controller
             'email'=> 'required|email',
             'password'=>'required'
         ]);
-        
+
         if(Auth::attempt($credentials)){
             $user_role=Auth::user()->role;
 
@@ -52,25 +52,27 @@ class LoginController extends Controller
                 case 1:
                     return redirect('admin');
                     break;
-                case 2:
-                     return redirect('student');
-                    break;
-                case 3:
-                    return redirect('teacher');
-                    break;
-                case 4:
-                    return redirect('parent');
-                    break;
-                case 5:
-                    return redirect('developer');
-                    break;
-                default:
-                 Auth::logout();
-                 return redirect('/login')->with('error','ooops something went wrong try again later');
+                    case 2:
+                        return redirect('student');
+                        break;
+                        case 3:
+                            return redirect('teacher');
+                            break;
+                            case 4:
+                                return redirect('parent');
+                                break;
+                                case 5:
+                                    return redirect('developer');
+                                    break;
+                                    default:
+                                    Auth::logout();
+                                    return redirect('/login')->with('error','ooops something went wrong try again later');
 
             }
+        
         }else{
             return redirect('/login');
         }
 
+    }
 }
