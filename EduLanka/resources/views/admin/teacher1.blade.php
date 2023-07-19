@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- My CSS -->
 	<link rel="stylesheet" href="assets/admin.css">
     <!-- end if link to CSS -->
@@ -51,13 +52,13 @@
 					<span class="text">Course</span>
 				</a>
 			</li>
-			<li >
+			<li>
 				<a href="{{url('/students')}}">
 					<i class='bx bx-group' ></i>
 					<span class="text">Students</span>
 				</a>
 			</li>
-			<li class="active">
+			<li  class="active">
 				<a href="{{url('/teachers')}}">
 					<i class='bx bxs-user' ></i>
 					<span class="text">Teacher</span>
@@ -103,7 +104,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="" class="nav-link">Categories</a>
+			<a href="" class="nav-link">Students</a>
 			<form action="">
 				
 			</form>
@@ -132,7 +133,7 @@
 						<li>
 							<a class="active" href="{{url('admin')}}">Home</a>
 						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
 						<li>
 							<a class="active" href="{{url('/teachers')}}">Teacher</a>
 						</li>
@@ -144,7 +145,7 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Courses</h3>
+						<h3>Teachers</h3>
 
                         <form action="#">
 				<div class="form-input">
@@ -163,26 +164,44 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add Course</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Add Teacher</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+	  <form method="POST" action="{{ url('createTeacher') }}" enctype="multipart/form-data">
+		@csrf
       <div class="modal-body">
         <!--form start -->
-      <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
+		<div class="mb-3">
+			<label for="fname" class="form-label">First Name</label>
+			<input type="text" class="form-control" name = "fname" id="exampleFormControlInput1" placeholder="Maryam">
+		</div>
+		<div class="mb-3">
+			<label for="lname" class="form-label">Last Name</label>
+			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Mashkoora">
+		</div>
+		<div class="mb-3">
+			<label for="email" class="form-label">Email address</label>
+			<input type="text" class="form-control" name = "email" id="exampleFormControlInput1" placeholder="name@example.com">
+		</div>
+		<div class="mb-3">
+			<label for="level" class="form-label">Level</label>
+			<input type="text" class="form-control" name = "level" id="exampleFormControlInput1" placeholder="A-level">
+		</div>
+		<div class="mb-3">
+			<label for="school" class="form-label">School</label>
+			<input type="text" class="form-control" name = "school" id="exampleFormControlInput1" placeholder="Example school">
+		</div>
+
                 <!-- end of form -->
 
       </div>
+	
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
       </div>
+
+	  </form>
     </div>
   </div>
 </div>
@@ -191,52 +210,25 @@
 					<table>
 						<thead>
 							<tr>
-								<th>User</th>
-								<th>Date Order</th>
-								<th>Status</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Email</th>
+								<th>Level</th>
+								<th>School</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
+						@foreach ($teachers as $teacher)
+                  		<tr  id="row{{ $teacher->id }}">
+							<td>{{$teacher -> first_name}}</td>
+							<td>{{$teacher -> last_name}}</td>
+							<td>{{$teacher -> email}}</td>
+							<td>{{$teacher -> level}}</td>
+							<td>{{$teacher -> school}}</td>
+							<td><i class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
+							<td><a href="{{url('/deleteTeacher',$teacher->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>           
+                  		</tr>
+                  @endforeach
 						</tbody>
 					</table>
 				</div>

@@ -203,23 +203,23 @@
 							</tr>
 						</thead>
 						<tbody>
-                        @foreach ($users as $user)
+						@foreach ($Student as $Student)
 							<tr>
 								<td>
-									<p>{{ $user->name }}</p>
+									<p>{{ $Student->first_name }}</p>
 								</td>
-								<td>{{ $user->email }}</td>
-								<td> @if ($user->role == 1)
-                    Admin
-                @elseif ($user->role == 2)
-                    Student
-                @elseif ($user->role == 3)
-                    Teacher
-                @elseif ($user->role == 4)
-                    Parent
-                @elseif ($user->role == 5)
-                    Developer
-                @endif</td>
+								<td>{{ $Student->email }}</td>
+								<td>{{ $Student->role == 2}} Student </td>
+							</tr>
+						
+                            @endforeach
+							@foreach ($Teacher as $Teacher)
+							<tr>
+								<td>
+									<p>{{ $Teacher->first_name }}</p>
+								</td>
+								<td>{{ $Teacher->email }}</td>
+								<td>{{ $Teacher->role == 3}} Teacher</td>
 							</tr>
 						
                             @endforeach

@@ -218,7 +218,8 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Name</th>
+								<th>First Name</th>
+								<th>Last Name</th>
 								<th>Email</th>
 								<th>Birthday</th>
 								<th>Level</th>
@@ -228,22 +229,19 @@
 						</thead>
 						<tbody>
 						@foreach ($students as $student)
-                  		<tr>
-							<td>{{$student -> first_name}} {{$student -> last_name}}</td>
+                  		<tr id="row{{ $student->id }}">
+							<td>{{$student -> first_name}} </td>
+							<td>{{$student -> last_name}}</td>
 							<td>{{$student -> email}}</td>
 							<td>{{$student -> birthday}}</td>
 							<td>{{$student -> level}}</td>
 							<td>{{$student -> school}}</td>
 							<td>{{$student -> guardian_id}}</td>
 							<td> 
-							<i onclick="openEditModal({{ $student->id }})" class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i>
+							<td> 
+							<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;" onclick="openEditModal({{ $student->id }})"></i>
 							 </td>
 							<td><a href="{{url('/deleteStudent',$student->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>
-
-
-
-
-							
 							<!--<td><span class="status completed">Completed</span></td>    -->             
                   		</tr>
                   @endforeach
@@ -259,8 +257,84 @@
 	</section>
 	<!-- CONTENT -->
 
+	<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" action="{{ route('updatestu') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id="editStudentId" name="studentId" value="">
+                    <!-- Add form fields for editing student properties -->
+                    <div class="form-group">
+                        <label for="editFirstName">First Name</label>
+                        <input type="text" class="form-control" id="editFirstName" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editLastName">Last Name</label>
+                        <input type="text" class="form-control" id="editLastName" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email</label>
+                        <input type="email" class="form-control" id="editEmail" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="editBirthday">Birthday</label>
+                        <input type="date" class="form-control" id="editBirthday" name="birthday">
+                    </div>
+                    <div class="form-group">
+                        <label for="editLevel">Level</label>
+                        <input type="text" class="form-control" id="editLevel" name="level">
+                    </div>
+                    <div class="form-group">
+                        <label for="editSchool">School</label>
+                        <input type="text" class="form-control" id="editSchool" name="school">
+                    </div>
+                    <div class="form-group">
+                        <label for="editGuardianId">Guardian ID</label>
+                        <input type="text" class="form-control" id="editGuardianId" name="guardian_id">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 	
-	
+<script>
+    function openEditModal(studentId) {
+        var studentRow = document.getElementById('row' + studentId);
+        var studentFirstName = studentRow.querySelector('td:nth-child(1)').textContent;
+        var studentLastName = studentRow.querySelector('td:nth-child(2)').textContent;
+        var studentEmail = studentRow.querySelector('td:nth-child(3)').textContent;
+        var studentBirthday = studentRow.querySelector('td:nth-child(4)').textContent;
+        var studentLevel = studentRow.querySelector('td:nth-child(5)').textContent;
+        var studentSchool = studentRow.querySelector('td:nth-child(6)').textContent;
+        var studentGuardianId = studentRow.querySelector('td:nth-child(7)').textContent;
+
+        document.getElementById('editStudentId').value = studentId;
+        document.getElementById('editFirstName').value = studentFirstName;
+        document.getElementById('editLastName').value = studentLastName;
+        document.getElementById('editEmail').value = studentEmail;
+        document.getElementById('editBirthday').value = studentBirthday;
+        document.getElementById('editLevel').value = studentLevel;
+        document.getElementById('editSchool').value = studentSchool;
+        document.getElementById('editGuardianId').value = studentGuardianId;
+
+        var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        editModal.show();
+    }
+</script>
+
+
+
 
 
 

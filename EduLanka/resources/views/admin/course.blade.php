@@ -212,8 +212,9 @@
 									<p>{{ $data->level }}</p>
 								</td>
 								<td>{{ $data->subject }}</td>
-								<td><button onclick="openEditModal({{ $data->id }})">Edit</button></td>
-								<td><a href="{{url('/deletecourse',$data->id)}}"> <span class="status completed">Delete</span></a></td>
+								<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;" onclick="openEditModal({{ $data->id }})"></i>
+							 </td>
+								<td><a href="{{url('/deletecourse',$data->id)}}"> <i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>
 								
 
 							</tr>
@@ -234,7 +235,8 @@
 
 
 
-	<!-- Edit Modal -->
+	<!-- first onclick to edit button
+	second Edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -268,7 +270,7 @@
 
 
 
-
+<!--js to modal to be open-->
 <script>
     function openEditModal(itemId) {
         var itemRow = document.getElementById('row' + itemId);

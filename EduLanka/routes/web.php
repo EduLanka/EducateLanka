@@ -62,4 +62,11 @@ Route::post('/update', 'App\Http\Controllers\AdminController@update')->name('upd
 
 Route::post("/createStudent",[AdminController::class,"createStudent"]);
 Route::get("/deleteStudent/{id}",[AdminController::class,"deleteStudent"]);
+Route::post('/updatestudent', 'App\Http\Controllers\AdminController@updatestu')->name('updatestu');
+
+
+
+Route::post("/createTeacher",[AdminController::class,"createTeacher"]);
+Route::get("/deleteTeacher/{id}",[AdminController::class,"deleteTeacher"]);
+
 

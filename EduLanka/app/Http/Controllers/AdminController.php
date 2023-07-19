@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -21,7 +22,8 @@ class AdminController extends Controller
         return view("admin.student1",compact("students"));
     }
     public function addteacher(){
-        return view("admin.teacher1");
+        $teachers = Teacher::all();
+        return view("admin.teacher1",compact("teachers"));
     }
 
     public function uploadcourse(Request $request){
@@ -90,4 +92,58 @@ class AdminController extends Controller
         $data->delete();
         return redirect()->back();
     }
+
+    public function updatestu(Request $request)
+{
+    $studentId = $request->input('studentId');
+    $student = Student::findOrFail($studentId);
+
+    $student->first_name = $request->input('first_name');
+    $student->last_name = $request->input('last_name');
+    $student->email = $request->input('email');
+    $student->birthday = $request->input('birthday');
+    $student->level = $request->input('level');
+    $student->school = $request->input('school');
+    $student->guardian_id = $request->input('guardian_id');
+    // Update more student properties as needed
+
+    $student->save();
+
+    return redirect()->back()->with('success', 'Student updated successfully.');
+}
+
+
+
+
+    public function createTeacher(Request $request){
+        $teachers = Teacher::all();
+        
+        $data = new user;
+        $data->name=$request->fname;
+        $data->email=$request->email;
+        $data->role=3;
+        $data->password=Hash::make('bbBB12!@');
+        $data->save();
+
+        $data = new teacher;
+        $data->first_name=$request->fname;
+        $data->last_name=$request->lname;
+        $data->email=$request->email;
+        $data->level=$request->level;
+        $data->school=$request->school;
+        $data->role=3;
+        $data->password=Hash::make('bbBB12!@');
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteTeacher($id){
+        $data = teacher::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+
+
 }
