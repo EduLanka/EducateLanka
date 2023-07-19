@@ -225,21 +225,84 @@
 							<td>{{$teacher -> email}}</td>
 							<td>{{$teacher -> level}}</td>
 							<td>{{$teacher -> school}}</td>
-							<td><i class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
+							<td>	<i onclick="openEditModal({{ $teacher->id }})" class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
 							<td><a href="{{url('/deleteTeacher',$teacher->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>           
                   		</tr>
                   @endforeach
 						</tbody>
 					</table>
 				</div>
-
-          		
-
 			</div>
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
+
+
+
+	<!-- Bootstrap modal -->
+<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="edit-modal-label">Edit Teacher Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- Edit form -->
+				<form id="editForm" action="{{ route('updatetech') }}" method="POST">
+					@csrf
+					<input type="hidden" name="teacher_id" id="teacher_id">
+					<div class="form-group">
+						<label for="first_name">First Name:</label>
+						<input type="text" class="form-control" name="first_name" id="first_name">
+					</div>
+					<div class="form-group">
+						<label for="last_name">Last Name:</label>
+						<input type="text" class="form-control" name="last_name" id="last_name">
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input type="email" class="form-control" name="email" id="email">
+					</div>
+					<div class="form-group">
+						<label for="level">Level:</label>
+						<input type="text" class="form-control" name="level" id="level">
+					</div>
+					<div class="form-group">
+						<label for="school">School:</label>
+						<input type="text" class="form-control" name="school" id="school">
+					</div>
+					<button type="submit" class="btn btn-primary">Update</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	function openEditModal(teacherId) {
+    var teacherRow = document.getElementById('row' + teacherId);
+    var teacherFirstName = teacherRow.querySelector('td:nth-child(1)').textContent;
+    var teacherLastName = teacherRow.querySelector('td:nth-child(2)').textContent;
+    var teacherEmail = teacherRow.querySelector('td:nth-child(3)').textContent;
+    var teacherLevel = teacherRow.querySelector('td:nth-child(4)').textContent;
+    var teacherSchool = teacherRow.querySelector('td:nth-child(5)').textContent;
+
+    document.getElementById('teacher_id').value = teacherId;
+    document.getElementById('first_name').value = teacherFirstName;
+    document.getElementById('last_name').value = teacherLastName;
+    document.getElementById('email').value = teacherEmail;
+    document.getElementById('level').value = teacherLevel;
+    document.getElementById('school').value = teacherSchool;
+
+    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
+}
+
+</script>
 	
 
 

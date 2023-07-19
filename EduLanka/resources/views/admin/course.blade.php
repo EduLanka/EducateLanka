@@ -198,8 +198,8 @@
 					<table>
 						<thead>
 							<tr>
-								<th>User</th>
-								<th>Date Order</th>
+								<th>Level</th>
+								<th>Subject</th>
 								<th>Action</th>
 								<th></th>
 							</tr>

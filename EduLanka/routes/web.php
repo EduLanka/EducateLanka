@@ -68,5 +68,5 @@ Route::post('/updatestudent', 'App\Http\Controllers\AdminController@updatestu')-
 
 Route::post("/createTeacher",[AdminController::class,"createTeacher"]);
 Route::get("/deleteTeacher/{id}",[AdminController::class,"deleteTeacher"]);
-
+Route::post('/updatetech', 'App\Http\Controllers\AdminController@updatetech')->name('updatetech');
 

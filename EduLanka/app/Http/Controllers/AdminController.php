@@ -144,6 +144,25 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function updatetech(Request $request)
+    {   
+    $teacherId = $request->input('teacher_id');
+    // Retrieve the teacher from the database
+    $teacher = Teacher::find($teacherId);
+  
+    // Update the teacher details with the submitted form data
+    $teacher->first_name = $request->input('first_name');
+    $teacher->last_name = $request->input('last_name');
+    $teacher->email = $request->input('email');
+    $teacher->level = $request->input('level');
+    $teacher->school = $request->input('school');
+  
+    // Save the updated teacher details
+    $teacher->save();
+        return redirect()->back()->with('success', 'Teacher updated successfully.');
+    }
+    
+
 
 
 }

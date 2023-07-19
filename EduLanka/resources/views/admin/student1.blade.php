@@ -196,9 +196,10 @@
 			<input type="text" class="form-control" name = "school" id="exampleFormControlInput1" placeholder="Example school">
 		</div>
 		<div class="mb-3">
-			<label for="guardian" class="form-label">Guardian ID</label>
+			<label for="guardian" class="form-label">Guardian Name</label>
 			<input type="text" class="form-control" name="guardian" id="exampleFormControlInput1" placeholder="">
 		</div>
+		
 
                 <!-- end of form -->
 
@@ -224,7 +225,7 @@
 								<th>Birthday</th>
 								<th>Level</th>
 								<th>School</th>
-								<th>Guardian ID</th>
+								<th>Guardian Name</th>
 							</tr>
 						</thead>
 						<tbody>
