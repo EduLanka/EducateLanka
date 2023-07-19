@@ -572,7 +572,13 @@ body {
 
 
 
-
+.bounce-icon {
+	transition: transform 0.3s ease-in-out;
+  }
+  
+  .bounce-icon:hover {
+	transform: translateY(-10px);
+  }
 
 
 

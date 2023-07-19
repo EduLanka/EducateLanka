@@ -54,15 +54,12 @@ Route::get("/students",[AdminController::class,"addstudent"]);
 
 Route::get("/teachers",[AdminController::class,"addteacher"]);
 
+Route::post("/uploadcourse",[AdminController::class,"uploadcourse"]);
+Route::get("/deletecourse/{id}",[AdminController::class, 'deletecourse']);
+Route::post('/update', 'App\Http\Controllers\AdminController@update')->name('update');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Route::post("/createStudent",[AdminController::class,"createStudent"]);
+Route::get("/deleteStudent/{id}",[AdminController::class,"deleteStudent"]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

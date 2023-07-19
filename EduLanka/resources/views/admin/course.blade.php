@@ -160,11 +160,11 @@
       </div>
 	<!--  form start -->
       <div class="modal-body">
-        <form action="" method="POST" enctype="multipart/from-data">
+        <form action="{{url('uploadcourse')}}" method="POST" enctype="multipart/from-data">
 			@csrf
           <div class="mb-3">
 		  <label for="recipient-name" class="col-form-label">Level:</label>
-         <select class="form-control" id="recipient-name" name="title" required>
+         <select class="form-control" id="recipient-name" name="level" required>
   <option value="grade5">Grade 5</option>
   <option value="grade6">Grade 6</option>
   <option value="grade7">Grade 7</option>
@@ -182,13 +182,13 @@
   <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Biological Science" name="subject" required>
           </div>
 
-	
+		  <button type="submit" class="btn btn-primary">Save</button>
+
         </form>
       </div>
 	  <!-- end form start -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
@@ -200,50 +200,25 @@
 							<tr>
 								<th>User</th>
 								<th>Date Order</th>
-								<th>Status</th>
+								<th>Action</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+						@foreach ($data as $data)
+							<tr id="row{{ $data->id }}" >
 								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
+									
+									<p>{{ $data->level }}</p>
 								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
+								<td>{{ $data->subject }}</td>
+								<td><button onclick="openEditModal({{ $data->id }})">Edit</button></td>
+								<td><a href="{{url('/deletecourse',$data->id)}}"> <span class="status completed">Delete</span></a></td>
+								
+
 							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
+						@endforeach
+							
 						</tbody>
 					</table>
 				</div>
@@ -255,12 +230,59 @@
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
+
+
+
+
+	<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" action="{{ route('update') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id="editItemId" name="itemId" value="">
+                    <!-- Add form fields for editing item properties -->
+                    <div class="form-group">
+                        <label for="editLevel">Level</label>
+                        <input type="text" class="form-control" id="editLevel" name="level">
+                    </div>
+                    <div class="form-group">
+                        <label for="editSubject">Subject</label>
+                        <input type="text" class="form-control" id="editSubject" name="subject">
+                    </div>
+                    <!-- Add more form fields as needed -->
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 	
 
 
 
 
 
+<script>
+    function openEditModal(itemId) {
+        var itemRow = document.getElementById('row' + itemId);
+        var itemLevel = itemRow.querySelector('p').textContent;
+        var itemSubject = itemRow.querySelector('td:nth-child(2)').textContent;
+
+        document.getElementById('editItemId').value = itemId;
+        document.getElementById('editLevel').value = itemLevel;
+        document.getElementById('editSubject').value = itemSubject;
+
+        var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        editModal.show();
+    }
+</script>
 
 
 
