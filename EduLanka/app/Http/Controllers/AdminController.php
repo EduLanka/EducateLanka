@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Admin;
+use App\Models\Dev;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -25,6 +27,16 @@ class AdminController extends Controller
         $teachers = Teacher::all();
         return view("admin.teacher1",compact("teachers"));
     }
+    public function addadmin(){
+        $admin = Admin::all();
+        return view("admin.admin1",compact("admin"));
+    }
+
+    public function dev(){
+        $dev = Dev::all();
+        return view("admin.dev",compact("dev"));
+    }
+
 
     public function uploadcourse(Request $request){
         $data = new course;
@@ -98,7 +110,7 @@ class AdminController extends Controller
     $studentId = $request->input('studentId');
     $student = Student::findOrFail($studentId);
 
-    $student->first_name = $request->input('first_name');
+    $student->first_nam = $request->input('first_name');
     $student->last_name = $request->input('last_name');
     $student->email = $request->input('email');
     $student->birthday = $request->input('birthday');
@@ -161,6 +173,67 @@ class AdminController extends Controller
     $teacher->save();
         return redirect()->back()->with('success', 'Teacher updated successfully.');
     }
+
+
+
+    public function createAdmin(Request $request){
+        $admins = Admin::all();
+        
+        $data = new user;
+        $data->name=$request->fname;
+        $data->email=$request->email;
+        $data->role=1;
+        $data->password=Hash::make('aaAA12!@');
+        $data->save();
+
+        $data = new admin;
+        $data->full_name=$request->fname;
+        $data->email=$request->email;
+        $data->telno=$request->no;
+        $data->address=$request->address;
+        $data->role=1;
+        $data->password=Hash::make('aaAA12!@');
+        $data->save();
+    
+
+        return redirect()->back()->with('success', 'Data added successfully to both databases.');
+
+
+
+    }
+    
+    public function adddev(Request $request){
+        $developer = Dev::all();
+        
+        $data = new user;
+        $data->name=$request->fname;
+        $data->email=$request->email;
+        $data->role=5;
+        $data->password=Hash::make('aaAA12!@');
+        $data->save();
+
+        $data = new dev;
+        $data->full_name=$request->fname;
+        $data->email=$request->email;
+        $data->telno=$request->telno;
+        $data->Address=$request->add;
+        $data->role=5;
+        $data->password=Hash::make('aaAA12!@');
+        $data->save();
+    
+
+        return redirect()->back()->with('success', 'Data added successfully to both databases.');
+
+
+
+    }
+    public function deleteDev($id){
+        $data = dev::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+
     
 
 

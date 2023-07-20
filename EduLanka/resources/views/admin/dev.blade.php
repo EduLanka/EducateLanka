@@ -58,7 +58,7 @@
 					<span class="text">Students</span>
 				</a>
 			</li>
-			<li class="active" >
+			<li  >
 				<a href="{{url('/teachers')}}">
 					<i class='bx bxs-user' ></i>
 					<span class="text">Teacher</span>
@@ -70,7 +70,7 @@
 					<span class="text">Advert</span>
 				</a>
 			</li>
-            <li>
+            <li class="active">
 				<a href="{{url('/dev')}}">
 					<i class='bx bx-code-alt' ></i>
 					<span class="text">Developer</span>
@@ -156,7 +156,7 @@
                     
 						<!-- Button trigger modal pop up -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Register Teacher
+  Register Developer
 </button>
 
 <!-- Modal -->
@@ -164,32 +164,29 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add Teacher</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Add Developer</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-	  <form method="POST" action="{{ url('createTeacher') }}" enctype="multipart/form-data">
+	  <form method="POST" action="{{ url('adddev') }}" enctype="multipart/form-data">
 		@csrf
       <div class="modal-body">
         <!--form start -->
 		<div class="mb-3">
-			<label for="fname" class="form-label">First Name</label>
+			<label for="fname" class="form-label">Full Name</label>
 			<input type="text" class="form-control" name = "fname" id="exampleFormControlInput1" placeholder="Maryam">
 		</div>
-		<div class="mb-3">
-			<label for="lname" class="form-label">Last Name</label>
-			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Mashkoora">
-		</div>
+		
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
 			<input type="text" class="form-control" name = "email" id="exampleFormControlInput1" placeholder="name@example.com">
 		</div>
 		<div class="mb-3">
-			<label for="level" class="form-label">Level</label>
-			<input type="text" class="form-control" name = "level" id="exampleFormControlInput1" placeholder="A-level">
+			<label for="level" class="form-label">Telno</label>
+			<input type="text" class="form-control" name = "telno" id="exampleFormControlInput1" placeholder="A-level">
 		</div>
 		<div class="mb-3">
-			<label for="school" class="form-label">School</label>
-			<input type="text" class="form-control" name = "school" id="exampleFormControlInput1" placeholder="Example school">
+			<label for="school" class="form-label">Address</label>
+			<input type="text" class="form-control" name = "add" id="exampleFormControlInput1" placeholder="Example school">
 		</div>
 
                 <!-- end of form -->
@@ -211,24 +208,26 @@
 						<thead>
 							<tr>
 								<th>First Name</th>
-								<th>Last Name</th>
 								<th>Email</th>
-								<th>Level</th>
-								<th>School</th>
+                                <th>Role</th>
+								<th>Telno</th>
+								<th>Address</th>
+								<th></th>
+                                <th></th>
 							</tr>
 						</thead>
 						<tbody>
-						@foreach ($teachers as $teacher)
-                  		<tr  id="row{{ $teacher->id }}">
-							<td>{{$teacher -> first_name}}</td>
-							<td>{{$teacher -> last_name}}</td>
-							<td>{{$teacher -> email}}</td>
-							<td>{{$teacher -> level}}</td>
-							<td>{{$teacher -> school}}</td>
-							<td>	<i onclick="openEditModal({{ $teacher->id }})" class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
-							<td><a href="{{url('/deleteTeacher',$teacher->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>           
+                        @foreach ($dev as $dev)
+                  		<tr  id="">
+							<td>{{$dev -> full_name}}</td>
+							<td>{{$dev -> email}}</td>
+							<td>{{$dev -> role}}</td>
+							<td>{{$dev -> telno}}</td>
+							<td>{{$dev -> Address}}</td>
+							<td>	<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
+							<td><a href="{{url('/deleteDev',$dev->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>           
                   		</tr>
-                  @endforeach
+                          @endforeach
 						</tbody>
 					</table>
 				</div>
@@ -240,69 +239,9 @@
 
 
 
-	<!-- Bootstrap modal -->
-<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="edit-modal-label">Edit Teacher Details</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				</button>
-			</div>
-			<div class="modal-body">
-				<!-- Edit form -->
-				<form id="editForm" action="{{ route('updatetech') }}" method="POST">
-					@csrf
-					<input type="hidden" name="teacher_id" id="teacher_id">
-					<div class="form-group">
-						<label for="first_name">First Name:</label>
-						<input type="text" class="form-control" name="first_name" id="first_name">
-					</div>
-					<div class="form-group">
-						<label for="last_name">Last Name:</label>
-						<input type="text" class="form-control" name="last_name" id="last_name">
-					</div>
-					<div class="form-group">
-						<label for="email">Email:</label>
-						<input type="email" class="form-control" name="email" id="email">
-					</div>
-					<div class="form-group">
-						<label for="level">Level:</label>
-						<input type="text" class="form-control" name="level" id="level">
-					</div>
-					<div class="form-group">
-						<label for="school">School:</label>
-						<input type="text" class="form-control" name="school" id="school">
-					</div>
-					<button type="submit" class="btn btn-primary">Update</button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
 
 
-<script>
-	function openEditModal(teacherId) {
-    var teacherRow = document.getElementById('row' + teacherId);
-    var teacherFirstName = teacherRow.querySelector('td:nth-child(1)').textContent;
-    var teacherLastName = teacherRow.querySelector('td:nth-child(2)').textContent;
-    var teacherEmail = teacherRow.querySelector('td:nth-child(3)').textContent;
-    var teacherLevel = teacherRow.querySelector('td:nth-child(4)').textContent;
-    var teacherSchool = teacherRow.querySelector('td:nth-child(5)').textContent;
 
-    document.getElementById('teacher_id').value = teacherId;
-    document.getElementById('first_name').value = teacherFirstName;
-    document.getElementById('last_name').value = teacherLastName;
-    document.getElementById('email').value = teacherEmail;
-    document.getElementById('level').value = teacherLevel;
-    document.getElementById('school').value = teacherSchool;
-
-    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
-    editModal.show();
-}
-
-</script>
 	
 
 

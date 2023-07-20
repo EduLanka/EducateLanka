@@ -53,6 +53,8 @@ Route::get("/course",[AdminController::class,"addcourse"]);
 Route::get("/students",[AdminController::class,"addstudent"]);
 
 Route::get("/teachers",[AdminController::class,"addteacher"]);
+Route::get("/admins",[AdminController::class,"addadmin"]);
+
 
 Route::post("/uploadcourse",[AdminController::class,"uploadcourse"]);
 Route::get("/deletecourse/{id}",[AdminController::class, 'deletecourse']);
@@ -69,4 +71,10 @@ Route::post('/updatestudent', 'App\Http\Controllers\AdminController@updatestu')-
 Route::post("/createTeacher",[AdminController::class,"createTeacher"]);
 Route::get("/deleteTeacher/{id}",[AdminController::class,"deleteTeacher"]);
 Route::post('/updatetech', 'App\Http\Controllers\AdminController@updatetech')->name('updatetech');
+
+
+Route::post("/createAdmin",[AdminController::class,"createAdmin"]);
+Route::get("/dev",[AdminController::class,"dev"]);
+Route::post("/adddev",[AdminController::class,"adddev"]);
+Route::get("/deleteDev/{id}",[AdminController::class,"deleteDev"]);
 

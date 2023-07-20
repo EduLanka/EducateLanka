@@ -223,6 +223,26 @@
 							</tr>
 						
                             @endforeach
+							@foreach ($Admin as $Admin)
+							<tr>
+								<td>
+									<p>{{ $Admin->full_name}}</p>
+								</td>
+								<td>{{ $Admin->email }}</td>
+								<td>{{ $Admin->role == 1}} Admin</td>
+							</tr>
+						
+                            @endforeach
+							@foreach ($Dev as $Dev)
+							<tr>
+								<td>
+									<p>{{ $Dev->full_name}}</p>
+								</td>
+								<td>{{ $Dev->email }}</td>
+								<td>{{ $Dev->role == 5}} Developer</td>
+							</tr>
+						
+                            @endforeach
 							
 						</tbody>
 					</table>
