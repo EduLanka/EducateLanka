@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
 use App\Models\Dev;
+use App\Models\Message;
 
 class HomeController extends Controller
 {
@@ -43,9 +44,10 @@ class HomeController extends Controller
         $Teacher = Teacher::all();
         $Admin = Admin::all();
         $Dev = Dev::all();
+        $messages = Message::all();
         // Retrieve all users
 
-        return view('admin', compact('studentCount', 'teacherCount', 'adminCount', 'parentCount', 'developerCount', 'users','Admin','Dev','Student','Teacher'));
+        return view('admin', compact('studentCount', 'teacherCount', 'adminCount', 'parentCount', 'developerCount', 'users','Admin','Dev','Student','Teacher','messages'));
 
     }
 }

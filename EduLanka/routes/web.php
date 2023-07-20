@@ -78,3 +78,6 @@ Route::get("/dev",[AdminController::class,"dev"]);
 Route::post("/adddev",[AdminController::class,"adddev"]);
 Route::get("/deleteDev/{id}",[AdminController::class,"deleteDev"]);
 
+
+Route::post("/sendMessage",[AdminController::class,"sendMessage"]);
+

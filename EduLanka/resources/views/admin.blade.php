@@ -254,6 +254,32 @@
 						<i class='bx bx-filter' ></i>
 					</div>
 					<ul class="todo-list">
+					@foreach ($messages as $message)
+            @php
+                $senderUser = \App\Models\User::find($message->sender);
+            @endphp
+            <li>
+                <div class="message-info">
+                    <div class="avatar">
+						<center><i class="bx bx-user" style="font-size: 30px;"></i></center>
+                    </div>
+                    <div class="message-content">
+                        @if ($senderUser)
+                            <h3>{{ $senderUser->name }}</h3>
+                        @else
+                            <h3>Unknown User</h3>
+                        @endif
+                        <p>{{ $message->description }}</p>
+                    </div>
+                
+                </div>
+            </li>
+        @endforeach
+        @if ($messages->isEmpty())
+            <li class="empty-state">
+                <p>No messages found.</p>
+            </li>
+        @endif
 						
 					</ul>
 				</div>

@@ -10,6 +10,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
 use App\Models\Dev;
+use App\Models\Message;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -230,6 +231,16 @@ class AdminController extends Controller
     public function deleteDev($id){
         $data = dev::find($id);
         $data->delete();
+        return redirect()->back();
+    }
+
+    public function sendMessage(Request $request){
+        $data = new Message;
+        $data->topic=$request->topic;
+        $data->description=$request->description;
+        $data->sender=Auth::user()->id;
+        $data->save();
+
         return redirect()->back();
     }
 

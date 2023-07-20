@@ -582,7 +582,65 @@ body {
 
 
 
+  /*messages*/
 
+  .todo {
+	  margin: 20px;
+	  padding: 20px;
+	  background-color: #f7f7f7;
+	  border-radius: 5px;
+	  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	}
+	
+	.todo .head {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  margin-bottom: 10px;
+	  font-size: 20px;
+	  color: #333;
+	}
+	
+	.todo-list li {
+	  list-style: none;
+	  padding: 10px 0;
+	  border-bottom: 1px solid #e5e5e5;
+	}
+	
+	.todo-list .message-info {
+	  display: flex;
+	  align-items: center;
+	}
+	
+	.todo-list .avatar {
+	  width: 40px;
+	  height: 40px;
+	  border-radius: 50%;
+	  background-color: #ccc;
+	  margin-right: 10px;
+	  /* You can add an icon or image as background here */
+	}
+	
+	.todo-list .message-content {
+	  flex: 1;
+	}
+	
+	.todo-list h3 {
+	  margin: 0;
+	  font-size: 16px;
+	  color: #555;
+	}
+	
+	.todo-list p {
+	  margin: 0;
+	  font-size: 14px;
+	  color: #777;
+	}
+	
+	.todo-list .empty-state {
+	  text-align: center;
+	  color: #888;
+	}
 
 @media screen and (max-width: 768px) {
 	#sidebar {
