@@ -104,7 +104,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="" class="nav-link">Students</a>
+			<a href="" class="nav-link">Teacher</a>
 			<form action="">
 				
 			</form>

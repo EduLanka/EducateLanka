@@ -66,11 +66,11 @@
 			<li>
 				<a href="#">
 					<i class='bx bxs-user-circle' ></i>
-					<span class="text">admin</span>
+					<span class="text">Advert</span>
 				</a>
 			</li>
             <li>
-				<a href="#">
+			<a href="{{url('/dev')}}">
 					<i class='bx bx-code-alt' ></i>
 					<span class="text">Developer</span>
 				</a>
@@ -103,7 +103,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
+			<a href="#" class="nav-link">Courses</a>
 			<form action="">
 				
 			</form>
@@ -207,7 +207,8 @@
 							<tr>
 								<th>Level</th>
 								<th>Subject</th>
-								<th>Action</th>
+								<th></th>
+								
 								<th></th>
 							</tr>
 						</thead>
@@ -219,6 +220,7 @@
 									<p>{{ $data->level }}</p>
 								</td>
 								<td>{{ $data->subject }}</td>
+								<td>
 								<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;" onclick="openEditModal({{ $data->id }})"></i>
 							 </td>
 								<td><a href="{{url('/deletecourse',$data->id)}}"> <i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>
