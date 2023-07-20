@@ -135,7 +135,7 @@
 						</li>
                         <li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="{{url('/teachers')}}">Teacher</a>
+							<a class="active" href="{{url('/dev')}}">Developers</a>
 						</li>
 					</ul>
 				</div>
@@ -145,7 +145,7 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Teachers</h3>
+						<h3>Developers</h3>
 
                         <form action="#">
 				<div class="form-input">

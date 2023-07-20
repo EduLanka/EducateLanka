@@ -65,11 +65,11 @@
 			<li>
 				<a href="#">
 					<i class='bx bxs-user-circle' ></i>
-					<span class="text">admin</span>
+					<span class="text">Adevert</span>
 				</a>
 			</li>
             <li>
-				<a href="#">
+				<a href="{{url('/dev')}}">
 					<i class='bx bx-code-alt' ></i>
 					<span class="text">Developer</span>
 				</a>
@@ -140,7 +140,7 @@
 				<li>
 					<i class='bx bx-book-open' ></i>
 					<span class="text">
-						<h3>1020</h3>
+						<h3>12</h3>
 						<p>Course Modules</p>
 					</span>
 				</li>

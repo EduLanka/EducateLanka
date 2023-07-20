@@ -67,11 +67,11 @@
 			<li>
 				<a href="#">
 					<i class='bx bxs-user-circle' ></i>
-					<span class="text">admin</span>
+					<span class="text">Advert</span>
 				</a>
 			</li>
             <li>
-				<a href="#">
+				<a href="{{url('/dev')}}">
 					<i class='bx bx-code-alt' ></i>
 					<span class="text">Developer</span>
 				</a>
