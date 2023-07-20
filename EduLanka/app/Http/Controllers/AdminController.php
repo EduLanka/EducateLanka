@@ -111,7 +111,7 @@ class AdminController extends Controller
     $studentId = $request->input('studentId');
     $student = Student::findOrFail($studentId);
 
-    $student->first_nam = $request->input('first_name');
+    $student->first_name = $request->input('first_name');
     $student->last_name = $request->input('last_name');
     $student->email = $request->input('email');
     $student->birthday = $request->input('birthday');
