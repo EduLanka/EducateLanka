@@ -225,7 +225,8 @@
 							<td>{{$dev -> telno}}</td>
 							<td>{{$dev -> Address}}</td>
 							<td>	<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
-							<td><a href="{{url('/deleteDev',$dev->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" ></i></a></td>           
+							<td><a href="{{url('/deleteDev',$dev->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" 
+                            onclick="confirmDelete(event)" ></i></a></td>           
                   		</tr>
                           @endforeach
 						</tbody>
@@ -245,7 +246,18 @@
 	
 
 
+    <script>
+	//confirmation dialog for delete
+	function confirmDelete(event) {
+    event.preventDefault(); 
 
+    // Show the alert dialog
+    if (confirm("Are you sure you want to delete this teacher?")) {
+      // If the user clicks OK, proceed with the deletion 
+      window.location.href = event.target.parentElement.href;
+    }
+  }
+</script>
 	<script src="assets/script.js"></script>
 </body>
 </html>
