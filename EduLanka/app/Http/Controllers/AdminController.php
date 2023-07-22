@@ -37,6 +37,10 @@ class AdminController extends Controller
         $dev = Dev::all();
         return view("admin.dev",compact("dev"));
     }
+    public function setting(){
+        $setting = Admin::all();
+        return view("admin.setting",compact("setting"));
+    }
 
 
     public function uploadcourse(Request $request){
