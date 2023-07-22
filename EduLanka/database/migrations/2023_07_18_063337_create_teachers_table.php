@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('school');
             $table->integer('role')->default(3);
             $table->string('password')->default('bbBB12!@');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
