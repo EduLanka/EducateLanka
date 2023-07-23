@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -21,8 +22,11 @@ return new class extends Migration
             $table->string('level');
             $table->string('school');
             $table->string('guardian_id');
+            $table->string('guardian_telno');
+            $table->string('guardian_busniess');
             $table->integer('role')->default(2);
             $table->string('password')->default('aaAA12!@');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

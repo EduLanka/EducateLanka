@@ -199,8 +199,15 @@
 			<label for="guardian" class="form-label">Guardian Name</label>
 			<input type="text" class="form-control" name="guardian" id="exampleFormControlInput1" placeholder="">
 		</div>
+		<div class="mb-3">
+			<label for="guardian" class="form-label">Guardian Telno</label>
+			<input type="text" class="form-control" name="guardianno" id="exampleFormControlInput1" placeholder="">
+		</div>
 		
-
+		<div class="mb-3">
+			<label for="guardian" class="form-label">Guardian Bussniess</label>
+			<input type="text" class="form-control" name="guardian_busniess" id="exampleFormControlInput1" placeholder="">
+		</div>
                 <!-- end of form -->
 
       </div>
@@ -242,7 +249,9 @@
 							<td> 
 							<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;" onclick="openEditModal({{ $student->id }})"></i>
 							 </td>
-							<td><a href="{{url('/deleteStudent',$student->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" onclick="confirmDelete(event)"></i></a></td>
+							<td> <a href="{{ url('/deleteStudent', $student->id) }}">
+                    <i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" onclick="confirmDelete(event)"></i>
+                </a></td>
 							<!--<td><span class="status completed">Completed</span></td>    -->             
                   		</tr>
                   @endforeach

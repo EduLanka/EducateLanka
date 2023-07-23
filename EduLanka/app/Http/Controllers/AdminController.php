@@ -58,18 +58,19 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-
+//add student
     public function createStudent(Request $request){
         $students = Student::all();
         
-        $data = new user;
-        $data->name=$request->fname;
-        $data->email=$request->email;
-        $data->role=2;
-        $data->password=Hash::make('aaAA12!@');
-        $data->save();
+        $user = new user;
+        $user->name=$request->fname;
+        $user->email=$request->email;
+        $user->role=2;
+        $user->password=Hash::make('aaAA12!@');
+        $user->save();
 
-        $data = new student;
+        $data = new student; 
+        $data -> user_id = $user->id;                                                                                                   
         $data->first_name=$request->fname;
         $data->last_name=$request->lname;
         $data->email=$request->email;
@@ -77,6 +78,8 @@ class AdminController extends Controller
         $data->level=$request->level;
         $data->school=$request->school;
         $data->guardian_id=$request->guardian;
+        $data->guardian_telno=$request->guardianno;
+        $data->guardian_busniess=$request->guardian_busniess;
         $data->role=2;
         $data->password=Hash::make('aaAA12!@');
         $data->save();
@@ -87,28 +90,27 @@ class AdminController extends Controller
 
 
     }
-    public function update(Request $request)
+
+
+
+
+
+//delete student
+public function deleteStudent(Request $request, $studentId)
 {
-    $itemId = $request->input('itemId');
-    $data = Course::findOrFail($itemId);
+    $student = Student::findOrFail($studentId);
+    $userId = $student->user_id;
 
-    $data->level = $request->input('level');
-    $data->subject = $request->input('subject');
-    // Update more item properties as needed
+    // Delete the student from the 'students' table
+    $student->delete();
 
-    $data->save();
+    // Delete the associated user from the 'users' table using the relationship
+    User::where('id', $userId)->delete();
 
-    return redirect()->back()->with('success', 'Item updated successfully.');
+    return redirect()->back()->with('success', 'Student deleted successfully');
 }
 
-
-
-
-    public function deleteStudent($id){
-        $data = student::find($id);
-        $data->delete();
-        return redirect()->back();
-    }
+//edit student
 
     public function updatestu(Request $request)
 {
@@ -130,34 +132,57 @@ class AdminController extends Controller
 }
 
 
+public function update(Request $request)
+{
+    $itemId = $request->input('itemId');
+    $data = Course::findOrFail($itemId);
+
+    $data->level = $request->input('level');
+    $data->subject = $request->input('subject');
+    // Update more item properties as needed
+
+    $data->save();
+
+    return redirect()->back()->with('success', 'Item updated successfully.');
+}
+
 
 
     public function createTeacher(Request $request){
         $teachers = Teacher::all();
         
-        $data = new user;
-        $data->name=$request->fname;
-        $data->email=$request->email;
-        $data->role=3;
-        $data->password=Hash::make('bbBB12!@');
-        $data->save();
+        $user = new User;
+    $user->name = $request->fname;
+    $user->email = $request->email;
+    $user->role = 3;
+    $user->password = Hash::make('bbBB12!@');
+    $user->save();
 
-        $data = new teacher;
-        $data->first_name=$request->fname;
-        $data->last_name=$request->lname;
-        $data->email=$request->email;
-        $data->level=$request->level;
-        $data->school=$request->school;
-        $data->role=3;
-        $data->password=Hash::make('bbBB12!@');
-        $data->save();
+    // Save teacher data with the correct user_id
+    $teacher = new Teacher;
+    $teacher->user_id = $user->id; // Set the user_id to the newly created user's id
+    $teacher->first_name = $request->fname;
+    $teacher->last_name = $request->lname;
+    $teacher->email = $request->email;
+    $teacher->level = $request->level;
+    $teacher->school = $request->school;
+    $teacher->role = 3;
+    $teacher->password = Hash::make('bbBB12!@');
+    $teacher->save();
 
-        return redirect()->back();
+    return redirect()->back();
     }
 
-    public function deleteTeacher($id){
-        $data = teacher::find($id);
-        $data->delete();
+    public function deleteTeacher(Request $request, $teacherId){//remember to put this
+        $teacher = Teacher::findOrFail($teacherId);//remember to put this
+        $userId = $teacher->user_id;
+
+        // Delete the teacher from the 'teachers' table
+        $teacher->delete();
+
+        // Delete the associated user from the 'users' table using the relationship
+        User::where('id', $userId)->delete();
+
         return redirect()->back();
     }
 
