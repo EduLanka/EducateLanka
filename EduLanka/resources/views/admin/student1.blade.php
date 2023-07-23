@@ -355,6 +355,18 @@
     }
   }
 </script>
+@if(Session::has('email_exists_error'))
+    <script>
+        // Display the pop-up message using JavaScript (you can use any pop-up library or implement your custom solution)
+        alert("{{ Session::get('email_exists_error') }}");
+    </script>
+@endif
+
+@if(Session::has('student_added_success'))
+    <script>
+        alert("{{ Session::get('student_added_success') }}");
+    </script>
+@endif
 
 
 

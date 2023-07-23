@@ -62,6 +62,8 @@ Route::post('/update', 'App\Http\Controllers\AdminController@update')->name('upd
 
 
 
+
+
 Route::post("/createStudent",[AdminController::class,"createStudent"]);
 Route::get("/deleteStudent/{id}",[AdminController::class,"deleteStudent"]);
 Route::post('/updatestudent', 'App\Http\Controllers\AdminController@updatestu')->name('updatestu');
@@ -82,5 +84,11 @@ Route::get("/deleteDev/{id}",[AdminController::class,"deleteDev"]);
 
 
 Route::post("/sendMessage",[AdminController::class,"sendMessage"]);
+Route::post("/replyMessage/{id}",[AdminController::class,"replyMessage"]);
 
+
+Route::middleware('auth')->group(function () {
 Route::get("/setting",[AdminController::class,"setting"]);
+Route::put('/profile', [AdminController::class,"updatep"])->name('updatep');
+Route::post('/changepassword', [AdminController::class,"updatepass"])->name('changepassword');
+});

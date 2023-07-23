@@ -11,6 +11,8 @@ class Message extends Model
 
     protected $table = 'messages';
 
+    protected $fillable = ['topic', 'description', 'sender','reply'];
+
 
     public function senderUser(){
         return $this->belongsTo(User::class,'sender','id');

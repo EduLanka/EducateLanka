@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('topic');
             $table->string('description');
             $table->unsignedBigInteger('sender');
+            $table->string('reply')->nullable();
             $table->timestamps();
 
             $table->foreign('sender')
