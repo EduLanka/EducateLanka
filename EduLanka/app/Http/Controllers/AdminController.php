@@ -10,6 +10,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
 use App\Models\Dev;
+use App\Models\Gurdian;
 use App\Models\Message;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -82,6 +83,7 @@ class AdminController extends Controller
         $user->password=Hash::make('aaAA12!@');
         $user->save();
 
+
         $data = new student; 
         $data -> user_id = $user->id;                                                                                                   
         $data->first_name=$request->fname;
@@ -93,12 +95,28 @@ class AdminController extends Controller
         $data->guardian_id=$request->guardian;
         $data->guardian_telno=$request->guardianno;
         $data->guardian_busniess=$request->guardian_busniess;
+        $data->guardian_email=$request->guardian_email;
         $data->role=2;
         $data->password=Hash::make('aaAA12!@');
         $data->save();
     
 
         Session::flash('student_added_success', 'Student added successfully.');
+
+        $parent = new gurdian;
+        $parent -> student_id = $data->id;
+        $parent->guardian_name=$request->guardian;
+        $parent->guardian_telno=$request->guardianno;
+        $parent->guardian_busniess=$request->guardian_busniess;
+        $parent->guardian_email=$request->guardian_email;
+        $parent->role=4;
+        $parent->password=Hash::make('aaAA12!@');
+        $parent->save();
+      
+
+
+
+       
 
         return redirect()->back();
 
