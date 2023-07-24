@@ -13,4 +13,8 @@ class Student extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function gurdian()
+    {
+        return $this->hasOne(Gurdian::class);
+    }
 }

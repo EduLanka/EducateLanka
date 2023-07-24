@@ -35,9 +35,11 @@ class HomeController extends Controller
     public function admin(){
         $studentCount = Student::where('role', 2)->count();
         $teacherCount = Teacher::where('role', 3)->count();
-        $adminCount = Admin::where('role', 1)->count();
+        $adminCount = User::where('role', 1)->count();
         $parentCount = User::where('role', 4)->count();
         $developerCount = Dev::where('role', 5)->count();
+        $messageCount = Message::count();
+        $courseCount = Course::count();
 
         $users = User::all();
         $Student = Student::all();
@@ -45,9 +47,10 @@ class HomeController extends Controller
         $Admin = Admin::all();
         $Dev = Dev::all();
         $messages = Message::all();
+        $course = Course :: all();
         // Retrieve all users
 
-        return view('admin', compact('studentCount', 'teacherCount', 'adminCount', 'parentCount', 'developerCount', 'users','Admin','Dev','Student','Teacher','messages'));
+        return view('admin', compact('studentCount', 'teacherCount', 'adminCount', 'parentCount', 'developerCount', 'users','Admin','Dev','Student','Teacher','messages','messageCount','courseCount'));
 
     }
 }

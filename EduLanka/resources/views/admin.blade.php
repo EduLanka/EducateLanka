@@ -108,9 +108,9 @@
 			</form>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
+			<a href="" class="notification">
+				<i class='bx bxs-message' ></i>
+				<span class="num">{{$messageCount}}</span>
 			</a>
 			<a href="" class="profile">
             {{ Auth::user()->name }}
@@ -140,7 +140,7 @@
 				<li>
 					<i class='bx bx-book-open' ></i>
 					<span class="text">
-						<h3>12</h3>
+						<h3>{{$courseCount}}</h3>
 						<p>Course Modules</p>
 					</span>
 				</li>
@@ -250,35 +250,55 @@
 						<i class='bx bx-plus' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
-					<ul class="todo-list">
-					@foreach ($messages as $message)
-            @php
-                $senderUser = \App\Models\User::find($message->sender);
-            @endphp
-            <li>
-                <div class="message-info">
-                    <div class="avatar">
-						<center><i class="bx bx-user" style="font-size: 30px;"></i></center>
-                    </div>
-                    <div class="message-content">
-                        @if ($senderUser)
-                            <h3>{{ $senderUser->name }}</h3>
-                        @else
-                            <h3>Unknown User</h3>
-                        @endif
-                        <p>{{ $message->description }}</p>
-                    </div>
-                
-                </div>
-            </li>
-        @endforeach
-        @if ($messages->isEmpty())
-            <li class="empty-state">
-                <p>No messages found.</p>
-            </li>
-        @endif
-						
-					</ul>
+					<div class="messages">
+    @foreach ($messages as $message)
+        @php
+            $senderUser = \App\Models\User::find($message->sender);
+        @endphp
+        <div class="message">
+			<div class="top">
+				<div class="message-info">
+					<div class="avatar">
+						<i class="bx bx-user" style="font-size: 30px;"></i>
+					</div>
+					<div class="message-content">
+						@if ($senderUser)
+							<h3>{{ $senderUser->name }}</h3>
+						@else
+							<h3>Unknown User</h3>
+						@endif
+						<p>{{ $message->description }}</p>
+					</div>
+				</div>
+				<div class="reply">
+					<button type="button" class="btn btn-primary reply-btn" onclick="toggleReplyArea(this)">
+					<i class="bx bx-reply" style="font-size: 30px;"></i></button>
+				</div>
+			</div>            
+			<div class="reply-area">
+				@if(!is_null($message->reply))
+				<p>You have already replied to this message.</p>
+				<p>Reply: {{$message->reply}}</p>
+				@else
+				<form method="POST" action="{{ url('replyMessage',$message->id) }}" enctype="multipart/form-data">
+				@csrf
+					<input type="text" placeholder="Type your reply..." name="reply">
+					<button class="btn btn-success send-button" type="submit">
+						<i class="bx bx-send" style="font-size: 30px;"></i>
+					</button>
+				</form>
+				@endif
+            </div>
+        </div>
+		
+		
+    @endforeach
+    @if ($messages->isEmpty())
+        <div class="empty-state">
+            <p>No messages found.</p>
+        </div>
+		@endif
+					
 				</div>
 			</div>
 		</main>
@@ -286,10 +306,29 @@
 	</section>
 	<!-- CONTENT -->
 	
+<footer>
 
+<marquee>	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved</marquee>
+	
+</footer>
 
 
 
 	<script src="assets/script.js"></script>
+	<script>
+  function toggleReplyArea(replyButton) {
+    const replyArea = replyButton.closest('.message').querySelector('.reply-area');
+    replyArea.style.display = replyArea.style.display === 'block' ? 'none' : 'block';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const replyButtons = document.querySelectorAll('.reply-button');
+    replyButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        toggleReplyArea(button);
+      });
+    });
+  });
+</script>
 </body>
 </html>

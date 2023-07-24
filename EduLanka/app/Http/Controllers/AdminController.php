@@ -10,8 +10,11 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
 use App\Models\Dev;
+use App\Models\Gurdian;
 use App\Models\Message;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class AdminController extends Controller
 {
@@ -38,8 +41,8 @@ class AdminController extends Controller
         return view("admin.dev",compact("dev"));
     }
     public function setting(){
-        $setting = Admin::all();
-        return view("admin.setting",compact("setting"));
+        $user = Auth::user();
+        return view("admin.setting",compact("user"));
     }
 
 
@@ -60,6 +63,17 @@ class AdminController extends Controller
 
 //add student
     public function createStudent(Request $request){
+      
+        // Check if the email already exists in the users table
+        $existingUser = User::where('email', $request->email)->first();
+    
+        if ($existingUser) {
+            // Email already exists, display a message and redirect back to the form
+            Session::flash('email_exists_error', 'Email already exists. Try with a different email.');
+            return redirect()->back()->withInput();
+        }
+
+
         $students = Student::all();
         
         $user = new user;
@@ -68,6 +82,7 @@ class AdminController extends Controller
         $user->role=2;
         $user->password=Hash::make('aaAA12!@');
         $user->save();
+
 
         $data = new student; 
         $data -> user_id = $user->id;                                                                                                   
@@ -80,13 +95,30 @@ class AdminController extends Controller
         $data->guardian_id=$request->guardian;
         $data->guardian_telno=$request->guardianno;
         $data->guardian_busniess=$request->guardian_busniess;
+        $data->guardian_email=$request->guardian_email;
         $data->role=2;
         $data->password=Hash::make('aaAA12!@');
         $data->save();
     
 
-        return redirect()->back()->with('success', 'Data added successfully to both databases.');
+        Session::flash('student_added_success', 'Student added successfully.');
 
+        $parent = new gurdian;
+        $parent -> student_id = $data->id;
+        $parent->guardian_name=$request->guardian;
+        $parent->guardian_telno=$request->guardianno;
+        $parent->guardian_busniess=$request->guardian_busniess;
+        $parent->guardian_email=$request->guardian_email;
+        $parent->role=4;
+        $parent->password=Hash::make('aaAA12!@');
+        $parent->save();
+      
+
+
+
+       
+
+        return redirect()->back();
 
 
     }
@@ -124,6 +156,8 @@ public function deleteStudent(Request $request, $studentId)
     $student->level = $request->input('level');
     $student->school = $request->input('school');
     $student->guardian_id = $request->input('guardian_id');
+    $student->guardian_telno = $request->input('guardianno');
+    $student->guardian_business = $request->input('guardian_busniess');
     // Update more student properties as needed
 
     $student->save();
@@ -131,7 +165,7 @@ public function deleteStudent(Request $request, $studentId)
     return redirect()->back()->with('success', 'Student updated successfully.');
 }
 
-
+//update subject
 public function update(Request $request)
 {
     $itemId = $request->input('itemId');
@@ -146,9 +180,18 @@ public function update(Request $request)
     return redirect()->back()->with('success', 'Item updated successfully.');
 }
 
-
+//add teacher
 
     public function createTeacher(Request $request){
+
+         // Check if the email already exists in the users table
+         $existingUser = User::where('email', $request->email)->first();
+    
+         if ($existingUser) {
+             // Email already exists, display a message and redirect back to the form
+             Session::flash('email_exists_error', 'Email already exists. Try with a different email.');
+             return redirect()->back()->withInput();
+         }
         $teachers = Teacher::all();
         
         $user = new User;
@@ -170,7 +213,9 @@ public function update(Request $request)
     $teacher->password = Hash::make('bbBB12!@');
     $teacher->save();
 
-    return redirect()->back();
+    Session::flash('teacher_added_success', 'Student added successfully.');
+
+        return redirect()->back();
     }
 
     public function deleteTeacher(Request $request, $teacherId){//remember to put this
@@ -233,6 +278,15 @@ public function update(Request $request)
     }
     
     public function adddev(Request $request){
+
+          // Check if the email already exists in the users table
+          $existingUser = User::where('email', $request->email)->first();
+    
+          if ($existingUser) {
+              // Email already exists, display a message and redirect back to the form
+              Session::flash('email_exists_error', 'Email already exists. Try with a different email.');
+              return redirect()->back()->withInput();
+          }
         $developer = Dev::all();
         
         $data = new user;
@@ -272,6 +326,49 @@ public function update(Request $request)
 
         return redirect()->back();
     }
+
+    public function updatep(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+            // Add other profile fields validation here if needed
+        ]);
+
+        // Update the user's profile
+        $user = Auth::user();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        // Update other profile fields here if needed
+        $user->save();
+
+        // Redirect the user back to the profile page with a success message
+        return redirect()->back();
+    }
+
+    public function updatepass(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        // Check if the current password provided by the user matches their actual password
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back();        }
+
+        // Update the user's password
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back(); 
+       }
+
+
+    
 
 
     

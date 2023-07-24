@@ -173,40 +173,44 @@
         <!--form start -->
 		<div class="mb-3">
 			<label for="fname" class="form-label">First Name</label>
-			<input type="text" class="form-control" name = "fname" id="exampleFormControlInput1" placeholder="Maryam">
+			<input type="text" class="form-control" name = "fname" id="exampleFormControlInput1" placeholder="Maryam" required>
 		</div>
 		<div class="mb-3">
 			<label for="lname" class="form-label">Last Name</label>
-			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Mashkoora">
+			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Mashkoora" required>
 		</div>
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
-			<input type="text" class="form-control" name = "email" id="exampleFormControlInput1" placeholder="name@example.com">
+			<input type="text" class="form-control" name = "email" id="exampleFormControlInput1" placeholder="name@example.com" required>
 		</div>
 		<div class="mb-3">
 			<label for="bday" class="form-label">Birthday</label>
-			<input type="date" class="form-control" name = "bday" id="exampleFormControlInput1" placeholder="name@example.com">
+			<input type="date" class="form-control" name = "bday" id="exampleFormControlInput1" placeholder="name@example.com" required>
 		</div>
 		<div class="mb-3">
 			<label for="level" class="form-label">Level</label>
-			<input type="text" class="form-control" name = "level" id="exampleFormControlInput1" placeholder="A-level">
+			<input type="text" class="form-control" name = "level" id="exampleFormControlInput1" placeholder="A-level" required>
 		</div>
 		<div class="mb-3">
 			<label for="school" class="form-label">School</label>
-			<input type="text" class="form-control" name = "school" id="exampleFormControlInput1" placeholder="Example school">
+			<input type="text" class="form-control" name = "school" id="exampleFormControlInput1" placeholder="Example school" required>
 		</div>
 		<div class="mb-3">
 			<label for="guardian" class="form-label">Guardian Name</label>
-			<input type="text" class="form-control" name="guardian" id="exampleFormControlInput1" placeholder="">
+			<input type="text" class="form-control" name="guardian" id="exampleFormControlInput1" placeholder="Mr/Mrs john" required>
 		</div>
 		<div class="mb-3">
 			<label for="guardian" class="form-label">Guardian Telno</label>
-			<input type="text" class="form-control" name="guardianno" id="exampleFormControlInput1" placeholder="">
+			<input type="text" class="form-control" name="guardianno" id="exampleFormControlInput1" placeholder="0716655452" required>
 		</div>
 		
 		<div class="mb-3">
 			<label for="guardian" class="form-label">Guardian Bussniess</label>
-			<input type="text" class="form-control" name="guardian_busniess" id="exampleFormControlInput1" placeholder="">
+			<input type="text" class="form-control" name="guardian_busniess" id="exampleFormControlInput1" placeholder="Bussniess" required>
+		</div>
+		<div class="mb-3">
+			<label for="guardian" class="form-label">Guardian Email</label>
+			<input type="text" class="form-control" name="guardian_email" id="exampleFormControlInput1" placeholder="Bussniess" required>
 		</div>
                 <!-- end of form -->
 
@@ -355,6 +359,18 @@
     }
   }
 </script>
+@if(Session::has('email_exists_error'))
+    <script>
+        // Display the pop-up message using JavaScript (you can use any pop-up library or implement your custom solution)
+        alert("{{ Session::get('email_exists_error') }}");
+    </script>
+@endif
+
+@if(Session::has('student_added_success'))
+    <script>
+        alert("{{ Session::get('student_added_success') }}");
+    </script>
+@endif
 
 
 

@@ -40,7 +40,7 @@ body{
 .container form{
     position: relative;
     margin-top: 16px;
-    min-height: 490px;
+    min-height: 340px;
     background-color: #fff;
     overflow: hidden;
 }
