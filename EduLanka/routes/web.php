@@ -92,3 +92,6 @@ Route::get("/setting",[AdminController::class,"setting"]);
 Route::put('/profile', [AdminController::class,"updatep"])->name('updatep');
 Route::post('/changepassword', [AdminController::class,"updatepass"])->name('changepassword');
 });
+
+
+Route::post("/changePassword/{id}",[AdminController::class,"changePassword"]);

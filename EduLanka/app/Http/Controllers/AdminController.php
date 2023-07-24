@@ -367,6 +367,16 @@ public function update(Request $request)
         return redirect()->back(); 
        }
 
+       public function changePassword(Request $request, $id){
+        $data = User::find($id);
+
+        $data->update([
+            'password' => Hash::make($request->newpw),
+        ]);
+        
+        return redirect()->back();
+    }
+
 
     
 
