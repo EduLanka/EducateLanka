@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-his 
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,4 +147,3 @@ his
 </html>
 </body>
 </html>
->>>>>>> 1503e5cb6bba2e0b2c59e92a8b0418822de93a5e
