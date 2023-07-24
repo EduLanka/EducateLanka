@@ -156,11 +156,15 @@ public function deleteStudent(Request $request, $studentId)
     $student->level = $request->input('level');
     $student->school = $request->input('school');
     $student->guardian_id = $request->input('guardian_id');
-    $student->guardian_telno = $request->input('guardianno');
-    $student->guardian_business = $request->input('guardian_busniess');
+
     // Update more student properties as needed
 
     $student->save();
+
+    $user = $student->user;
+    $user->name = $request->input('first_name');
+    $user->email = $request->input('email');
+    $user->save();
 
     return redirect()->back()->with('success', 'Student updated successfully.');
 }
@@ -235,7 +239,7 @@ public function update(Request $request)
     {   
     $teacherId = $request->input('teacher_id');
     // Retrieve the teacher from the database
-    $teacher = Teacher::find($teacherId);
+    $teacher = Teacher::findOrFail($teacherId);
   
     // Update the teacher details with the submitted form data
     $teacher->first_name = $request->input('first_name');
@@ -246,6 +250,12 @@ public function update(Request $request)
   
     // Save the updated teacher details
     $teacher->save();
+
+    $user = $teacher->user;
+    $user->name = $request->input('first_name');
+    $user->email = $request->input('email');
+    $user->save();
+
         return redirect()->back()->with('success', 'Teacher updated successfully.');
     }
 
@@ -326,7 +336,7 @@ public function update(Request $request)
 
         return redirect()->back();
     }
-
+//admin profile update
     public function updatep(Request $request)
     {
         // Validate the incoming request data
@@ -346,6 +356,7 @@ public function update(Request $request)
         // Redirect the user back to the profile page with a success message
         return redirect()->back();
     }
+    //change password for admin
 
     public function updatepass(Request $request)
     {

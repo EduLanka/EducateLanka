@@ -882,4 +882,12 @@ body {
 	bottom: 0;
 
   }
+  .tab{
+	display: inline-block;
+	margin-right: 30em;
+  }
+  .tab1{
+	display: inline-block;
+	margin-left: 30em;
+  }
  

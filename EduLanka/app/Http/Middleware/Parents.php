@@ -14,27 +14,19 @@ class Parents
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+ 
+        public function handle(Request $request, Closure $next)
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect('/login');
         }
-        $user=Auth::user();
-        if($user->role==4){
+        
+        $user = Auth::user();
+        
+        if ($user->role == 4) {
             return $next($request);
         }
-        if($user->role==2){
-            return redirect('/student');
-        }
-        if($user->role==3){
-            return redirect('/teacher');
-        }
-        if($user->role==1){
-            return redirect('/admin');
-        }
-        if($user->role==5){
-            return redirect('/developer');
-        }
         
+        return redirect('/' . $user->role); // Redirect the user to their respective dashboard
     }
 }

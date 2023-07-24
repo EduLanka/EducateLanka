@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
 use App\Models\Dev;
+use App\Models\Gurdian;
 use App\Models\Message;
 
 class HomeController extends Controller
@@ -36,8 +37,8 @@ class HomeController extends Controller
         $studentCount = Student::where('role', 2)->count();
         $teacherCount = Teacher::where('role', 3)->count();
         $adminCount = User::where('role', 1)->count();
-        $parentCount = User::where('role', 4)->count();
         $developerCount = Dev::where('role', 5)->count();
+        $parentCount = Gurdian::count();
         $messageCount = Message::count();
         $courseCount = Course::count();
 
@@ -46,6 +47,7 @@ class HomeController extends Controller
         $Teacher = Teacher::all();
         $Admin = Admin::all();
         $Dev = Dev::all();
+        $parent = Gurdian::all();
         $messages = Message::all();
         $course = Course :: all();
         // Retrieve all users

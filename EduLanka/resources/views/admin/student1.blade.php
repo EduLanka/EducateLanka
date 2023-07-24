@@ -79,7 +79,7 @@
 		</ul>
 		<ul class="side-menu">
 			<li>
-				<a href="#">
+				<a href="{{url('/setting')}}">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
@@ -108,11 +108,11 @@
 			<form action="">
 				
 			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
+			<input type="checkbox" id="" hidden>
+			<label for="switch-mode" class=""></label>
+			<a href="" class="">
+				<i ></i>
+				<span class="num"></span>
 			</a>
 			<a href="" class="profile">
             {{ Auth::user()->name }}
@@ -189,7 +189,18 @@
 		</div>
 		<div class="mb-3">
 			<label for="level" class="form-label">Level</label>
-			<input type="text" class="form-control" name = "level" id="exampleFormControlInput1" placeholder="A-level" required>
+			<select class="form-control" id="exampleFormControlInput1" name="level" placeholder="A-level" required>
+  <option value="grade5">Grade 5</option>
+  <option value="grade6">Grade 6</option>
+  <option value="grade7">Grade 7</option>
+  <option value="grade8">Grade 8</option>
+  <option value="grade9">Grade 9</option>
+  <option value="grade10">Grade 10</option>
+  <option value="grade11">Grade 11</option>
+  <option value="grade12">Grade 12</option>
+  <option value="grade13">Grade 13</option>
+  <!-- Add more options as needed -->
+</select>
 		</div>
 		<div class="mb-3">
 			<label for="school" class="form-label">School</label>
@@ -237,6 +248,7 @@
 								<th>Level</th>
 								<th>School</th>
 								<th>Guardian Name</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -249,6 +261,7 @@
 							<td>{{$student -> level}}</td>
 							<td>{{$student -> school}}</td>
 							<td>{{$student -> guardian_id}}</td>
+						
 							<td> 
 							<td> 
 							<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;" onclick="openEditModal({{ $student->id }})"></i>
@@ -302,17 +315,29 @@
                     </div>
                     <div class="form-group">
                         <label for="editLevel">Level</label>
-                        <input type="text" class="form-control" id="editLevel" name="level">
+						<select class="form-control" id="editLevel" name="level" >
+  <option value="grade5">Grade 5</option>
+  <option value="grade6">Grade 6</option>
+  <option value="grade7">Grade 7</option>
+  <option value="grade8">Grade 8</option>
+  <option value="grade9">Grade 9</option>
+  <option value="grade10">Grade 10</option>
+  <option value="grade11">Grade 11</option>
+  <option value="grade12">Grade 12</option>
+  <option value="grade13">Grade 13</option>
+  <!-- Add more options as needed -->
+</select>
+						
                     </div>
                     <div class="form-group">
                         <label for="editSchool">School</label>
                         <input type="text" class="form-control" id="editSchool" name="school">
                     </div>
                     <div class="form-group">
-                        <label for="editGuardianId">Guardian ID</label>
+                        <label for="editGuardianId">Guardian Name</label>
                         <input type="text" class="form-control" id="editGuardianId" name="guardian_id">
                     </div>
-
+		
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
@@ -320,6 +345,13 @@
     </div>
 </div>
 
+
+<footer>
+
+<marquee direction="right" scrollamount="14"> <span class="tab">The Best Learning platform</span>  	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
+
+	
+</footer>
 
 	
 <script>
@@ -332,6 +364,9 @@
         var studentLevel = studentRow.querySelector('td:nth-child(5)').textContent;
         var studentSchool = studentRow.querySelector('td:nth-child(6)').textContent;
         var studentGuardianId = studentRow.querySelector('td:nth-child(7)').textContent;
+		
+
+
 
         document.getElementById('editStudentId').value = studentId;
         document.getElementById('editFirstName').value = studentFirstName;
@@ -341,7 +376,7 @@
         document.getElementById('editLevel').value = studentLevel;
         document.getElementById('editSchool').value = studentSchool;
         document.getElementById('editGuardianId').value = studentGuardianId;
-
+	
         var editModal = new bootstrap.Modal(document.getElementById('editModal'));
         editModal.show();
     }
@@ -353,7 +388,7 @@
     event.preventDefault(); 
 
     // Show the alert dialog
-    if (confirm("Are you sure you want to delete this teacher?")) {
+    if (confirm("Are you sure you want to delete this student?")) {
       // If the user clicks OK, proceed with the deletion 
       window.location.href = event.target.parentElement.href;
     }

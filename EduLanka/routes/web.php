@@ -24,26 +24,35 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //connecting middleware since ther is no login through controller we add the function here
-Route::get('admin',function(){
-    return view('admin');
-})->name('admin')->middleware('admin');
+Route::middleware(['admin'])->group(function () {
+    Route::get('admin', function () {
+        return view('admin');
+    })->name('admin');
+});
 
-Route::get('student',function(){
-    return view('student');
-})->name('student')->middleware('student');
 
-Route::get('teacher',function(){
-    return view('teacher');
-})->name('teacher')->middleware('teacher');
+Route::middleware(['student'])->group(function () {
+    Route::get('student', function () {
+        return view('student');
+    })->name('student');
+});
 
-Route::get('parent',function(){
-    return view('parent');
-})->name('parent')->middleware('parent');
+Route::middleware(['teacher'])->group(function () {
+    Route::get('teacher', function () {
+        return view('teacher');
+    })->name('teacher');
+});
 
-Route::get('developer',function(){
-    return view('developer');
-})->name('developer')->middleware('developer');
-
+Route::middleware(['parent'])->group(function () {
+    Route::get('parent', function () {
+        return view('parent');
+    })->name('parent');
+});
+Route::middleware(['developer'])->group(function () {
+    Route::get('developer', function () {
+        return view('developer');
+    })->name('developer');
+});
 //to get the database deatils shown when the admin dashboard open
 Route::get('admin', [App\Http\Controllers\HomeController::class, 'admin'])->name('admin');
 

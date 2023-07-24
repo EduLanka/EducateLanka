@@ -79,7 +79,7 @@
 		</ul>
 		<ul class="side-menu">
 			<li>
-				<a href="#">
+				<a href="{{url('/setting')}}">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
@@ -108,11 +108,12 @@
 			<form action="">
 				
 			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
+			
+			<input type="checkbox" id="" hidden>
+			<label for="switch-mode" class=""></label>
+			<a href="" class="">
+				<i ></i>
+				<span class="num"></span>
 			</a>
 			<a href="" class="profile">
             {{ Auth::user()->name }}
@@ -185,7 +186,18 @@
 		</div>
 		<div class="mb-3">
 			<label for="level" class="form-label">Level</label>
-			<input type="text" class="form-control" name = "level" id="exampleFormControlInput1" placeholder="A-level">
+			<select class="form-control" id="exampleFormControlInput1" name="level" placeholder="A-level" required>
+  <option value="grade5">Grade 5</option>
+  <option value="grade6">Grade 6</option>
+  <option value="grade7">Grade 7</option>
+  <option value="grade8">Grade 8</option>
+  <option value="grade9">Grade 9</option>
+  <option value="grade10">Grade 10</option>
+  <option value="grade11">Grade 11</option>
+  <option value="grade12">Grade 12</option>
+  <option value="grade13">Grade 13</option>
+  <!-- Add more options as needed -->
+</select>
 		</div>
 		<div class="mb-3">
 			<label for="school" class="form-label">School</label>
@@ -268,7 +280,18 @@
 					</div>
 					<div class="form-group">
 						<label for="level">Level:</label>
-						<input type="text" class="form-control" name="level" id="level">
+						<select class="form-control" id="level" name="level">
+  <option value="grade5">Grade 5</option>
+  <option value="grade6">Grade 6</option>
+  <option value="grade7">Grade 7</option>
+  <option value="grade8">Grade 8</option>
+  <option value="grade9">Grade 9</option>
+  <option value="grade10">Grade 10</option>
+  <option value="grade11">Grade 11</option>
+  <option value="grade12">Grade 12</option>
+  <option value="grade13">Grade 13</option>
+  <!-- Add more options as needed -->
+</select>
 					</div>
 					<div class="form-group">
 						<label for="school">School:</label>
@@ -281,6 +304,13 @@
 	</div>
 </div>
 
+
+<footer>
+
+<marquee direction="right" scrollamount="14"> <span class="tab">The Best Learning platform</span>  	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
+
+	
+</footer>
 
 <script>
 	function openEditModal(teacherId) {

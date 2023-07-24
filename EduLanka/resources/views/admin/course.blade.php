@@ -107,11 +107,11 @@
 			<form action="">
 				
 			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
+			<input type="checkbox" id="" hidden>
+			<label for="switch-mode" class=""></label>
+			<a href="#" class="">
+				<i ></i>
+				<span class="num"></span>
 			</a>
 			<a href="" class="profile">
             {{ Auth::user()->name }}
@@ -250,7 +250,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
+                <h5 class="modal-title" id="editModalLabel">Edit Course</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -260,7 +260,16 @@
                     <!-- Add form fields for editing item properties -->
                     <div class="form-group">
                         <label for="editLevel">Level</label>
-                        <input type="text" class="form-control" id="editLevel" name="level">
+						<select class="form-control" id="editLevel" name="level" >
+  <option value="grade5">Grade 5</option>
+  <option value="grade6">Grade 6</option>
+  <option value="grade7">Grade 7</option>
+  <option value="grade8">Grade 8</option>
+  <option value="grade9">Grade 9</option>
+  <option value="grade10">Grade 10</option>
+  <option value="grade11">Grade 11</option>
+  <option value="grade12">Grade 12</option>
+  <option value="grade13">Grade 13</option>
                     </div>
                     <div class="form-group">
                         <label for="editSubject">Subject</label>
@@ -275,6 +284,13 @@
     </div>
 </div>
 	
+
+<footer>
+
+<marquee direction="right" scrollamount="14"> <span class="tab">The Best Learning platform</span>  	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
+
+	
+</footer>
 
 
 
@@ -302,7 +318,7 @@
     event.preventDefault(); 
 
     // Show the alert dialog
-    if (confirm("Are you sure you want to delete this teacher?")) {
+    if (confirm("Are you sure you want to delete this courser?")) {
       // If the user clicks OK, proceed with the deletion 
       window.location.href = event.target.parentElement.href;
     }
