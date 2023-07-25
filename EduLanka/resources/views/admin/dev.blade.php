@@ -85,7 +85,7 @@
 				</a>
 			</li>
 			<li class="nav-item">
-        <a href="#" class="nav-link logout">
+        <a href="#" class="nav-link logout" onclick="confirmLogout()">
             <i class='bx bxs-log-out-circle'></i>
             <span class="text">Logout</span>
         </a>
@@ -253,6 +253,13 @@
 @endif
 
 
+<script>
+function confirmLogout() {
+    if (window.confirm('Are you sure you want to logout?')) {
+        document.getElementById('logout-form').submit();
+    }
+}
+</script>
 	
 
 

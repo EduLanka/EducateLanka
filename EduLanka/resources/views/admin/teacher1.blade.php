@@ -85,11 +85,11 @@
 				</a>
 			</li>
 			<li class="nav-item">
-        <a href="#" class="nav-link logout">
+        <a href="#" class="nav-link logout" onclick="confirmLogout()" >
             <i class='bx bxs-log-out-circle'></i>
             <span class="text">Logout</span>
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" >
             @csrf
         </form>
     </li>
@@ -305,12 +305,24 @@
 </div>
 
 
+
+
 <footer>
 
 <marquee direction="right" scrollamount="14"> <span class="tab">The Best Learning platform</span>  	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
 
 	
 </footer>
+
+<script>
+function confirmLogout() {
+    if (window.confirm('Are you sure you want to logout?')) {
+        document.getElementById('logout-form').submit();
+    }
+}
+</script>
+
+
 
 <script>
 	function openEditModal(teacherId) {

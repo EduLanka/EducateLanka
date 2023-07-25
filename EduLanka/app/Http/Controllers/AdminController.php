@@ -387,13 +387,14 @@ public function update(Request $request)
         
         return redirect()->back();
     }
+    public function replyMessage(Request $request, $id){
+        $data = Message::find($id);
 
-
-    
-
-
-    
-
-
+        $data->update([
+            'reply' => $request->reply,
+        ]);
+        
+        return redirect()->back();
+    }
 
 }
