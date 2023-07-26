@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/setting.css">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/setting.css">
+    <title>Document</title>
 </head>
 <body>
 <div class="container">
@@ -20,24 +20,24 @@
                             <label>Full Name</label>
                             <input type="text" placeholder="Enter your first name" name="name" value="{{ $user->name }}" required>
                         </div>
-					
+                   
                         <div class="input-field">
                             <label>Email</label>
                             <input type="email" placeholder="Enter your email" name="email" value="{{ $user->email }}" required>
                         </div>
 
-	
-						<br><br><br>
-						<button  type="submit" class="saveBtn">
+   
+                        <br><br><br>
+                        <button  type="submit" class="saveBtn">
                         <span class="btnText">Save</span>
                         <i class="uil uil-navigator"></i>
                     </button>
-                        
+                       
                     </div>
                </form>
                 </div>
-				<form action="{{ route('changepassword') }}" method="POST">
-				@csrf
+                <form action="{{ route('changepassword') }}" method="POST">
+                @csrf
                 <div class="details ID">
                     <span class="title">Change Password</span>
                     <div class="fields">
@@ -50,6 +50,7 @@
                             <label>New Password</label>
                             <input type="password" id="psw" placeholder="Enter your new password" name="password" required>
                         </div>
+<<<<<<< HEAD
                         <div id="criteria">
                         New password must contain the following:
                         <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
@@ -59,10 +60,14 @@
                         <p id="length" class="invalid">Minimum <b>8 characters</b></p>
                       </div>
 						<div class="input-field">
+=======
+                        <div class="input-field">
+>>>>>>> cbe196025f066b29983e225a85c6d8b1c28090cf
                             <label>Confirm New Password</label>
                             <input type="password" id="confirmPassword" placeholder="Confirm your new password" name="password_confirmation" required>
                             <p id="confirmErrorMessage" style="color: red; display: none;">Passwords do not match</p>
                         </div>
+<<<<<<< HEAD
 						<button type="submit" class="sumbit">
 						<span class="btnText">Save</span>
 						<i class="uil uil-navigator"></i>
@@ -171,3 +176,20 @@ myInput.onkeyup = function() {
 </html>
 </body>
 </html>
+=======
+                        <button type="submit" class="sumbit">
+                        <span class="btnText">Save</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                   
+                    </div>
+                   
+                   
+                   
+                </div> 
+            </div>
+</body>
+</html>
+</body>
+</html>
+>>>>>>> cbe196025f066b29983e225a85c6d8b1c28090cf
