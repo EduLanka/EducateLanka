@@ -90,6 +90,8 @@ Route::post("/createAdmin",[AdminController::class,"createAdmin"]);
 Route::get("/dev",[AdminController::class,"dev"]);
 Route::post("/adddev",[AdminController::class,"adddev"]);
 Route::get("/deleteDev/{id}",[AdminController::class,"deleteDev"]);
+Route::post('/updatedev', 'App\Http\Controllers\AdminController@updatedev')->name('updatedev');
+
 
 
 Route::post("/sendMessage",[AdminController::class,"sendMessage"]);
@@ -103,4 +105,9 @@ Route::post('/changepassword', [AdminController::class,"updatepass"])->name('cha
 });
 
 
+
+
+
 Route::post("/changePassword/{id}",[AdminController::class,"changePassword"]);
+
+

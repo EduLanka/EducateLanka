@@ -216,12 +216,12 @@
 		</div>
 		
 		<div class="mb-3">
-			<label for="guardian" class="form-label">Guardian Bussniess</label>
-			<input type="text" class="form-control" name="guardian_busniess" id="exampleFormControlInput1" placeholder="Bussniess" required>
+			<label for="guardian" class="form-label">Guardian Occupation</label>
+			<input type="text" class="form-control" name="guardian_busniess" id="exampleFormControlInput1" placeholder="Occupation" required>
 		</div>
 		<div class="mb-3">
 			<label for="guardian" class="form-label">Guardian Email</label>
-			<input type="text" class="form-control" name="guardian_email" id="exampleFormControlInput1" placeholder="Bussniess" required>
+			<input type="text" class="form-control" name="guardian_email" id="exampleFormControlInput1" placeholder="gurdian@gmail.com" required>
 		</div>
                 <!-- end of form -->
 
@@ -392,15 +392,24 @@ function confirmLogout() {
 </script>
 
 <script>
-	//confirmation dialog for delete
-	function confirmDelete(event) {
-    event.preventDefault(); 
+  // Confirmation dialog for delete
+  function confirmDelete(event) {
+    event.preventDefault();
 
     // Show the alert dialog
-    if (confirm("Are you sure you want to delete this student?")) {
-      // If the user clicks OK, proceed with the deletion 
+    if (confirm("Are you sure you want to delete this courser?")) {
+      // If the user clicks OK, proceed with the deletion
       window.location.href = event.target.parentElement.href;
+
+      // Display a success message
+      showSuccessMessage();
     }
+  }
+
+  // Function to show the success message
+  function showSuccessMessage() {
+    // You can customize the success message here
+    alert("Deletion was successful!");
   }
 </script>
 @if(Session::has('email_exists_error'))
@@ -415,7 +424,11 @@ function confirmLogout() {
         alert("{{ Session::get('student_added_success') }}");
     </script>
 @endif
-
+@if(Session::has('student_edit_success'))
+    <script>
+        alert("{{ Session::get('student_edit_success') }}");
+    </script>
+@endif
 
 
 

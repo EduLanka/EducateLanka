@@ -12,6 +12,7 @@ use App\Models\Admin;
 use App\Models\Dev;
 use App\Models\Gurdian;
 use App\Models\Message;
+use App\Models\Advert;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -51,6 +52,8 @@ class AdminController extends Controller
         $data->level=$request->level;
         $data->subject=$request->subject;
         $data->save();
+        Session::flash('student_added_success', 'Course added successfully.');
+        
         return redirect()->back();
     }
 
@@ -158,6 +161,7 @@ public function deleteStudent(Request $request, $studentId)
     $student->guardian_id = $request->input('guardian_id');
 
     // Update more student properties as needed
+    Session::flash('student_edit_success', 'Student upadted successfully.');
 
     $student->save();
 
@@ -180,6 +184,7 @@ public function update(Request $request)
     // Update more item properties as needed
 
     $data->save();
+    Session::flash('course_edit_success', 'Course upadted successfully.');
 
     return redirect()->back()->with('success', 'Item updated successfully.');
 }
@@ -217,7 +222,7 @@ public function update(Request $request)
     $teacher->password = Hash::make('bbBB12!@');
     $teacher->save();
 
-    Session::flash('teacher_added_success', 'Student added successfully.');
+    Session::flash('teacher_added_success', 'Teacher added successfully.');
 
         return redirect()->back();
     }
@@ -249,7 +254,9 @@ public function update(Request $request)
     $teacher->school = $request->input('school');
   
     // Save the updated teacher details
+    
     $teacher->save();
+    Session::flash('teacher_edit_success', 'Teacher upadted successfully.');
 
     $user = $teacher->user;
     $user->name = $request->input('first_name');
@@ -299,14 +306,15 @@ public function update(Request $request)
           }
         $developer = Dev::all();
         
-        $data = new user;
-        $data->name=$request->fname;
-        $data->email=$request->email;
-        $data->role=5;
-        $data->password=Hash::make('aaAA12!@');
-        $data->save();
+        $user = new user;
+        $user->name=$request->fname;
+        $user->email=$request->email;
+        $user->role=5;
+        $user->password=Hash::make('aaAA12!@');
+        $user->save();
 
         $data = new dev;
+        $data -> user_id = $user->id;    
         $data->full_name=$request->fname;
         $data->email=$request->email;
         $data->telno=$request->telno;
@@ -314,18 +322,58 @@ public function update(Request $request)
         $data->role=5;
         $data->password=Hash::make('aaAA12!@');
         $data->save();
+
+        Session::flash('student_added_success', 'Developer added successfully.');
     
 
-        return redirect()->back()->with('success', 'Data added successfully to both databases.');
-
-
-
-    }
-    public function deleteDev($id){
-        $data = dev::find($id);
-        $data->delete();
         return redirect()->back();
+
+
+
     }
+
+    public function deleteDev(Request $request, $devId)//remember to put this
+{
+    $dev = Dev::findOrFail($devId);//remember to put this
+    $userId = $dev->user_id;
+
+    // Delete the student from the 'students' table
+    $dev->delete();
+
+    // Delete the associated user from the 'users' table using the relationship
+    User::where('id', $userId)->delete();
+
+    return redirect()->back()->with('success', 'Student deleted successfully');
+}
+
+
+public function updatedev(Request $request)
+{   
+$devId = $request->input('dev_id');
+// Retrieve the teacher from the database
+$dev = Dev::findOrFail($devId);
+
+// Update the teacher details with the submitted form data
+$dev->full_name = $request->input('full_name');
+$dev->email = $request->input('email');
+$dev->telno = $request->input('telno');
+$dev->Address = $request->input('Address');
+
+// Save the updated teacher details
+
+$dev->save();
+Session::flash('teacher_edit_success', 'Developer upadted successfully.');
+
+$user = $dev->user;
+$user->name = $request->input('full_name');
+$user->email = $request->input('email');
+$user->save();
+
+    return redirect()->back()->with('success', 'Teacher updated successfully.');
+}
+
+
+   
 
     public function sendMessage(Request $request){
         $data = new Message;
@@ -354,7 +402,7 @@ public function update(Request $request)
         $user->save();
 
         // Redirect the user back to the profile page with a success message
-        return redirect()->back();
+        return redirect("admin");
     }
     //change password for admin
 
@@ -378,6 +426,8 @@ public function update(Request $request)
         return redirect()->back(); 
        }
 
+
+//passwrod change to student,teacher,developer
        public function changePassword(Request $request, $id){
         $data = User::find($id);
 
@@ -387,6 +437,9 @@ public function update(Request $request)
         
         return redirect()->back();
     }
+
+
+
     public function replyMessage(Request $request, $id){
         $data = Message::find($id);
 
@@ -396,5 +449,9 @@ public function update(Request $request)
         
         return redirect()->back();
     }
+
+ 
+
+
 
 }

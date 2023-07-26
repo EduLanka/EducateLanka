@@ -15,6 +15,7 @@
     <!-- link to jquery file for logout-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- end link to jquery file for logout-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <!-- js file for logout-->
     <script>
@@ -146,12 +147,14 @@
 					<div class="head">
 						<h3>Courses</h3>
 
-						   <form action="#">
+						   
+						<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
 					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
 				</div>
 			</form>
+			
 						<!-- Button trigger modal pop up -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Add Course
@@ -293,6 +296,24 @@
 </footer>
 
 
+<!--<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+
+    var availableTags = [ ];
+	$.ajax({
+		type: "GET",
+		url: "/courselist",
+		success: function(response){
+			console.log(response);
+		}
+	});
+    $( "#search_product" ).autocomplete({
+      source: availableTags
+    });
+  
+  </script>-->
+
+
 <script>
 function confirmLogout() {
     if (window.confirm('Are you sure you want to logout?')) {
@@ -319,18 +340,42 @@ function confirmLogout() {
 </script>
 
 
+
 <script>
-	//confirmation dialog for delete
-	function confirmDelete(event) {
-    event.preventDefault(); 
+  // Confirmation dialog for delete
+  function confirmDelete(event) {
+    event.preventDefault();
 
     // Show the alert dialog
     if (confirm("Are you sure you want to delete this courser?")) {
-      // If the user clicks OK, proceed with the deletion 
+      // If the user clicks OK, proceed with the deletion
       window.location.href = event.target.parentElement.href;
+
+      // Display a success message
+      showSuccessMessage();
     }
   }
+
+  // Function to show the success message
+  function showSuccessMessage() {
+    // You can customize the success message here
+    alert("Deletion was successful!");
+  }
 </script>
+
+@if(Session::has('student_added_success'))
+    <script>
+        alert("{{ Session::get('student_added_success') }}");
+    </script>
+@endif
+
+@if(Session::has('course_edit_success'))
+    <script>
+        alert("{{ Session::get('course_edit_success') }}");
+    </script>
+@endif
+
+
 
 
 

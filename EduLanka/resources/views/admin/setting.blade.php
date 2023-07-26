@@ -45,17 +45,31 @@
                             <label>Old Password</label>
                             <input type="password" placeholder="Enter your old password" name="current_password" required>
                         </div>
+                        
                         <div class="input-field">
                             <label>New Password</label>
-                            <input type="password" placeholder="Enter your new password" name="password" required>
+                            <input type="password" id="psw" placeholder="Enter your new password" name="password" required>
                         </div>
+                        <div id="criteria">
+                        New password must contain the following:
+                        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                        <p id="number" class="invalid">A <b>number</b></p>
+                        <p id="specialChar" class="invalid">A <b>special character</b></p>
+                        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                      </div>
 						<div class="input-field">
                             <label>Confirm New Password</label>
-                            <input type="password" placeholder="Confirm your new password" name="password_confirmation" required>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your new password" name="password_confirmation" required>
+                            <p id="confirmErrorMessage" style="color: red; display: none;">Passwords do not match</p>
                         </div>
 						<button type="submit" class="sumbit">
 						<span class="btnText">Save</span>
 						<i class="uil uil-navigator"></i>
+					</button>
+                    <button type="submit" class="sumbit"> <a href="{{url('admin')}}" style= "text-decoration: none; color: white;">
+						<span >Cancel</span>
+						</a>
 					</button>
                    
                     </div>
@@ -63,86 +77,97 @@
 					
                     
                 </div> 
-<<<<<<< HEAD
             </div>
-            <div class="form second">
-                <div class="details address">
-                    <span class="title">Address Details</span>
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>Address Type</label>
-                            <input type="text" placeholder="Permanent or Temporary" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Nationality</label>
-                            <input type="text" placeholder="Enter nationality" required>
-                        </div>
-                        <div class="input-field">
-                            <label>State</label>
-                            <input type="text" placeholder="Enter your state" required>
-                        </div>
-                        <div class="input-field">
-                            <label>District</label>
-                            <input type="text" placeholder="Enter your district" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Block Number</label>
-                            <input type="number" placeholder="Enter block number" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Ward Number</label>
-                            <input type="number" placeholder="Enter ward number" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="details family">
-                    <span class="title">Family Details</span>
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>Father Name</label>
-                            <input type="text" placeholder="Enter father name" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Mother Name</label>
-                            <input type="text" placeholder="Enter mother name" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Grandfather</label>
-                            <input type="text" placeholder="Enter grandfther name" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Spouse Name</label>
-                            <input type="text" placeholder="Enter spouse name" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Father in Law</label>
-                            <input type="text" placeholder="Father in law name" required>
-                        </div>
-                        <div class="input-field">
-                            <label>Mother in Law</label>
-                            <input type="text" placeholder="Mother in law name" required>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <div class="backBtn">
-                            <i class="uil uil-navigator"></i>
-                            <span class="btnText">Back</span>
-                        </div>
-                        
-                        <button class="sumbit">
-                            <span class="btnText">Submit</span>
-                            <i class="uil uil-navigator"></i>
-                        </button>
-                    </div>
-                </div> 
-            </div>
-        </form>
-    </div>
-    <script src="script.js"></script>
+       
+
+            <script>
+                var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("criteria").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("criteria").style.display = "none";
+}
+
+//confirm password not matching new password error
+var confirmPasswordInput = document.getElementById("confirmPassword");
+var confirmErrorMessage = document.getElementById("confirmErrorMessage");
+
+confirmPasswordInput.onkeyup = function () {
+  if (confirmPasswordInput.value !== myInput.value) {
+    confirmErrorMessage.style.display = "block";
+  } else {
+    confirmErrorMessage.style.display = "none";
+  }
+};
+
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  
+  
+  
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+
+  var specialCharacters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/@#]/g;
+  if (myInput.value.match(specialCharacters)) {  
+    specialChar.classList.remove("invalid");
+    specialChar.classList.add("valid");
+  } else {
+    specialChar.classList.remove("valid");
+    specialChar.classList.add("invalid");
+  }
+  
+ 
+}
+            </script>
 </body>
 </html>
 </body>
 </html>
-=======
-            </div>
->>>>>>> 235b672541997a1870d1742ede30cfdd88bfdac2

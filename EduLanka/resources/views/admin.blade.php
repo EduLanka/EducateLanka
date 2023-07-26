@@ -63,7 +63,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="">
 					<i class='bx bxs-user-circle' ></i>
 					<span class="text">Adevert</span>
 				</a>

@@ -40,7 +40,7 @@ body{
 .container form{
     position: relative;
     margin-top: 16px;
-    min-height: 340px;
+    min-height: 540px;
     background-color: #fff;
     overflow: hidden;
 }
@@ -80,7 +80,7 @@ form.secActive .form.first{
 }
 form .fields .input-field{
     display: flex;
-    width: calc(100% / 3 - 15px);
+    width: calc(100% / 2 - 25px);
     flex-direction: column;
     margin: 4px 0;
 }
@@ -148,6 +148,44 @@ form .buttons{
 form .buttons button , .backBtn{
     margin-right: 14px;
 }
+
+
+
+
+/*password criteria*/
+#criteria {
+	display:none;
+	background: #f1f1f1;
+	color: #000;
+	/* position: relative; */
+	padding: 1em;
+  }
+  
+  /* Add a green text color and a checkmark when the requirements are right */
+.valid {
+	color: green;
+  }
+  
+  .valid:before {
+	position: relative;
+	left: -5px;
+	content: "✔";
+  }
+  
+  /* Add a red text color and an "x" when the requirements are wrong */
+  .invalid {
+	color: red;
+  }
+  
+  .invalid:before {
+	position: relative;
+	left: -5px;
+	content: "✖";
+  }
+
+
+
+
 @media (max-width: 750px) {
     .container form{
         overflow-y: scroll;

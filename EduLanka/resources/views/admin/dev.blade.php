@@ -180,11 +180,11 @@
 		</div>
 		<div class="mb-3">
 			<label for="level" class="form-label">Telno</label>
-			<input type="text" class="form-control" name = "telno" id="exampleFormControlInput1" placeholder="A-level">
+			<input type="text" class="form-control" name = "telno" id="exampleFormControlInput1" placeholder="075122333">
 		</div>
 		<div class="mb-3">
 			<label for="school" class="form-label">Address</label>
-			<input type="text" class="form-control" name = "add" id="exampleFormControlInput1" placeholder="Example school">
+			<input type="text" class="form-control" name = "add" id="exampleFormControlInput1" placeholder="Full Address">
 		</div>
 
                 <!-- end of form -->
@@ -207,7 +207,6 @@
 							<tr>
 								<th>First Name</th>
 								<th>Email</th>
-                                <th>Role</th>
 								<th>Telno</th>
 								<th>Address</th>
 								<th></th>
@@ -216,13 +215,12 @@
 						</thead>
 						<tbody>
                         @foreach ($dev as $dev)
-                  		<tr  id="">
+                  		<tr  id="row{{ $dev->id }}">
 							<td>{{$dev -> full_name}}</td>
 							<td>{{$dev -> email}}</td>
-							<td>{{$dev -> role}}</td>
 							<td>{{$dev -> telno}}</td>
 							<td>{{$dev -> Address}}</td>
-							<td>	<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
+							<td><i  onclick="openEditModal({{ $dev->id }})"  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
 							<td><a href="{{url('/deleteDev',$dev->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" 
                             onclick="confirmDelete(event)" ></i></a></td>           
                   		</tr>
@@ -236,15 +234,75 @@
 	</section>
 	<!-- CONTENT -->
 
+
+	
+<!-- The Bootstrap modal for editing -->
+<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-modal-label">Edit Developer Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Edit form -->
+                <form id="editForm" action="{{ route('updatedev') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="dev_id" id="dev_id">
+                    <div class="form-group">
+                        <label for="full_name">Full Name:</label>
+                        <input type="text" class="form-control" name="full_name" id="full_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" name="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="telno">Telno:</label>
+                        <input type="text" class="form-control" name="telno" id="telno">
+                    </div>
+                    <div class="form-group">
+                        <label for="Address">Address:</label>
+                        <input type="text" class="form-control" name="Address" id="Address">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Bootstrap modal -->
+	
+
 	<footer>
 
-<marquee direction="right" scrollamount="14"> <span class="tab">The Best Learning platform</span>  	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
+<marquee direction="right" scrollamount="10"> <span class="tab">The Best Learning platform</span>  	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
 
 	
 </footer>
 
+<script>
+    function openEditModal(devId) {
+		
+        var developerRow = document.getElementById('row' + devId);
+        var developerFullName = developerRow.querySelector('td:nth-child(1)').textContent;
+        var developerEmail = developerRow.querySelector('td:nth-child(2)').textContent;
+        var developerTelno = developerRow.querySelector('td:nth-child(3)').textContent;
+        var developerAddress = developerRow.querySelector('td:nth-child(4)').textContent;
 
+        document.getElementById('dev_id').value = devId;
+        document.getElementById('full_name').value = developerFullName;
+        document.getElementById('email').value = developerEmail;
+        document.getElementById('telno').value = developerTelno;
+        document.getElementById('Address').value = developerAddress;
 
+        var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        editModal.show();
+    }
+</script>
+
+	
 	@if(Session::has('email_exists_error'))
     <script>
         // Display the pop-up message using JavaScript (you can use any pop-up library or implement your custom solution)
@@ -252,6 +310,16 @@
     </script>
 @endif
 
+@if(Session::has('student_added_success'))
+    <script>
+        alert("{{ Session::get('student_added_success') }}");
+    </script>
+@endif
+@if(Session::has('teacher_edit_success'))
+    <script>
+        alert("{{ Session::get('teacher_edit_success') }}");
+    </script>
+@endif
 
 <script>
 function confirmLogout() {
@@ -263,16 +331,25 @@ function confirmLogout() {
 	
 
 
-    <script>
-	//confirmation dialog for delete
-	function confirmDelete(event) {
-    event.preventDefault(); 
+<script>
+  // Confirmation dialog for delete
+  function confirmDelete(event) {
+    event.preventDefault();
 
     // Show the alert dialog
-    if (confirm("Are you sure you want to delete this teacher?")) {
-      // If the user clicks OK, proceed with the deletion 
+    if (confirm("Are you sure you want to delete this courser?")) {
+      // If the user clicks OK, proceed with the deletion
       window.location.href = event.target.parentElement.href;
+
+      // Display a success message
+      showSuccessMessage();
     }
+  }
+
+  // Function to show the success message
+  function showSuccessMessage() {
+    // You can customize the success message here
+    alert("Deletion was successful!");
   }
 </script>
 	<script src="assets/script.js"></script>

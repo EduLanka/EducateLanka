@@ -349,15 +349,24 @@ function confirmLogout() {
 
 
 <script>
-	//confirmation dialog for delete
-	function confirmDelete(event) {
-    event.preventDefault(); 
+  // Confirmation dialog for delete
+  function confirmDelete(event) {
+    event.preventDefault();
 
     // Show the alert dialog
-    if (confirm("Are you sure you want to delete this teacher?")) {
-      // If the user clicks OK, proceed with the deletion 
+    if (confirm("Are you sure you want to delete this courser?")) {
+      // If the user clicks OK, proceed with the deletion
       window.location.href = event.target.parentElement.href;
+
+      // Display a success message
+      showSuccessMessage();
     }
+  }
+
+  // Function to show the success message
+  function showSuccessMessage() {
+    // You can customize the success message here
+    alert("Deletion was successful!");
   }
 </script>
 @if(Session::has('email_exists_error'))
@@ -369,6 +378,11 @@ function confirmLogout() {
 @if(Session::has('teacher_added_success'))
     <script>
         alert("{{ Session::get('teacher_added_success') }}");
+    </script>
+@endif
+@if(Session::has('teacher_edit_success'))
+    <script>
+        alert("{{ Session::get('teacher_edit_success') }}");
     </script>
 @endif
 
