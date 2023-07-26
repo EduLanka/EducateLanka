@@ -412,18 +412,19 @@ $user->save();
             'current_password' => 'required',
             'password' => 'required|min:8|confirmed',
         ]);
-
+    
         $user = Auth::user();
-
-        // Check if the current password provided by the user matches their actual password
+    
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back();        }
-
-        // Update the user's password
+            return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+    
         $user->password = Hash::make($request->password);
         $user->save();
-
-        return redirect()->back(); 
+    
+        session()->flash('success', 'Password changed successfully.');
+    
+        return redirect()->back();
        }
 
 
@@ -439,7 +440,7 @@ $user->save();
     }
 
 
-
+//reply message fron admin
     public function replyMessage(Request $request, $id){
         $data = Message::find($id);
 
@@ -450,8 +451,67 @@ $user->save();
         return redirect()->back();
     }
 
- 
+ //announcments add,delete.update,retive code
+    public function banner(){
+        $advert = Advert::all();
+        return view("admin.banner",compact('advert'));
+    }
+    public function uploadbanner(Request $request)
+    {
+        
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed image types and size as needed
+        ]);
+    
+        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+        $request->image->move(public_path('EduLanka\public\advert'), $imageName);
+    
+        Advert::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $imageName,
+        ]);
+    
+        return redirect()->back()->with('success', 'Advertisement added successfully.');
+    }
+
+    public function deleteadvert($id){
+        $advert=advert::find($id);
+        $advert->delete();
+        return redirect()->back();
+    }
+    public function updateadvert(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'new_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $advertId = $request->input('advert_id');
+        $advert = Advert::findOrFail($advertId);
+
+        $advert->name = $request->input('name');
+        $advert->description = $request->input('description');
+
+        if ($request->hasFile('new_image')) {
+            $imageName = time() . '.' . $request->file('new_image')->getClientOriginalExtension();
+            $request->file('new_image')->move(public_path('EduLanka/public/advert'), $imageName);
+            $advert->image = $imageName;
+        }
+
+        $advert->save();
+
+        return redirect()->back()->with('success', 'Advertisement updated successfully.');
+    }
+//end of announcments code
+
+    }
 
 
 
-}
+  
+
+

@@ -104,7 +104,10 @@ Route::put('/profile', [AdminController::class,"updatep"])->name('updatep');
 Route::post('/changepassword', [AdminController::class,"updatepass"])->name('changepassword');
 });
 
-
+Route::get("/banner",[AdminController::class,"banner"]);
+Route::post("/uploadbanner",[AdminController::class,"uploadbanner"]);
+Route::get("/deleteadvert/{id}",[AdminController::class,"deleteadvert"]);
+Route::post('/updateadvert', 'App\Http\Controllers\AdminController@updateadvert')->name('updateadvert');
 
 
 

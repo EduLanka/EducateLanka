@@ -47,7 +47,7 @@
 			<li>
 				<a href="{{url('/course')}}">
 					<i class='bx bx-book' ></i>
-					<span class="text">Course</span>
+					<span class="text">Courses</span>
 				</a>
 			</li>
 			<li>
@@ -59,25 +59,25 @@
 			<li>
 				<a href="{{url('/teachers')}}">
 					<i class='bx bxs-user' ></i>
-					<span class="text">Teacher</span>
+					<span class="text">Teachers</span>
 				</a>
 			</li>
 			<li>
 				<a href="">
 					<i class='bx bxs-user-circle' ></i>
-					<span class="text">Adevert</span>
+					<span class="text">Adeverts</span>
 				</a>
 			</li>
             <li>
 				<a href="{{url('/dev')}}">
 					<i class='bx bx-code-alt' ></i>
-					<span class="text">Developer</span>
+					<span class="text">Developers</span>
 				</a>
 			</li>
 		</ul>
 		<ul class="side-menu">
 			<li>
-				<a href="#">
+			<a href="{{url('/setting')}}">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>

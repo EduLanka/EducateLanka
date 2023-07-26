@@ -49,7 +49,7 @@
 			<li >
 				<a href="{{url('/course')}}">
 					<i class='bx bx-book' ></i>
-					<span class="text">Course</span>
+					<span class="text">Courses</span>
 				</a>
 			</li>
 			<li>
@@ -61,19 +61,19 @@
 			<li class="active" >
 				<a href="{{url('/teachers')}}">
 					<i class='bx bxs-user' ></i>
-					<span class="text">Teacher</span>
+					<span class="text">Teachers</span>
 				</a>
 			</li>
 			<li >
-				<a href="">
+				<a href="{{url('/banner')}}">
 					<i class='bx bxs-user-circle' ></i>
-					<span class="text">Advert</span>
+					<span class="text">Announcments</span>
 				</a>
 			</li>
             <li>
 				<a href="{{url('/dev')}}">
 					<i class='bx bx-code-alt' ></i>
-					<span class="text">Developer</span>
+					<span class="text">Developers</span>
 				</a>
 			</li>
 		</ul>
