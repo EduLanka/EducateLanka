@@ -63,9 +63,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="">
+				<a href="{{url('/banner')}}">
 					<i class='bx bxs-user-circle' ></i>
-					<span class="text">Adeverts</span>
+					<span class="text">Announcments</span>
 				</a>
 			</li>
             <li>
@@ -308,7 +308,7 @@
 	
 <footer>
 
-<marquee direction="right" scrollamount="14"> <span class="tab">The Best Learning platform</span>  	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
+	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
 
 	
 </footer>

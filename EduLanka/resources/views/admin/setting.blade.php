@@ -36,7 +36,7 @@
                     </div>
                </form>
                 </div>
-                <form action="{{ route('changepassword') }}" method="POST">
+                <form action="{{ route('updatepass') }}" method="POST">
                 @csrf
                 <div class="details ID">
                     <span class="title">Change Password</span>
@@ -167,6 +167,12 @@ myInput.onkeyup = function() {
  
 }
             </script>
+
+            @if(session('success'))
+            <div class="alert alert-success">
+              {{session('success')}}
+            </div>
+            @endif
 </body>
 </html>
 </body>

@@ -421,10 +421,12 @@ $user->save();
     
         $user->password = Hash::make($request->password);
         $user->save();
+
+        Auth::logout();
     
         session()->flash('success', 'Password changed successfully.');
     
-        return redirect()->back();
+        return redirect('/login');
        }
 
 

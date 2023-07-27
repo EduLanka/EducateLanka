@@ -101,7 +101,7 @@ Route::post("/replyMessage/{id}",[AdminController::class,"replyMessage"]);
 Route::middleware('auth')->group(function () {
 Route::get("/setting",[AdminController::class,"setting"]);
 Route::put('/profile', [AdminController::class,"updatep"])->name('updatep');
-Route::post('/changepassword', [AdminController::class,"updatepass"])->name('changepassword');
+Route::post('/changepassword', [AdminController::class,"updatepass"])->name('updatepass');
 });
 
 Route::get("/banner",[AdminController::class,"banner"]);
