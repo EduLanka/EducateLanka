@@ -66,16 +66,11 @@
 			</li>
 			<li class="active">
 				<a href="{{url('/banner')}}">
-					<i class='bx bxs-user-circle' ></i>
+					<i class='bx bx-image-add' ></i>
 					<span class="text">Announcments</span>
 				</a>
 			</li>
-            <li>
-			<a href="{{url('/dev')}}">
-					<i class='bx bx-code-alt' ></i>
-					<span class="text">Developers</span>
-				</a>
-			</li>
+            
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -157,7 +152,7 @@
 			
 						<!-- Button trigger modal pop up -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Add Course
+  Add Announcment
 </button>
 
 <!-- Modal -->
@@ -165,7 +160,7 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add Course</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Announcment Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 	<!--  form start -->
@@ -174,12 +169,12 @@
             <form  action="{{url('/uploadbanner')}}" method="Post" enctype="multipart/form-data">
              @csrf
           <div class="mb-3">
-		  <label for="exampleFormControlInput1" class="form-label">Name:</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Biological Science" name="name" required>
+		  <label for="exampleFormControlInput1" class="form-label">Title:</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="name" required>
           </div>
           <div class="mb-3">
 		  <label for="exampleFormControlInput1" class="form-label">Description:</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Biological Science" name="description" required>
+  <textarea type="text" class="form-control" id="exampleFormControlInput1" placeholder="About the event" name="description" required></textarea>
           </div>
           <div class="mb-3">
 		  <label for="exampleFormControlInput1" class="form-label">Image:</label>
@@ -254,12 +249,12 @@
                     @csrf
                     <input type="hidden" name="advert_id" id="advert_id">
                     <div class="form-group">
-                        <label for="name">Name:</label>
+                        <label for="name">Title:</label>
                         <input type="text" class="form-control" name="name" id="name">
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <input type="text" class="form-control" name="description" id="description">
+                        <textarea type="text" class="form-control" name="description" id="description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="current_image">Current Image:</label>

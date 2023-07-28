@@ -13,4 +13,5 @@ class Teacher extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    protected $fillable = ['user_id', 'first_name', 'last_name', 'email', 'level', 'role', 'password'];
 }

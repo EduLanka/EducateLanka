@@ -9,7 +9,6 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
-use App\Models\Dev;
 use App\Models\Gurdian;
 use App\Models\Message;
 use App\Models\Advert;
@@ -37,10 +36,6 @@ class AdminController extends Controller
         return view("admin.admin1",compact("admin"));
     }
 
-    public function dev(){
-        $dev = Dev::all();
-        return view("admin.dev",compact("dev"));
-    }
     public function setting(){
         $user = Auth::user();
         return view("admin.setting",compact("user"));
@@ -94,7 +89,6 @@ class AdminController extends Controller
         $data->email=$request->email;
         $data->birthday=$request->bday;
         $data->level=$request->level;
-        $data->school=$request->school;
         $data->guardian_id=$request->guardian;
         $data->guardian_telno=$request->guardianno;
         $data->guardian_busniess=$request->guardian_busniess;
@@ -157,7 +151,6 @@ public function deleteStudent(Request $request, $studentId)
     $student->email = $request->input('email');
     $student->birthday = $request->input('birthday');
     $student->level = $request->input('level');
-    $student->school = $request->input('school');
     $student->guardian_id = $request->input('guardian_id');
 
     // Update more student properties as needed
@@ -216,8 +209,8 @@ public function update(Request $request)
     $teacher->first_name = $request->fname;
     $teacher->last_name = $request->lname;
     $teacher->email = $request->email;
-    $teacher->level = $request->level;
-    $teacher->school = $request->school;
+    $teacher->no = $request -> no;
+    $teacher->level = implode(',', $request->input('level'));
     $teacher->role = 3;
     $teacher->password = Hash::make('bbBB12!@');
     $teacher->save();
@@ -250,8 +243,8 @@ public function update(Request $request)
     $teacher->first_name = $request->input('first_name');
     $teacher->last_name = $request->input('last_name');
     $teacher->email = $request->input('email');
-    $teacher->level = $request->input('level');
-    $teacher->school = $request->input('school');
+    $teacher->no = $request->input('no');
+    $teacher->level = implode(',', $request->input('level'));
   
     // Save the updated teacher details
     
@@ -294,85 +287,6 @@ public function update(Request $request)
 
     }
     
-    public function adddev(Request $request){
-
-          // Check if the email already exists in the users table
-          $existingUser = User::where('email', $request->email)->first();
-    
-          if ($existingUser) {
-              // Email already exists, display a message and redirect back to the form
-              Session::flash('email_exists_error', 'Email already exists. Try with a different email.');
-              return redirect()->back()->withInput();
-          }
-        $developer = Dev::all();
-        
-        $user = new user;
-        $user->name=$request->fname;
-        $user->email=$request->email;
-        $user->role=5;
-        $user->password=Hash::make('aaAA12!@');
-        $user->save();
-
-        $data = new dev;
-        $data -> user_id = $user->id;    
-        $data->full_name=$request->fname;
-        $data->email=$request->email;
-        $data->telno=$request->telno;
-        $data->Address=$request->add;
-        $data->role=5;
-        $data->password=Hash::make('aaAA12!@');
-        $data->save();
-
-        Session::flash('student_added_success', 'Developer added successfully.');
-    
-
-        return redirect()->back();
-
-
-
-    }
-
-    public function deleteDev(Request $request, $devId)//remember to put this
-{
-    $dev = Dev::findOrFail($devId);//remember to put this
-    $userId = $dev->user_id;
-
-    // Delete the student from the 'students' table
-    $dev->delete();
-
-    // Delete the associated user from the 'users' table using the relationship
-    User::where('id', $userId)->delete();
-
-    return redirect()->back()->with('success', 'Student deleted successfully');
-}
-
-
-public function updatedev(Request $request)
-{   
-$devId = $request->input('dev_id');
-// Retrieve the teacher from the database
-$dev = Dev::findOrFail($devId);
-
-// Update the teacher details with the submitted form data
-$dev->full_name = $request->input('full_name');
-$dev->email = $request->input('email');
-$dev->telno = $request->input('telno');
-$dev->Address = $request->input('Address');
-
-// Save the updated teacher details
-
-$dev->save();
-Session::flash('teacher_edit_success', 'Developer upadted successfully.');
-
-$user = $dev->user;
-$user->name = $request->input('full_name');
-$user->email = $request->input('email');
-$user->save();
-
-    return redirect()->back()->with('success', 'Teacher updated successfully.');
-}
-
-
    
 
     public function sendMessage(Request $request){

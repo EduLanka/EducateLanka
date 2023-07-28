@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('no'); 
             $table->string('level');
-            $table->string('school');
             $table->integer('role')->default(3);
             $table->string('password')->default('bbBB12!@');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

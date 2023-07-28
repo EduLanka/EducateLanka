@@ -66,16 +66,11 @@
 			</li>
 			<li>
 				<a href="{{url('/banner')}}">
-					<i class='bx bxs-user-circle' ></i>
+					<i class='bx bx-image-add' ></i>
 					<span class="text">Announcments</span>
 				</a>
 			</li>
-            <li>
-				<a href="{{url('/dev')}}">
-					<i class='bx bx-code-alt' ></i>
-					<span class="text">Developers</span>
-				</a>
-			</li>
+
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -203,10 +198,6 @@
 </select>
 		</div>
 		<div class="mb-3">
-			<label for="school" class="form-label">School</label>
-			<input type="text" class="form-control" name = "school" id="exampleFormControlInput1" placeholder="Example school" required>
-		</div>
-		<div class="mb-3">
 			<label for="guardian" class="form-label">Guardian Name</label>
 			<input type="text" class="form-control" name="guardian" id="exampleFormControlInput1" placeholder="Mr/Mrs john" required>
 		</div>
@@ -221,7 +212,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="guardian" class="form-label">Guardian Email</label>
-			<input type="text" class="form-control" name="guardian_email" id="exampleFormControlInput1" placeholder="gurdian@gmail.com" required>
+			<input type="text" class="form-control" name="guardian_email" id="exampleFormControlInput1" placeholder="gurdian@gmail.com" >
 		</div>
                 <!-- end of form -->
 
@@ -246,7 +237,6 @@
 								<th>Email</th>
 								<th>Birthday</th>
 								<th>Level</th>
-								<th>School</th>
 								<th>Guardian Name</th>
 								
 							</tr>
@@ -259,7 +249,6 @@
 							<td>{{$student -> email}}</td>
 							<td>{{$student -> birthday}}</td>
 							<td>{{$student -> level}}</td>
-							<td>{{$student -> school}}</td>
 							<td>{{$student -> guardian_id}}</td>
 						
 							<td> 
@@ -329,10 +318,7 @@
 </select>
 						
                     </div>
-                    <div class="form-group">
-                        <label for="editSchool">School</label>
-                        <input type="text" class="form-control" id="editSchool" name="school">
-                    </div>
+                    
                     <div class="form-group">
                         <label for="editGuardianId">Guardian Name</label>
                         <input type="text" class="form-control" id="editGuardianId" name="guardian_id">
@@ -371,8 +357,7 @@ function confirmLogout() {
         var studentEmail = studentRow.querySelector('td:nth-child(3)').textContent;
         var studentBirthday = studentRow.querySelector('td:nth-child(4)').textContent;
         var studentLevel = studentRow.querySelector('td:nth-child(5)').textContent;
-        var studentSchool = studentRow.querySelector('td:nth-child(6)').textContent;
-        var studentGuardianId = studentRow.querySelector('td:nth-child(7)').textContent;
+        var studentGuardianId = studentRow.querySelector('td:nth-child(6)').textContent;
 		
 
 
@@ -383,7 +368,6 @@ function confirmLogout() {
         document.getElementById('editEmail').value = studentEmail;
         document.getElementById('editBirthday').value = studentBirthday;
         document.getElementById('editLevel').value = studentLevel;
-        document.getElementById('editSchool').value = studentSchool;
         document.getElementById('editGuardianId').value = studentGuardianId;
 	
         var editModal = new bootstrap.Modal(document.getElementById('editModal'));

@@ -86,11 +86,7 @@ Route::post('/updatetech', 'App\Http\Controllers\AdminController@updatetech')->n
 
 Route::post("/createAdmin",[AdminController::class,"createAdmin"]);
 
-//open,add developer,deleted developer
-Route::get("/dev",[AdminController::class,"dev"]);
-Route::post("/adddev",[AdminController::class,"adddev"]);
-Route::get("/deleteDev/{id}",[AdminController::class,"deleteDev"]);
-Route::post('/updatedev', 'App\Http\Controllers\AdminController@updatedev')->name('updatedev');
+
 
 
 

@@ -13,6 +13,12 @@
 	<!-- My CSS -->
 	<link rel="stylesheet" href="assets/admin.css">
     <!-- end if link to CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+
+
+
     <!-- link to jquery file for logout-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- end link to jquery file for logout-->
@@ -66,16 +72,11 @@
 			</li>
 			<li >
 				<a href="{{url('/banner')}}">
-					<i class='bx bxs-user-circle' ></i>
+					<i class='bx bx-image-add' ></i>
 					<span class="text">Announcments</span>
 				</a>
 			</li>
-            <li>
-				<a href="{{url('/dev')}}">
-					<i class='bx bx-code-alt' ></i>
-					<span class="text">Developers</span>
-				</a>
-			</li>
+          
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -174,19 +175,23 @@
         <!--form start -->
 		<div class="mb-3">
 			<label for="fname" class="form-label">First Name</label>
-			<input type="text" class="form-control" name = "fname" id="exampleFormControlInput1" placeholder="Maryam">
+			<input type="text" class="form-control" name = "fname" id="exampleFormControlInput1" placeholder="Maryam" required>
 		</div>
 		<div class="mb-3">
 			<label for="lname" class="form-label">Last Name</label>
-			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Mashkoora">
+			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Mashkoora" required>
 		</div>
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
-			<input type="text" class="form-control" name = "email" id="exampleFormControlInput1" placeholder="name@example.com">
+			<input type="text" class="form-control" name = "email" id="exampleFormControlInput1" placeholder="name@example.com" required>
+		</div>
+		<div class="mb-3">
+			<label for="guardian" class="form-label">Telno</label>
+			<input type="text" class="form-control" name="no" id="exampleFormControlInput1" placeholder="0716655452" required>
 		</div>
 		<div class="mb-3">
 			<label for="level" class="form-label">Level</label>
-			<select class="form-control" id="exampleFormControlInput1" name="level" placeholder="A-level" required>
+			<select class="form-control selectpicker" multiple data-live-search="true" name="level[]" placeholder="A-level" required>
   <option value="grade5">Grade 5</option>
   <option value="grade6">Grade 6</option>
   <option value="grade7">Grade 7</option>
@@ -199,10 +204,7 @@
   <!-- Add more options as needed -->
 </select>
 		</div>
-		<div class="mb-3">
-			<label for="school" class="form-label">School</label>
-			<input type="text" class="form-control" name = "school" id="exampleFormControlInput1" placeholder="Example school">
-		</div>
+	
 
                 <!-- end of form -->
 
@@ -225,8 +227,9 @@
 								<th>First Name</th>
 								<th>Last Name</th>
 								<th>Email</th>
+								<th>Contact Number</th>
 								<th>Level</th>
-								<th>School</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -235,8 +238,9 @@
 							<td>{{$teacher -> first_name}}</td>
 							<td>{{$teacher -> last_name}}</td>
 							<td>{{$teacher -> email}}</td>
+							<td>{{$teacher -> no}}</td>
 							<td>{{$teacher -> level}}</td>
-							<td>{{$teacher -> school}}</td>
+							
 							<td>	<i onclick="openEditModal({{ $teacher->id }})" class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;"></i></td>
 							<td><a href="{{url('/deleteTeacher',$teacher->id)}}"><i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" onclick="confirmDelete(event)" ></i></a></td>           
                   		</tr>
@@ -258,8 +262,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="edit-modal-label">Edit Teacher Details</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				</button>
+				<button type="button" class="btn-close" aria-label="Close" onclick="closeEditModal()"></button>
 			</div>
 			<div class="modal-body">
 				<!-- Edit form -->
@@ -279,8 +282,12 @@
 						<input type="email" class="form-control" name="email" id="email">
 					</div>
 					<div class="form-group">
+						<label for="no">Contact No:</label>
+						<input type="text" class="form-control" name="no" id="no">
+					</div>
+					<div class="form-group">
 						<label for="level">Level:</label>
-						<select class="form-control" id="level" name="level">
+						<select class="form-control selectpicker" multiple data-live-search="true" id="level" name="level[]">
   <option value="grade5">Grade 5</option>
   <option value="grade6">Grade 6</option>
   <option value="grade7">Grade 7</option>
@@ -293,10 +300,7 @@
   <!-- Add more options as needed -->
 </select>
 					</div>
-					<div class="form-group">
-						<label for="school">School:</label>
-						<input type="text" class="form-control" name="school" id="school">
-					</div>
+				
 					<button type="submit" class="btn btn-primary">Update</button>
 				</form>
 			</div>
@@ -330,21 +334,39 @@ function confirmLogout() {
     var teacherFirstName = teacherRow.querySelector('td:nth-child(1)').textContent;
     var teacherLastName = teacherRow.querySelector('td:nth-child(2)').textContent;
     var teacherEmail = teacherRow.querySelector('td:nth-child(3)').textContent;
-    var teacherLevel = teacherRow.querySelector('td:nth-child(4)').textContent;
-    var teacherSchool = teacherRow.querySelector('td:nth-child(5)').textContent;
+	var teacherNo = teacherRow.querySelector('td:nth-child(4)').textContent;
+    var teacherLevel = teacherRow.querySelector('td:nth-child(5)').textContent.split(',');
 
     document.getElementById('teacher_id').value = teacherId;
     document.getElementById('first_name').value = teacherFirstName;
     document.getElementById('last_name').value = teacherLastName;
     document.getElementById('email').value = teacherEmail;
-    document.getElementById('level').value = teacherLevel;
-    document.getElementById('school').value = teacherSchool;
+	document.getElementById('no').value = teacherNo;
+
+			var levelSelect = document.getElementById('level');
+
+for (var i = 0; i < levelSelect.options.length; i++) {
+	if (teacherLevel.includes(levelSelect.options[i].value)) {
+		levelSelect.options[i].selected = true;
+	} else {
+		levelSelect.options[i].selected = false; // Unselect any other options
+	}
+}
+
+
 
     var editModal = new bootstrap.Modal(document.getElementById('editModal'));
     editModal.show();
 }
 
 </script>
+<script>
+    function closeEditModal() {
+        var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        editModal.hide();
+    }
+</script>
+
 
 
 
@@ -387,6 +409,8 @@ function confirmLogout() {
 @endif
 
 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js" ></script>
 
 	<script src="assets/script.js"></script>
 </body>

@@ -44,6 +44,8 @@
                           <option value="Leave a comment" class="form-control" name="topic">Leave a comment</option>
                           <option value="Report a bug" class="form-control" name="topic">Report a bug</option>
                           <option value="Suggest an improvement" class="form-control" name="topic">Suggest an improvement</option>
+                          <option value="other" class="form-control" name="topic">Other</option>
+
                         </select>
                       </div>
                       <div class="mb-3">

@@ -64,16 +64,11 @@
 			</li>
 			<li>
 				<a href="{{url('/banner')}}">
-					<i class='bx bxs-user-circle' ></i>
+					<i class='bx bx-image-add' ></i>
 					<span class="text">Announcments</span>
 				</a>
 			</li>
-            <li>
-				<a href="{{url('/dev')}}">
-					<i class='bx bx-code-alt' ></i>
-					<span class="text">Developers</span>
-				</a>
-			</li>
+          
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -173,13 +168,14 @@
 						<p>parent</p>
 					</span>
 				</li>
-                <li>
-					<i class='bx bx-code-alt' ></i>
+				<li>
+					<i class='bx bx-image-add' ></i>
 					<span class="text">
-						<h3>{{ $developerCount }}</h3>
-						<p>Developer</p>
+						<h3>{{ $bannerCount }}</h3>
+						<p>Announcment</p>
 					</span>
 				</li>
+
                 
 			</ul>
 
@@ -220,26 +216,7 @@
 							</tr>
 						
                             @endforeach
-							@foreach ($Admin as $Admin)
-							<tr>
-								<td>
-									<p>{{ $Admin->full_name}}</p>
-								</td>
-								<td>{{ $Admin->email }}</td>
-								<td>{{ $Admin->role == 1}} Admin</td>
-							</tr>
 						
-                            @endforeach
-							@foreach ($Dev as $Dev)
-							<tr>
-								<td>
-									<p>{{ $Dev->full_name}}</p>
-								</td>
-								<td>{{ $Dev->email }}</td>
-								<td>{{ $Dev->role == 5}} Developer</td>
-							</tr>
-						
-                            @endforeach
 							
 						</tbody>
 					</table>

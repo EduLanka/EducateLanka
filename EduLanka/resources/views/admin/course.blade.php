@@ -66,16 +66,11 @@
 			</li>
 			<li>
 				<a href="{{url('/banner')}}">
-					<i class='bx bxs-user-circle' ></i>
+					<i class='bx bx-image-add' ></i>
 					<span class="text">Announcments</span>
 				</a>
 			</li>
-            <li>
-			<a href="{{url('/dev')}}">
-					<i class='bx bx-code-alt' ></i>
-					<span class="text">Developers</span>
-				</a>
-			</li>
+
 		</ul>
 		<ul class="side-menu">
 			<li>
