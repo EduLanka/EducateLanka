@@ -65,7 +65,7 @@
 			<li>
 				<a href="{{url('/banner')}}">
 					<i class='bx bx-image-add' ></i>
-					<span class="text">Announcments</span>
+					<span class="text">Announcement</span>
 				</a>
 			</li>
           
@@ -143,7 +143,7 @@
 					<i class='bx bxs-user' ></i>
 					<span class="text">
 						<h3>{{ $studentCount }}</h3>
-						<p>Student</p>
+						<p>Students</p>
 					</span>
 				</li>
                 
@@ -151,7 +151,7 @@
 					<i class='bx bx-group' ></i>
 					<span class="text">
 						<h3>{{ $teacherCount }}</h3>
-						<p>Teacher</p>
+						<p>Teachers</p>
 					</span>
 				</li>
                 <li>
@@ -165,14 +165,14 @@
 					<i class='bx bx-user-check' ></i>
 					<span class="text">
 						<h3>{{ $parentCount }}</h3>
-						<p>parent</p>
+						<p>Parents</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bx-image-add' ></i>
 					<span class="text">
 						<h3>{{ $bannerCount }}</h3>
-						<p>Announcment</p>
+						<p>Announcements</p>
 					</span>
 				</li>
 

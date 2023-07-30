@@ -70,10 +70,10 @@
 					<span class="text">Teachers</span>
 				</a>
 			</li>
-			<li >
+			<li>
 				<a href="{{url('/banner')}}">
 					<i class='bx bx-image-add' ></i>
-					<span class="text">Announcments</span>
+					<span class="text">Announcements</span>
 				</a>
 			</li>
           
@@ -329,43 +329,50 @@ function confirmLogout() {
 
 
 <script>
-	function openEditModal(teacherId) {
-    var teacherRow = document.getElementById('row' + teacherId);
-    var teacherFirstName = teacherRow.querySelector('td:nth-child(1)').textContent;
-    var teacherLastName = teacherRow.querySelector('td:nth-child(2)').textContent;
-    var teacherEmail = teacherRow.querySelector('td:nth-child(3)').textContent;
-	var teacherNo = teacherRow.querySelector('td:nth-child(4)').textContent;
-    var teacherLevel = teacherRow.querySelector('td:nth-child(5)').textContent.split(',');
+    function openEditModal(teacherId) {
+        var teacherRow = document.getElementById('row' + teacherId);
+        var teacherFirstName = teacherRow.querySelector('td:nth-child(1)').textContent;
+        var teacherLastName = teacherRow.querySelector('td:nth-child(2)').textContent;
+        var teacherEmail = teacherRow.querySelector('td:nth-child(3)').textContent;
+        var teacherNo = teacherRow.querySelector('td:nth-child(4)').textContent;
+        var teacherLevel = teacherRow.querySelector('td:nth-child(5)').textContent.split(',');
 
-    document.getElementById('teacher_id').value = teacherId;
-    document.getElementById('first_name').value = teacherFirstName;
-    document.getElementById('last_name').value = teacherLastName;
-    document.getElementById('email').value = teacherEmail;
-	document.getElementById('no').value = teacherNo;
+        document.getElementById('teacher_id').value = teacherId;
+        document.getElementById('first_name').value = teacherFirstName;
+        document.getElementById('last_name').value = teacherLastName;
+        document.getElementById('email').value = teacherEmail;
+        document.getElementById('no').value = teacherNo;
 
-			var levelSelect = document.getElementById('level');
+        var levelSelect = document.getElementById('level');
 
-for (var i = 0; i < levelSelect.options.length; i++) {
-	if (teacherLevel.includes(levelSelect.options[i].value)) {
-		levelSelect.options[i].selected = true;
-	} else {
-		levelSelect.options[i].selected = false; // Unselect any other options
-	}
-}
+        // Reset all options in the level dropdown
+        for (var i = 0; i < levelSelect.options.length; i++) {
+            levelSelect.options[i].selected = false;
+        }
 
+        // Set selected options based on teacherLevel
+        for (var i = 0; i < levelSelect.options.length; i++) {
+            if (teacherLevel.includes(levelSelect.options[i].value)) {
+                levelSelect.options[i].selected = true;
+            }
+        }
 
+        // Add a custom class to the selected options
+        $(levelSelect).selectpicker('refresh');
+        $(levelSelect).find('.selected').addClass('selected-option');
 
-    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
-    editModal.show();
-}
-
-</script>
-<script>
-    function closeEditModal() {
         var editModal = new bootstrap.Modal(document.getElementById('editModal'));
-        editModal.hide();
+        editModal.show();
     }
 </script>
+
+
+
+
+
+
+
+
 
 
 

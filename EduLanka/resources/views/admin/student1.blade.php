@@ -67,7 +67,7 @@
 			<li>
 				<a href="{{url('/banner')}}">
 					<i class='bx bx-image-add' ></i>
-					<span class="text">Announcments</span>
+					<span class="text">Announcements</span>
 				</a>
 			</li>
 
@@ -184,8 +184,9 @@
 		</div>
 		<div class="mb-3">
 			<label for="level" class="form-label">Level</label>
-			<select class="form-control" id="exampleFormControlInput1" name="level" placeholder="A-level" required>
-  <option value="grade5">Grade 5</option>
+			<select class="form-control" id="exampleFormControlInput1" name="level"  required>
+			<option selected disable>Choose your grade</option>
+			<option value="grade5">Grade 5</option>
   <option value="grade6">Grade 6</option>
   <option value="grade7">Grade 7</option>
   <option value="grade8">Grade 8</option>
@@ -286,14 +287,16 @@
                     @csrf
                     <input type="hidden" id="editStudentId" name="studentId" value="">
                     <!-- Add form fields for editing student properties -->
-                    <div class="form-group">
+					<div class="row g-3">
+                    <div class="col">
                         <label for="editFirstName">First Name</label>
                         <input type="text" class="form-control" id="editFirstName" name="first_name">
                     </div>
-                    <div class="form-group">
+                    <div class="col">
                         <label for="editLastName">Last Name</label>
                         <input type="text" class="form-control" id="editLastName" name="last_name">
                     </div>
+					</div>
                     <div class="form-group">
                         <label for="editEmail">Email</label>
                         <input type="email" class="form-control" id="editEmail" name="email">
@@ -305,6 +308,7 @@
                     <div class="form-group">
                         <label for="editLevel">Level</label>
 						<select class="form-control" id="editLevel" name="level" >
+							
   <option value="grade5">Grade 5</option>
   <option value="grade6">Grade 6</option>
   <option value="grade7">Grade 7</option>

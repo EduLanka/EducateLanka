@@ -35,7 +35,6 @@ class LoginController extends Controller
             'email'=> 'required|email',
             'password'=>'required',
         ]);
-
         if(Auth::attempt($credentials)){
             $user_role=Auth::user()->role;
 
@@ -62,7 +61,7 @@ class LoginController extends Controller
             }
         
         }else{
-            return redirect('/login');
+            return redirect('/login')->with('error', 'Invalid credentials. Please try again');
         }
 
     }

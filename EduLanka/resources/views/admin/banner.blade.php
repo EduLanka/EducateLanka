@@ -99,7 +99,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Courses</a>
+			<a href="#" class="nav-link">Announcements</a>
 			<form action="">
 				
 			</form>

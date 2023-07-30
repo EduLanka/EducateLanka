@@ -67,7 +67,7 @@
 			<li>
 				<a href="{{url('/banner')}}">
 					<i class='bx bx-image-add' ></i>
-					<span class="text">Announcments</span>
+					<span class="text">Announcements</span>
 				</a>
 			</li>
 
