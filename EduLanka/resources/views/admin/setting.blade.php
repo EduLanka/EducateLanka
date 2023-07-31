@@ -67,7 +67,7 @@
 						<span class="btnText">Save</span>
 						<i class="uil uil-navigator"></i>
 					</button>
-                    <button type="submit" class="sumbit"> <a href="{{url('admin')}}" style= "text-decoration: none; color: white;">
+                    <button type="cancel" class="cancel"> <a href="{{url('admin')}}" style= "text-decoration: none; color: white;">
 						<span >Cancel</span>
 						</a>
 					</button>

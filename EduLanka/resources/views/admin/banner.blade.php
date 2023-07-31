@@ -67,7 +67,7 @@
 			<li class="active">
 				<a href="{{url('/banner')}}">
 					<i class='bx bx-image-add' ></i>
-					<span class="text">Announcments</span>
+					<span class="text">Announcements</span>
 				</a>
 			</li>
             
@@ -130,7 +130,7 @@
 						</li>
                         <li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="{{url('/banner')}}">Announcments</a>
+							<a class="active" href="{{url('/banner')}}">Announcements</a>
 						</li>
 					</ul>
 				</div>
@@ -140,7 +140,7 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Annoouncments</h3>
+						<h3>Announcements</h3>
 
 						   
 						<form action="#">
@@ -338,7 +338,7 @@ function confirmLogout() {
     event.preventDefault();
 
     
-    if (confirm("Are you sure you want to delete this courser?")) {
+    if (confirm("Are you sure you want to delete this Announcements?")) {
     
       window.location.href = event.target.parentElement.href;
 
