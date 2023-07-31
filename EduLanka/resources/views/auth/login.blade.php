@@ -35,11 +35,7 @@
                             
                         </div>
 
-                        <!-- Remember Me -->
-                        <div class="mb-3 form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
-                        </div>
+                    
 
                         <!-- Login Button -->
                         <button type="submit" class="btn btn-danger">{{ __('Continue') }}</button>
