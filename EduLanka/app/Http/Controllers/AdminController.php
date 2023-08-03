@@ -18,10 +18,31 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
+    public function index(){
+        $studentCount = Student::where('role', 2)->count();
+        $teacherCount = Teacher::where('role', 3)->count();
+        $adminCount = User::where('role', 1)->count();
+        $parentCount = Gurdian::count();
+        $messageCount = Message::count();
+        $courseCount = Course::count();
+        $bannerCount = Advert::count();
+
+        $users = User::all();
+        $Student = Student::all();
+        $Teacher = Teacher::all();
+        $Admin = Admin::all();
+        $parent = Gurdian::all();
+        $messages = Message::all();
+        $course = Course :: all();
+        // Retrieve all users
+
+        return view('admin', compact('studentCount', 'teacherCount', 'adminCount', 'parentCount','bannerCount'  ,'users','Admin','Student','Teacher','messages','messageCount','courseCount'));
+    }
     
     public function addcourse(){
         $data=course::all();
-        return view("admin.course",compact("data"));
+        $teachers = Teacher::all();
+        return view("admin.course",compact("data","teachers"));
     }
     public function addstudent(){
         $students = Student::all();
@@ -46,6 +67,7 @@ class AdminController extends Controller
         $data = new course;
         $data->level=$request->level;
         $data->subject=$request->subject;
+        $data->teacher_id=$request->teacher_id;
         $data->save();
         Session::flash('student_added_success', 'Course added successfully.');
         
@@ -174,10 +196,11 @@ public function update(Request $request)
 
     $data->level = $request->input('level');
     $data->subject = $request->input('subject');
+    $data->teacher_id = $request->input('teacher_id');
     // Update more item properties as needed
 
     $data->save();
-    Session::flash('course_edit_success', 'Course upadted successfully.');
+    Session::flash('course_edit_success', 'Course updated successfully.');
 
     return redirect()->back()->with('success', 'Item updated successfully.');
 }
@@ -197,25 +220,25 @@ public function update(Request $request)
         $teachers = Teacher::all();
         
         $user = new User;
-    $user->name = $request->fname;
-    $user->email = $request->email;
-    $user->role = 3;
-    $user->password = Hash::make('bbBB12!@');
-    $user->save();
+        $user->name = $request->fname;
+        $user->email = $request->email;
+        $user->role = 3;
+        $user->password = Hash::make('bbBB12!@');
+        $user->save();
 
-    // Save teacher data with the correct user_id
-    $teacher = new Teacher;
-    $teacher->user_id = $user->id; // Set the user_id to the newly created user's id
-    $teacher->first_name = $request->fname;
-    $teacher->last_name = $request->lname;
-    $teacher->email = $request->email;
-    $teacher->no = $request -> no;
-    $teacher->level = implode(',', $request->input('level'));
-    $teacher->role = 3;
-    $teacher->password = Hash::make('bbBB12!@');
-    $teacher->save();
+        // Save teacher data with the correct user_id
+        $teacher = new Teacher;
+        $teacher->user_id = $user->id; // Set the user_id to the newly created user's id
+        $teacher->first_name = $request->fname;
+        $teacher->last_name = $request->lname;
+        $teacher->email = $request->email;
+        $teacher->no = $request -> no;
+        $teacher->level = implode(',', $request->input('level'));
+        $teacher->role = 3;
+        $teacher->password = Hash::make('bbBB12!@');
+        $teacher->save();
 
-    Session::flash('teacher_added_success', 'Teacher added successfully.');
+        Session::flash('teacher_added_success', 'Teacher added successfully.');
 
         return redirect()->back();
     }

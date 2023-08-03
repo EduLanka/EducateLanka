@@ -95,192 +95,207 @@
 
 
 	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Courses</a>
-			<form action="">
-				
-			</form>
-			<input type="checkbox" id="" hidden>
-			<label for="switch-mode" class=""></label>
-			<a href="#" class="">
-				<i ></i>
-				<span class="num"></span>
-			</a>
-			<a href="" class="profile">
-            {{ Auth::user()->name }}
-			</a>
-		</nav>
-		<!-- end of NAVBAR -->
-
-		<!-- MAIN -->
-		<main>
-			<div class="head-title">
-				<div class="left">
-					<h1>Dashboard</h1>
-					<ul class="breadcrumb">
-						<li>
-							<a href="">Dashboard</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="{{url('admin')}}">Home</a>
-						</li>
-                        <li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="{{url('/course')}}">Course</a>
-						</li>
-					</ul>
-				</div>
-				
-			</div>
-
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Courses</h3>
-
-						   
-						<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
-			
-						<!-- Button trigger modal pop up -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Add Course
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add Course</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<section id="content">
+   <!-- NAVBAR -->
+   <nav>
+      <i class='bx bx-menu' ></i>
+      <a href="#" class="nav-link">Courses</a>
+      <form action="">
+      </form>
+      <input type="checkbox" id="" hidden>
+      <label for="switch-mode" class=""></label>
+      <a href="#" class="">
+      <i ></i>
+      <span class="num"></span>
+      </a>
+      <a href="" class="profile">
+      {{ Auth::user()->name }}
+      </a>
+   </nav>
+   <!-- end of NAVBAR -->
+   <!-- MAIN -->
+   <main>
+      <div class="head-title">
+         <div class="left">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+               <li>
+                  <a href="">Dashboard</a>
+               </li>
+               <li><i class='bx bx-chevron-right' ></i></li>
+               <li>
+                  <a class="active" href="{{url('admin')}}">Home</a>
+               </li>
+               <li><i class='bx bx-chevron-right' ></i></li>
+               <li>
+                  <a class="active" href="{{url('/course')}}">Course</a>
+               </li>
+            </ul>
+         </div>
       </div>
-	<!--  form start -->
-      <div class="modal-body">
-        <form action="{{url('uploadcourse')}}" method="POST" enctype="multipart/from-data">
-			@csrf
-          <div class="mb-3">
-		  <label for="recipient-name" class="col-form-label">Level:</label>
-         <select class="form-control" id="recipient-name" name="level" required>
-  <option value="grade5">Grade 5</option>
-  <option value="grade6">Grade 6</option>
-  <option value="grade7">Grade 7</option>
-  <option value="grade8">Grade 8</option>
-  <option value="grade9">Grade 9</option>
-  <option value="grade10">Grade 10</option>
-  <option value="grade11">Grade 11</option>
-  <option value="grade12">Grade 12</option>
-  <option value="grade13">Grade 13</option>
-  <!-- Add more options as needed -->
-</select>
-          </div>
-          <div class="mb-3">
-		  <label for="exampleFormControlInput1" class="form-label">Subject:</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Biological Science" name="subject" required>
-          </div>
+      <div class="table-data">
+         <div class="order">
+            <div class="head">
+               <h3>Courses</h3>
+               <form action="#">
+                  <div class="form-input">
+                     <input type="search" placeholder="Search...">
+                     <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                  </div>
+               </form>
+               <!-- Button trigger modal pop up -->
+               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+               Add Course
+               </button>
+               <!-- Modal -->
+               <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="staticBackdropLabel">Add Course</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!--  form start -->
+                        <div class="modal-body">
+                           <form action="{{url('uploadcourse')}}" method="POST" enctype="multipart/from-data">
+                              @csrf
+                              <div class="mb-3">
+                                 <label for="recipient-name" class="col-form-label">Level:</label>
+                                 <select class="form-control" id="recipient-name" name="level" required>
+                                    <option value="grade5">Grade 5</option>
+                                    <option value="grade6">Grade 6</option>
+                                    <option value="grade7">Grade 7</option>
+                                    <option value="grade8">Grade 8</option>
+                                    <option value="grade9">Grade 9</option>
+                                    <option value="grade10">Grade 10</option>
+                                    <option value="grade11">Grade 11</option>
+                                    <option value="grade12">Grade 12</option>
+                                    <option value="grade13">Grade 13</option>
+                                    <!-- Add more options as needed -->
+                                 </select>
+                              </div>
+                              <div class="mb-3">
+                                 <label for="exampleFormControlInput1" class="form-label">Subject:</label>
+                                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Biological Science" name="subject" required>
+                              </div>
+                              <div class="mb-3">
+                                 <label for="teacher_id" class="form-label"> Course Instructor
+                                 </label>
+                                 <div class="mt-1">
+                                    <select id="teacher_id" name="teacher_id" class="form-select">
+                                       @foreach ($teachers as $teacher)
+                                             <option value="{{ $teacher->user_id }}">
+                                             {{ $teacher->user_id }} : {{ $teacher->first_name }} {{ $teacher->last_name }}
+                                             </option>
+                                       @endforeach
+                                    </select>
+                                 </div>   
+                              </div>
 
-		  <button type="submit" class="btn btn-primary">Save</button>
-
-        </form>
+                              <button type="submit" class="btn btn-primary">Save</button>
+                           </form>
+                        </div>
+                        <!-- end form start -->
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Level</th>
+                     <th>Subject</th>
+                     <th>Instructor ID</th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  @foreach ($data as $data)
+                  <tr id="row{{ $data->id }}" >
+                     <td>
+                        <p>{{ $data->level }}</p>
+                     </td>
+                     <td>{{ $data->subject }}</td>
+                     <td>{{ $data->teacher_id }}</td>
+                     <td>
+                        <i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px; cursor: pointer;" onclick="openEditModal({{ $data->id }})"></i>
+                     </td>
+                     <td><a href="{{url('/deletecourse',$data->id)}}"> <i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;"  onclick="confirmDelete(event)" ></i></a></td>
+                  </tr>
+                  @endforeach
+               </tbody>
+            </table>
+         </div>
       </div>
-	  <!-- end form start -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-					</div>
-                    
-					<table>
-						<thead>
-							<tr>
-								<th>Level</th>
-								<th>Subject</th>
-								<th></th>
-								
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-						@foreach ($data as $data)
-							<tr id="row{{ $data->id }}" >
-								<td>
-									
-									<p>{{ $data->level }}</p>
-								</td>
-								<td>{{ $data->subject }}</td>
-								<td>
-								<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;" onclick="openEditModal({{ $data->id }})"></i>
-							 </td>
-								<td><a href="{{url('/deletecourse',$data->id)}}"> <i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;"  onclick="confirmDelete(event)" ></i></a></td>
-								
-
-							</tr>
-						@endforeach
-							
-						</tbody>
-					</table>
-				</div>
-
-          		
-
-			</div>
-		</main>
-		<!-- MAIN -->
-	</section>
-	<!-- CONTENT -->
+   </main>
+   <!-- MAIN -->
+</section>
+<!-- CONTENT -->
 
 
 
 
 	<!-- first onclick to edit button
 	second Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Course</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editForm" action="{{ route('update') }}" method="POST">
-                    @csrf
-                    <input type="hidden" id="editItemId" name="itemId" value="">
-                    <!-- Add form fields for editing item properties -->
-                    <div class="form-group">
-                        <label for="editLevel">Level</label>
-						<select class="form-control" id="editLevel" name="level" >
-  <option value="grade5">Grade 5</option>
-  <option value="grade6">Grade 6</option>
-  <option value="grade7">Grade 7</option>
-  <option value="grade8">Grade 8</option>
-  <option value="grade9">Grade 9</option>
-  <option value="grade10">Grade 10</option>
-  <option value="grade11">Grade 11</option>
-  <option value="grade12">Grade 12</option>
-  <option value="grade13">Grade 13</option>
-                    </div>
-                    <div class="form-group">
-                        <label for="editSubject">Subject</label>
-                        <input type="text" class="form-control" id="editSubject" name="subject">
-                    </div>
-                    <!-- Add more form fields as needed -->
+	<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalLabel">Edit Course</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="editForm" action="{{ route('update') }}" method="POST">
+					@csrf
+					<input type="hidden" id="editItemId" name="itemId" value="">
+					<!-- Add form fields for editing item properties -->
+               <div class="mb-3">
+                  <div class="form-group">
+                     <label for="editLevel">Level</label>
+                     <select class="form-control" id="editLevel" name="level" >
+                     <option value="grade5">Grade 5</option>
+                     <option value="grade6">Grade 6</option>
+                     <option value="grade7">Grade 7</option>
+                     <option value="grade8">Grade 8</option>
+                     <option value="grade9">Grade 9</option>
+                     <option value="grade10">Grade 10</option>
+                     <option value="grade11">Grade 11</option>
+                     <option value="grade12">Grade 12</option>
+                     <option value="grade13">Grade 13</option>
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <div class="form-group">
+                     <label for="editSubject">Subject</label>
+                     <input type="text" class="form-control" id="editSubject" name="subject">
+                  </div>
+               </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+               <div class="mb-3">
+                  <label for="teacher_id" class="form-label"> Course Instructor
+                  </label>
+                  <div class="mt-1">
+                     <select id="editTeacher" name="teacher_id" class="form-select">
+                        @foreach ($teachers as $teacher)
+                              <option value="{{ $teacher->user_id }}">
+                              {{ $teacher->user_id }} : {{ $teacher->first_name }} {{ $teacher->last_name }}
+                              </option>
+                        @endforeach
+                     </select>
+                  </div>   
+               </div>
+               
+					<!-- Add more form fields as needed -->
+					<button type="submit" class="btn btn-primary">Save Changes</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 
 <footer>
@@ -291,22 +306,7 @@ Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu L
 </footer>
 
 
-<!--<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
 
-    var availableTags = [ ];
-	$.ajax({
-		type: "GET",
-		url: "/courselist",
-		success: function(response){
-			console.log(response);
-		}
-	});
-    $( "#search_product" ).autocomplete({
-      source: availableTags
-    });
-  
-  </script>-->
 
 
 <script>
@@ -324,10 +324,12 @@ function confirmLogout() {
         var itemRow = document.getElementById('row' + itemId);
         var itemLevel = itemRow.querySelector('p').textContent;
         var itemSubject = itemRow.querySelector('td:nth-child(2)').textContent;
+        var itemInstructor = itemRow.querySelector('td:nth-child(3)').textContent;
 
         document.getElementById('editItemId').value = itemId;
         document.getElementById('editLevel').value = itemLevel;
         document.getElementById('editSubject').value = itemSubject;
+        document.getElementById('editTeacher').value = itemInstructor;
 
         var editModal = new bootstrap.Modal(document.getElementById('editModal'));
         editModal.show();
@@ -342,7 +344,7 @@ function confirmLogout() {
     event.preventDefault();
 
     // Show the alert dialog
-    if (confirm("Are you sure you want to delete this courser?")) {
+    if (confirm("Are you sure you want to delete this course?")) {
       // If the user clicks OK, proceed with the deletion
       window.location.href = event.target.parentElement.href;
 
@@ -369,8 +371,6 @@ function confirmLogout() {
         alert("{{ Session::get('course_edit_success') }}");
     </script>
 @endif
-
-
 
 
 
