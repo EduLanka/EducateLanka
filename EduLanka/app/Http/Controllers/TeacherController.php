@@ -16,8 +16,9 @@ class TeacherController extends Controller
         $user = Auth::user();
     
         $courses = Course::where('teacher_id', $user->id)->get();
+        $courseCount = Course::count();
         
-        return view('teacher', compact('courses'));
+        return view('teacher', compact('courses','courseCount'));
     }
 
     /**

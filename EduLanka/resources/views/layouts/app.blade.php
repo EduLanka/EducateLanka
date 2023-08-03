@@ -19,7 +19,7 @@
       <header class="header" id="header">
          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Teacher's Workspace</div>
          
-         <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
+         <div class="header_img"> <img src="https://static.vecteezy.com/system/resources/previews/007/296/443/original/user-icon-person-icon-client-symbol-profile-icon-vector.jpg" alt=""> </div>
       </header>
       <div class="l-navbar" id="nav-bar">
          <nav class="nav">
