@@ -1,9 +1,7 @@
-
-
-
-
 document.addEventListener("DOMContentLoaded", function(event) {
    
+  //navbar javascript
+  
   const showNavbar = (toggleId, navId, bodyId, headerId) =>{
   const toggle = document.getElementById(toggleId),
   nav = document.getElementById(navId),
@@ -37,7 +35,37 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   }
   linkColor.forEach(l=> l.addEventListener('click', colorLink))
+
+
+  //displaying the students enrolled in each course
+
+  const courseDropdown = document.getElementById('course');
+    
+    courseDropdown.addEventListener('change', function () {
+        const selectedCourseId = courseDropdown.value;
+        
+        // Send AJAX request
+        fetch(`/get-students/${selectedCourseId}`)
+            .then(response => response.json())
+            .then(data => {
+                const studentTableBody = document.getElementById('student-table-body');
+                studentTableBody.innerHTML = ''; // Clear existing rows
+                
+                data.students.forEach(student => {
+                  const row = document.createElement('tr');
+                  row.innerHTML = `
+                      <td>${student.first_name}</td>
+                      <td>${student.id}</td>
+                      <td>${student.average_score !== null ? student.average_score.toFixed(2) : 'N/A'}</td>
+                  `;
+                  studentTableBody.appendChild(row);
+              });
+            })
+            .catch(error => console.error('Error fetching student data:', error));
+    });
   
+
+    //for password validation
   var myInput = document.getElementById("psw");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");

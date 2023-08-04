@@ -31,6 +31,10 @@ Route::middleware(['student'])->group(function () {
 
 Route::middleware(['teacher'])->group(function () {
     Route::get('/teacher', [App\Http\Controllers\TeacherController::class, 'index'])->name('teacher.index');
+    Route::get('/teacher/courses', 'App\Http\Controllers\TeacherController@viewCourse', 'index')->name('teacher.courses');
+    Route::get('/get-students/{courseId}', 'App\Http\Controllers\TeacherController@getStudentsByCourse');
+
+    // Route::post('/home', 'App\Http\Controllers\FrontEnd\MessageController@store')->name("messages.store");
 
 });
 

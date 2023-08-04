@@ -340,6 +340,59 @@ a{
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
  }
 
+ .sperf{
+    position: relative;
+ }
+ .sperf .cards .select-course{
+    position: absolute; /* Add absolute positioning */
+    right: 2em; 
+    top: 1.5em;
+ }
+
+ /* .select-course label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #4723D9; 
+} */
+
+.select-course select {
+  width: 100%;
+  padding: 0.4em;
+  font-size: 16px;
+  border: 2px solid #4723D9; /* Add a border to the dropdown */
+  border-radius: 8px;
+  appearance: none; /* Remove default styles for some browsers */
+  background-color: #ffffff; /* Change the background color of the dropdown */
+  color: #2d2d2d; /* Change the text color of the dropdown */
+  cursor: pointer;
+}
+
+
+/* .select-course::after {
+  content: "\25BC"; /
+  position: absolute;
+  top: 15%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 15px;
+  color: #4723D9; 
+} */
+
+.select-course select:focus {
+  outline: none;
+  border-color: #6c63ff; /* Change the border color when focused */
+  box-shadow: 0 0 10px rgba(70, 35, 217, 0.3); /* Add a box shadow when focused */
+}
+
+/* Style the dropdown options */
+.select-course option {
+  background-color: #ffffff;
+  color: #2d2d2d;
+}
+
  .cperf .cards{
    background: #ffffff; 
    border-radius: 20px;
@@ -366,7 +419,7 @@ a{
    width: 12rem;
    height: auto;
    position: absolute; /* Add absolute positioning */
-  bottom: 20px; /* Distance from the bottom */
+  bottom: 5px; /* Distance from the bottom */
   right: 20px; 
   }
   
@@ -438,6 +491,34 @@ a{
   button:hover .button-text {
    color: #fff;
   }
+
+  .admin-btn {
+    background-color: #AFA5D9;
+    font-size: 2em;
+    padding: auto;
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+    bottom: 10%;
+    left: 100%;
+    position: sticky;
+    animation: shakeAnimation 0.7s ease-in-out;
+  animation-iteration-count: 2; /* Number of times the animation will run */
+  animation-delay: 2s; 
+  }
+  
+  @keyframes shakeAnimation {
+    0%, 100% {
+      transform: translateX(0); /* Start and end position */
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-5px); /* Move left */
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(5px); /* Move right */
+    }
+  }
+  
  
  @media screen and (min-width: 768px) {
    /* Add any specific styles for larger screens if needed */
