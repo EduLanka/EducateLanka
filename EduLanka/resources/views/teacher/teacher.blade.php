@@ -44,12 +44,14 @@
               </div>
           @endforeach
           </div>
+          <a href="{{route('teacher.courses')}}">
           <button class="learn-more">
             <span class="circle" aria-hidden="true">
             <span class="icon arrow"></span>
             </span>
             <span class="button-text">GO TO COURSES</span>
           </button>
+        </a>
         </div>
       </div>
       
@@ -59,35 +61,349 @@
             <h5 class="card-title"><b>QUICK LINKS</b></h5>
             <br>
             <div class="links">
+
+            <!--add presentation-->
               <div>
                 <i class="bx bx-slideshow"></i>
                 <p><b>Presentation</b></p>
-                <p class="link">+ Add New</p>
+                <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropPre">
+                   + Add New
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropPre" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add New Presentation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="{{ route('teacher.material.add') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                          <!--form start -->
+                          <div class="mb-3">
+                            <label for="type" class="form-label">Material Type</label>
+                            <input type="text" class="form-control" id="type" value="Presentation" name="type" required readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="file" class="form-control" id="content"  name="content" accept=".pptx" required>
+                          </div>
+
+                          <label for="course" class="form-label">Select Course</label>
+                          <select id="course" name="course" class="form-control">
+                            @foreach($courses as $course) 
+                              <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
+                            @endforeach
+                          </select>
+
+                          
+                                  <!-- end of form -->
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--End of modal-->
+
               </div>
+
+              <!--add document-->
               <div>
                 <i class="bx bx-file"></i>
                 <p><b>Document</b></p>
-                <p class="link">+ Add New</p>
+                <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropDoc">
+                   + Add New
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add New Document</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="{{ route('teacher.material.add') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                          <!--form start -->
+                          <div class="mb-3">
+                            <label for="type" class="form-label">Material Type</label>
+                            <input type="text" class="form-control"  value="Document" name="type" required readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control"  name="title" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="file" class="form-control"   name="content" accept=".docx,.pdf" required>
+                          </div>
+
+                          <label for="course" class="form-label">Select Course</label>
+                          <select name="course" class="form-control">
+                            @foreach($courses as $course) 
+                              <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
+                            @endforeach
+                          </select>
+
+                          
+                                  <!-- end of form -->
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--End of modal-->
               </div>  
+
+              <!--add link-->
               <div>
                 <i class="bx bx-link"></i>
                 <p><b>Web Link</b></p>
-                <p class="link">+ Add New</p>
-              </div>  
+                <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropLink">
+                   + Add New
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropLink" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add New Web Link</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="{{ route('teacher.material.addlink') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                          <!--form start -->
+                          <div class="mb-3">
+                            <label for="type" class="form-label">Material Type</label>
+                            <input type="text" class="form-control"  value="Web Link" name="type" required readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control"  name="title" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="url" class="form-control"   name="content" placeholder="Enter link" required>
+                          </div>
+
+                          <label for="course" class="form-label">Select Course</label>
+                          <select name="course" class="form-control">
+                            @foreach($courses as $course) 
+                              <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
+                            @endforeach
+                          </select>
+
+                          
+                                  <!-- end of form -->
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--End of modal-->
+
+              </div>
+              
+              
               <div>
                 <i class="bx bx-music"></i>
                 <p><b>Announcement</b></p>
-                <p class="link">+ Add New</p>
+                <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropAnn">
+                   + Create New
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropAnn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Create New Announcement</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="{{ route('teacher.announce.add') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                          <!--form start -->
+                          <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control"  name="name" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="desc" class="form-label">Description</label>
+                            <textarea type="text" name="desc" class="form-control"
+                            required></textarea>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control"   name="image" accept=".png,.jpg,.jpeg" required>
+                          </div>
+
+                          <!-- <label for="course" class="form-label">Select Course</label>
+                          <select name="course" class="form-control">
+                            @foreach($courses as $course) 
+                              <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
+                            @endforeach
+                          </select>
+
+                           -->
+                                  <!-- end of form -->
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--End of modal-->
+
               </div>
               <div>
                 <i class="bx bx-video"></i>
                 <p><b>Video</b></p>
-                <p class="link">+ Add New</p>
-              </div> 
+                <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropVid">
+                   + Add New
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropVid" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add New Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="{{ route('teacher.material.add') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                          <!--form start -->
+                          <div class="mb-3">
+                            <label for="type" class="form-label">Material Type</label>
+                            <input type="text" class="form-control" id="type" value="Video" name="type" required readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="file" class="form-control" id="content"  name="content" accept=".mp4" required>
+                          </div>
+
+                          <label for="course" class="form-label">Select Course</label>
+                          <select id="course" name="course" class="form-control">
+                            @foreach($courses as $course) 
+                              <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
+                            @endforeach
+                          </select>
+
+                          
+                                  <!-- end of form -->
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--End of modal-->
+              </div>
+              
+              
               <div>
                 <i class="bx bx-image"></i>
                 <p><b>Image</b></p>
-                <p class="link">+ Add New</p>
+                <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropImg">
+                   + Add New
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropImg" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add New Image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="{{ route('teacher.material.add') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                          <!--form start -->
+                          <div class="mb-3">
+                            <label for="type" class="form-label">Material Type</label>
+                            <input type="text" class="form-control" id="type" value="Image" name="type" required readonly>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="file" class="form-control" id="content"  name="content" accept=".png,.jpg,.jpeg" required>
+                          </div>
+
+                          <label for="course" class="form-label">Select Course</label>
+                          <select id="course" name="course" class="form-control">
+                            @foreach($courses as $course) 
+                              <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
+                            @endforeach
+                          </select>
+
+                          
+                                  <!-- end of form -->
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--End of modal-->
               </div>             
             </div>            
           </div>
@@ -100,6 +416,7 @@
   <div class="row">
     <div class="performance">
 
+    <!--Student Performance-->
       <div class="sperf">
         <div class="cards" style="height: 39rem; width: 100%;">
             <div class="card-body">
@@ -187,8 +504,9 @@
   </div>
 
   <!--contact admin-->
-  <button type="button" class="admin-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <button type="button" title="Contact Admin" class="admin-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
      <i class="bx bx-message-dots"></i>
+     <!-- <p>Contact Admin</p> -->
   </button>
 
   <!-- Modal -->
@@ -201,7 +519,10 @@
         </div>
         <form method="POST" action="{{ url('sendMessage') }}" enctype="multipart/form-data">
           @csrf
+          
           <div class="modal-body">
+            <p>
+            This dedicated communication channel in EduLanka ensures that any queries, concerns, or valuable input you have are channeled to our administrative team for prompt attention, enhancing the overall quality of your experience.</p>
             <!--form start -->
             <div class="mb-3">
 
@@ -231,5 +552,7 @@
     </div>
   </div>
   <!--End of modal-->
-</div>
+
+
+ 
 @endsection

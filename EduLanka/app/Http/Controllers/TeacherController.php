@@ -7,7 +7,10 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\StudentCourse;
 use App\Models\Assignment;
+use App\Models\CourseMaterial;
+use App\Models\Advert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class TeacherController extends Controller
 {
@@ -41,7 +44,12 @@ class TeacherController extends Controller
 
     public function viewCourse()
     {    
-        return view('teacher.course');
+        $user = Auth::user();
+
+        // Courses of the logged-in teacher
+        $courses = Course::where('teacher_id', $user->id)->get();
+
+        return view('teacher.course',compact('courses'));
     }
 
     public function getStudentsByCourse($courseId)
@@ -49,7 +57,7 @@ class TeacherController extends Controller
         //using join to get the student name from the student table using foreign keys
         $students = StudentCourse::where('course_id', $courseId)
             ->join('students', 'student_courses.student_id', '=', 'students.user_id')
-            ->select('students.first_name', 'students.user_id as id')
+            ->select('students.first_name','students.last_name', 'students.user_id as id')
             ->get();
 
             //calculating average score of each student
@@ -64,6 +72,62 @@ class TeacherController extends Controller
 
         return response()->json(['students' => $students]);
     }
+
+    public function addMaterial(Request $request){
+        $fileName = time() . '.' . $request->content->getClientOriginalExtension();
+        $request->content->move(public_path('EduLanka\public\materials'), $fileName);
+
+        CourseMaterial::create([
+            'material_type' => $request->type,
+            'title' => $request->title,
+            'content' => $fileName,
+            'course_id' => $request->course,
+        ]);
+
+        Session::flash('success', 'Course material has been uploaded successfully!');
+
+        return redirect()->back();
+    }
+
+
+    public function addLink(Request $request){
+        CourseMaterial::create([
+            'material_type' => $request->type,
+            'title' => $request->title,
+            'content' => $request->content,
+            'course_id' => $request->course,
+        ]);
+
+        Session::flash('success', 'External Link has been added successfully!');
+
+        return redirect('/teacher');
+    }
+
+    public function addannounce(Request $request)
+    {
+    
+        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+        $request->image->move(public_path('EduLanka\public\advert'), $imageName);
+    
+        Advert::create([
+            'name' => $request->name,
+            'description' => $request->desc,
+            'image' => $imageName,
+        ]);
+    
+        Session::flash('success', 'Announcement has been added successfully!');
+
+        return redirect('/teacher');
+    }
+
+    public function getCourseMaterials($courseId, $materialType)
+{
+    $courseMaterials = CourseMaterial::where('course_id', $courseId)
+        ->where('material_type', $materialType)
+        ->get();
+    
+    return response()->json($courseMaterials);
+}
 
 
     /**

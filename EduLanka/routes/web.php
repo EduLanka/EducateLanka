@@ -34,7 +34,14 @@ Route::middleware(['teacher'])->group(function () {
     Route::get('/teacher/courses', 'App\Http\Controllers\TeacherController@viewCourse', 'index')->name('teacher.courses');
     Route::get('/get-students/{courseId}', 'App\Http\Controllers\TeacherController@getStudentsByCourse');
 
-    // Route::post('/home', 'App\Http\Controllers\FrontEnd\MessageController@store')->name("messages.store");
+    Route::post('/teacher/materials/add', 'App\Http\Controllers\TeacherController@addMaterial')->name('teacher.material.add');
+
+    Route::post('/teacher/materials/addlink', 'App\Http\Controllers\TeacherController@addLink')->name('teacher.material.addlink');
+
+    Route::post('/teacher//announcements/add', 'App\Http\Controllers\TeacherController@addannounce')->name('teacher.announce.add');
+
+    Route::get('/get-course-materials/{courseId}/{materialType}', 'App\Http\Controllers\TeacherController@getCourseMaterials');
+
 
 });
 
