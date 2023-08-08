@@ -7,6 +7,8 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\StudentCourse;
 use App\Models\Assignment;
+use App\Models\SubmissionLink;
+use App\Models\Submission;
 use App\Models\CourseMaterial;
 use App\Models\Advert;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +75,54 @@ class TeacherController extends Controller
         return response()->json(['students' => $students]);
     }
 
+    public function getSubmissions($courseId)
+    {
+
+        $submissions = Submission::where('course_id', $courseId)->get();
+
+        return response()->json(['submissions' => $submissions]);
+    }
+
+    public function getSubmissionDet($submissionId)
+    {
+
+        $submission_details = Submission::where('id', $submissionId)->get();
+
+        return response()->json(['submission_details' => $submission_details]);
+    }
+
+    
+
+    public function markSubmission(Request $request)
+{
+    try {
+        $request->validate([
+            'marks' => 'required|integer',
+            'grade' => 'required|string',
+            'feedback' => 'required|string',
+        ]);
+
+        $submissionId = $request->input('id');
+        $submission = Submission::findOrFail($submissionId);
+
+        $submission->update([
+            'total_marks' => $request->marks,
+            'grade' => $request->grade,
+            'feedback'=> $request->feedback
+        ]);
+
+        Session::flash('success', 'Submission marked successfully');
+
+        return redirect('/teacher/courses');
+    } catch (\Exception $e) {
+        // Log the error or handle it in some way
+        return response()->json(['error' => 'An error occurred while updating submission details.']);
+    }
+}
+
+
+
+
     public function addMaterial(Request $request){
         $fileName = time() . '.' . $request->content->getClientOriginalExtension();
         $request->content->move(public_path('EduLanka\public\materials'), $fileName);
@@ -120,61 +170,80 @@ class TeacherController extends Controller
         return redirect('/teacher');
     }
 
+    public function addSubLink(Request $request){
+        SubmissionLink::create([
+            'title' => $request->title,
+            'description' => $request->desc,
+            'dueDate' => $request->date,
+            'marks_available' => $request->marks,
+            'course_id' => $request->course,
+        ]);
+
+        Session::flash('success', 'Assignment Submission Link has been added successfully!');
+
+        return redirect('/teacher');
+    }
+
     public function getCourseMaterials($courseId, $materialType)
-{
-    $courseMaterials = CourseMaterial::where('course_id', $courseId)
-        ->where('material_type', $materialType)
-        ->get();
-    
-    return response()->json($courseMaterials);
-}
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
-        //
+        $courseMaterials = CourseMaterial::where('course_id', $courseId)
+            ->where('material_type', $materialType)
+            ->get();
+        
+        return response()->json($courseMaterials);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function downloadCourseMaterial($materialId)
     {
-        //
+        $material = CourseMaterial::find($materialId);
+
+        if (!$material) {
+            // Handle material not found, return an error response or redirect
+        }
+
+        $filePath = public_path('EduLanka/public/materials/' . $material->content);
+        
+        return response()->download($filePath, $material->title . '.' . pathinfo($filePath, PATHINFO_EXTENSION));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function deleteCourseMaterial($materialId)
     {
-        //
+        $material = CourseMaterial::find($materialId);
+        $material->delete();
+        return redirect()->back()->with('success', 'Course material has been deleted successfully!');
+        // Session::flash('success', 'Course material has been deleted successfully!');
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    //not workingggggg
+    public function editCourseMaterial(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+        ]);
+
+        $materialId = $request->input('materialId');
+        $material = CourseMaterial::findOrFail($materialId);
+
+        $material->title = $request->input('materialTitle');
+
+        $material->save();
+
+        return redirect()->back()->with('success', 'Advertisement updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function downloadSubmission($subId)
     {
-        //
+        $submission = Submission::find($subId);
+
+        if (!$submission) {
+            // Handle material not found, return an error response or redirect
+        }
+
+        $filePath = public_path('EduLanka/public/submissions/' . $submission->content);
+        
+        return response()->download($filePath, $submission->title . '.' . pathinfo($filePath, PATHINFO_EXTENSION));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
 }

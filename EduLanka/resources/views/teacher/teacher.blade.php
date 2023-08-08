@@ -179,7 +179,7 @@
 
               <!--add link-->
               <div>
-                <i class="bx bx-link"></i>
+                <i class="bx bx-link-external"></i>
                 <p><b>Web Link</b></p>
                 <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropLink">
                    + Add New
@@ -404,6 +404,72 @@
                   </div>
                 </div>
                 <!--End of modal-->
+
+              </div>  
+              <div>
+                <i class="bx bx-link"></i>
+                <p><b>Submission Link</b></p>
+                <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropSLink">
+                   + Create New
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdropSLink" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Create New Submission Link</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="POST" action="{{ route('teacher.sublink.add') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                          <!--form start -->
+                          <div class="mb-3">
+                            <label for="course" class="form-label">Select Course</label>
+                            <select id="course" name="course" class="form-control">
+                              @foreach($courses as $course) 
+                                <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                          
+                          <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="title" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="desc" class="form-label">Description</label>
+                            <textarea type="text" name="desc" class="form-control"
+                            required></textarea>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="date" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" name="date" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="marks" class="form-label">Total Marks Avaliable</label>
+                            <input type="number" class="form-control" id="marks" name="marks" required>
+                          </div>
+
+                          
+
+                          
+                                  <!-- end of form -->
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!--End of modal--> 
               </div>             
             </div>            
           </div>

@@ -15,12 +15,12 @@
 <div class="coursesgrid">
     <div class="material">
         <p><b>COURSE MATERIAL</b></p>
-        <button type="button" id="addM" data-bs-toggle="modal" data-bs-target="#staticBackdropPre">
+        <button type="button" id="addM" data-bs-toggle="modal" data-bs-target="#staticBackdropAdd">
                    <i class="bx bx-plus"></i>
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="staticBackdropPre" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="staticBackdropAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -83,13 +83,16 @@
             </div>
             <div class="materialss">
                 <p>Select Material Type</p>
-                <table class="table">
+                <table class="table table-hover table-striped">
                     <thead>
                         <tr>
                             <th>Type</th>
                             <th>ID</th>
                             <th>Title</th>
                             <th>Upload Date</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="course-mat">
@@ -100,11 +103,60 @@
                 
 
             </div>
+
+            <!-- Modal for Edit Material -->
+            <div class="modal" id="editMaterialModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Material</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="editMaterialForm" action="{{ route('teacher.material.edit') }}"  method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <input id="materialId" name="materialId"> <!-- Add this line -->
+                      
+
+                    <div class="mb-3">
+                            <label for="materialType" class="form-label">Material Type</label>
+                            <select name="materialType" class="form-control">
+                              <option value="Presentation">Presentation</option>
+                              <option value="Document">Document</option>
+                              <option value="Document">Web Link</option>
+                              <option value="Document">Video</option>
+                              <option value="Document">Image</option>
+                              
+                          </select>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="materialTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="materialTitle" name="materialTitle" required>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="file" class="form-control" id="content"  name="content">
+                          </div>
+
+                      <br>
+                      <br>
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+                       
+
         </div>
     </div>
     <div class="participants">
-        <p>Course participants</p>
-        <table class="table">
+        <p><b>COURSE PARTICIPANTS</b></p>
+        <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>Student ID</th>
@@ -118,25 +170,59 @@
     </div>
 </div>
 <br>
-<div class="assignments">
-    <p>Assignments</p>
-    <table class="table">
+<div class="submissions">
+    <p><b>SUBMISSIONS</b></p>
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>Description</th>
-                <th>Due Date</th>
+                <th>Submission ID</th>   
+                <th>Title</th>      
                 <th>Upload Date</th>
                 <th>Student ID</th>
+                <th>Link ID</th>
                 <th>Marks</th>
                 <th>Grade</th>
                 <th>Feedback</th>
+                <th>Download</th>
+                <th>Mark</th>
             </tr>
         </thead>
-        <tbody id="course-assign">
+        <tbody id="course-sub">
             <!-- Assignment rows will be dynamically added here -->
         </tbody>
     </table>
+
 </div>
+
+<!-- The modal structure -->
+<div id="commentModal" class="modal">
+    <div class="modal-content">
+   
+        <span class="close" id="closeModal">&times;</span>
+        <br>
+        <br>
+        <form id="commentForm" method="POST" action="{{ route('teacher.sub.grade')}}">
+          @csrf
+          @method('PUT')
+
+          <input type="hidden" id="id" name="id" required>
+
+            <label for="marks" class="form-label">Marks</label>
+            <input type="number" id="marks" name="marks"  required>
+
+            <label for="grade" class="form-label">Grade</label>
+            <input type="text" id="grade" name="grade" readonly required>
+
+            <label for="feedback">Feedback</label>
+            <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea>
+
+            <!-- <label for="comment">Add Comment:</label>
+            <textarea id="comment" name="comment" rows="4" cols="50"></textarea > -->
+            <button type="submit" id="markSub">Save</button>
+        </form>
+    </div>
+</div>
+
 
 
 
