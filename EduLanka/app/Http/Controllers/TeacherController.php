@@ -32,10 +32,11 @@ class TeacherController extends Controller
 
         $totalStudentCount = $studentIds->count();
 
+        //average score of each course
 
         foreach ($courses as $course) {
-            $averageScore = Assignment::where('course_id', $course->id)
-                ->avg('marks');
+            $averageScore = Submission::where('course_id', $course->id)
+                ->avg('total_marks');
             
             $course->average_score = $averageScore;
 
@@ -74,17 +75,49 @@ class TeacherController extends Controller
         $students = StudentCourse::where('course_id', $courseId)
             ->join('students', 'student_courses.student_id', '=', 'students.user_id')
             ->select('students.first_name','students.last_name', 'students.user_id as id')
-            ->get();
+            ->get();            
 
-            //calculating average score of each student
+            //calculating average score of each student           
+
+        // foreach ($students as $student) {
+        //     $averageScore = Submission::where('student_id', $student->user_id)
+        //         ->where('course_id', $courseId)
+        //         ->avg('total_marks');
+                
+        //     $student->average_score = $averageScore;
+        // }
 
         foreach ($students as $student) {
-            $averageScore = Assignment::where('student_id', $student->id)
+            $submissionsCount = Submission::where('student_id', $student->user_id)
                 ->where('course_id', $courseId)
-                ->avg('marks');
-            
-            $student->average_score = $averageScore;
+                ->count();
+
+                $student->submission_count = $submissionsCount;
+        
+            if ($submissionsCount > 0) {
+                $averageScore = Submission::where('student_id', $student->user_id)
+                    ->where('course_id', $courseId)
+                    ->avg('total_marks');
+        
+                $student->average_score = $averageScore ?? null;
+            } else {
+                $student->average_score = null;
+            }
         }
+
+            //     $submissionsCount = Submission::where('student_id', $student->user_id)
+            //     ->where('course_id', $courseId)
+            //     ->count();
+
+            // if ($submissionsCount > 0) {
+            //     $averageScore = Submission::where('student_id', $student->user_id)
+            //         ->where('course_id', $courseId)
+            //         ->avg('total_marks');
+
+            //     $student->average_score = $averageScore;
+            // } else {
+            //     $student->average_score = null;
+            // }
 
         return response()->json(['students' => $students]);
     }

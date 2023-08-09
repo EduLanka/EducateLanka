@@ -281,32 +281,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   // course dropdown
-  const courseDropdown = document.getElementById('course');
+  const courseDropdown = document.getElementById('courseDropdown');
 
   courseDropdown.addEventListener('change', function() {
+    const selectedCourseId = courseDropdown.value;
+    console.log(selectedCourseId);
 
-      const selectedCourseId = courseDropdown.value;
+    console.log('Sending AJAX request for course:', selectedCourseId);
 
-      console.log('Sending AJAX request for course:', selectedCourseId);
+    // Send AJAX request
+    fetch(`/get-students/${selectedCourseId}`)
+        .then(response => response.json())
+        .then(data => {
+            const studentTableBody = document.getElementById('student-table-body');
+            studentTableBody.innerHTML = ''; // Clear existing rows
 
-      // Send AJAX request
-      fetch(`/get-students/${selectedCourseId}`)
-          .then(response => response.json())
-          .then(data => {
-              const studentTableBody = document.getElementById('student-table-body');
-              studentTableBody.innerHTML = ''; // Clear existing rows
+            data.students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${student.first_name}</td>
+                <td>${student.id}</td>
+                <td>${student.submission_count}</td>
+                <td>${student.average_score !== null ? student.average_score.toFixed(2) : 'N/A'}</td>
+            `;
+                studentTableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching student data:', error));
 
-              data.students.forEach(student => {
-                  const row = document.createElement('tr');
-                  row.innerHTML = `
-                  <td>${student.first_name}</td>
-                  <td>${student.id}</td>
-                  <td>${student.average_score !== null ? student.average_score.toFixed(2) : 'N/A'}</td>
-              `;
-                  studentTableBody.appendChild(row);
-              });
-          })
-          .catch(error => console.error('Error fetching student data:', error));
   });
 
 

@@ -489,7 +489,7 @@
               <h5 class="card-title"><b>STUDENT PERFORMANCE</b></h5>  
               <div class="select-course">
                 <!-- <label for="course">Select Course</label> -->
-                <select id="course" name="course">
+                <select id="courseDropdown" name="course">
                   <option disabled selected>Select Course</option>
                   @foreach($courses as $course) 
                     <option value="{{$course->id}}">{{$course->level}}: {{$course->subject}}</option>
@@ -503,6 +503,7 @@
                   <tr>
                     <th scope="col">Student Name</th>
                     <th scope="col">Student ID</th>
+                    <th scope="col">Count</th>
                     <th scope="col">Average Score</th>
                     <!-- <th scope="col">Handle</th> -->
                   </tr>
@@ -555,7 +556,14 @@
                     <th scope="row">{{$course->level}} {{$course->subject}}</th>
 
                     <!-- if assignments are submitted under the course for an average to be caculated, then average is displayed. or else N/A is displayed -->
-                    <td>{{$course->average_score !== null ? $course->average_score : 'N/A'}}</td>
+
+                    <td>
+                       @if ($course->average_score !== null)
+                          {{ number_format($course->average_score, 2) }}
+                      @else
+                          N/A
+                      @endif
+                    </td>
                   </tr>
                 @endforeach
                 </tbody>
