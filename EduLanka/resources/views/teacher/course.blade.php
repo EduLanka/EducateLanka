@@ -1,7 +1,7 @@
 @extends('layouts.teacherLayout')
 
 @section('content')
-<p>MY COURSES</p>
+<p>MY COURSES : Select a course to view details</p>
 <div class="option-container">
     <div class="option-selection">
         @foreach($courses as $course)

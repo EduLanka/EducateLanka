@@ -581,11 +581,12 @@ a{
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
 }
 
 .option-selection {
   display: flex;
-    gap: 15px;
+  gap: 15px;
 }
 
 .option-label {
@@ -673,18 +674,23 @@ a{
  
 }
 
-.materialType i{
+.materialType i {
   font-size: 30px; 
-   background-color: #edecf1;
-   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-   padding: 20px;
-   border-radius: 50%;
-   cursor: pointer;
+  background-color: #edecf1;
+  padding: 20px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.materialType i:hover{
+.materialType i:hover {
   transform: scale(1.1);
 }
+
+.materialType i.selected {
+  background-color: #3498db;
+  color: #fff; /* Change the color of the icon */
+}
+
 
 .materialType::after{
   background-color: #3498db;

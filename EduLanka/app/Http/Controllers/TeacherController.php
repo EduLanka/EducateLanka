@@ -32,11 +32,24 @@ class TeacherController extends Controller
 
         $totalStudentCount = $studentIds->count();
 
+
         foreach ($courses as $course) {
             $averageScore = Assignment::where('course_id', $course->id)
                 ->avg('marks');
             
             $course->average_score = $averageScore;
+
+           // Retrieve due assignments for each course
+        $dueAssignments = Submission::where('total_marks', null)
+        ->where('course_id', $course->id)
+        ->get();
+    
+    // Attach the due assignments to the course
+    $course->due_assignments = $dueAssignments;
+
+    // Get the count of due assignments
+    $dueAssignmentsCount = $dueAssignments->count();
+    $course->due_assignments_count = $dueAssignmentsCount;
         }
 
         $courseCount = $courses->count();

@@ -1,8 +1,16 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
+
   //selecting material type icons and displaying material accordingly
   document.querySelectorAll(".materialType i").forEach(function(icon) {
       icon.addEventListener("click", function() {
+            // Remove the 'selected' class from all icons
+            document.querySelectorAll(".materialType i").forEach(function(icon) {
+                icon.classList.remove("selected");
+            });
+
+            // Add the 'selected' class to the clicked icon
+            icon.classList.add("selected");
           var materialType = icon.getAttribute("title"); // Get the material type from the icon title
           var courseId = document.querySelector('input[name="selected_course"]:checked').value;
           console.log(courseId); // Get the selected course ID
@@ -135,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               var courseMatTable = document.getElementById("course-mat");
               courseMatTable.innerHTML = "";
 
+              //displaying students enrolled in course
               const courseId = this.value;
               fetch(`/get-students/${courseId}`)
                   .then(response => response.json())
@@ -153,6 +162,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                   })
                   .catch(error => console.error('Error fetching data:', error));
+
+                  document.querySelectorAll(".materialType i").forEach(function(icon) {
+                    icon.classList.remove("selected");
+                });
+                
+                // Find the presentation icon and add the 'selected' class
+                var presentationIcon = document.querySelector(".materialType i[title='Presentation']");
+                presentationIcon.classList.add("selected");
 
                   //get couse material of selected course
                   var xhr = new XMLHttpRequest();
@@ -233,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                          inputfeedback.value = submission_detail.feedback;
                       });
 
+                      //display grade accoring to makrs
                       inputmarks.onkeyup = function() {
                         if (inputmarks.value >= 80) {
                             inputgrade.value = "A";
@@ -245,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         }else if (inputmarks.value >= 40 && inputmarks.value < 50) {
                           inputgrade.value = "E";
                         } else {
-                            inputgrade.value = "F"; // Clear the value if not within defined ranges
+                            inputgrade.value = "F"; 
                         }
                     };
 

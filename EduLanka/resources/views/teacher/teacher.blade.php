@@ -25,7 +25,7 @@
               <li>
                 <i class='bx bx-alarm' ></i>
                 <span class="text">
-                  <h3>3</h3>
+                  <h3>{{$courses->sum('due_assignments_count')}}</h3>
                   <p>Due</p>
                 </span>
               </li>
