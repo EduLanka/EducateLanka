@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teacher;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\StudentCourse;
@@ -67,6 +68,16 @@ class TeacherController extends Controller
         $courses = Course::where('teacher_id', $user->id)->get();
 
         return view('teacher.course',compact('courses'));
+    }
+
+
+    public function settings()
+    {    
+        $user = Auth::user();
+        $teacherdetails = Teacher::where('user_id',$user->id)->get();
+        $courses = Course::where('teacher_id', $user->id)->get();
+
+        return view('teacher.settings', compact('teacherdetails','courses'));
     }
 
     public function getStudentsByCourse($courseId)

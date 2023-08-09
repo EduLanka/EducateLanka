@@ -237,7 +237,7 @@
               
               
               <div>
-                <i class="bx bx-music"></i>
+                <i class="bx bx-chat"></i>
                 <p><b>Announcement</b></p>
                 <button type="button" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdropAnn">
                    + Create New

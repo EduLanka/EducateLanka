@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 /* pasword criteria */
-#criteria {
+.changeP #criteria {
     display:none;
     background: #f1f1f1;
     color: #000;
@@ -9,19 +9,19 @@
     padding: 1em;
 }
 /* Add a green text color and a checkmark when the requirements are right */
-.valid {
+.changeP .valid {
     color: green;
 }
-.valid:before {
+.changeP .valid:before {
     position: relative;
     left: -5px;
     content: "✔";
 }
 /* Add a red text color and an "x" when the requirements are wrong */
-.invalid {
+.changeP .invalid {
     color: red;
 }
-.invalid:before {
+.changeP .invalid:before {
     position: relative;
     left: -5px;
     content: "✖";
@@ -815,4 +815,52 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #243164;
+}
+
+
+/* Settings page*/
+
+.settings-container{
+  display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-gap: 15px;
+}
+
+.profile, .changeP{
+  position: relative;
+  height: fit-content;
+  background: #ffffff; 
+  border-radius: 20px;
+  align-items: center;
+  padding: 2em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.basics{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  background: #ffffff; 
+  border-radius: 20px;
+  align-items: center;
+  padding: 2em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.my-courses{
+  display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   grid-gap: 15px;
+}
+
+.coursee{
+  color: white;
+  padding: 1em;
+  border-radius: 20px;
+}
+
+.info{
+  padding: 10px;
+  color: red;
+  border-radius: 20px;
 }

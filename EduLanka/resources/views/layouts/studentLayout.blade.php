@@ -19,7 +19,7 @@
    </head>
    <body id="body-pd">
       <header class="header" id="header">
-         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Teacher's Workspace</div>
+         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Student's Workspace</div>
          
          <a href="{{route('teacher.settings')}}">
          <div class="header_img"><img src="https://static.vecteezy.com/system/resources/previews/007/296/443/original/user-icon-person-icon-client-symbol-profile-icon-vector.jpg" alt="user-im" title="{{Auth::user()->name}}"> </div>

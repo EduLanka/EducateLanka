@@ -33,6 +33,8 @@ Route::middleware(['teacher'])->group(function () {
     Route::get('/teacher', [App\Http\Controllers\TeacherController::class, 'index'])->name('teacher.index');
     Route::get('/teacher/courses', 'App\Http\Controllers\TeacherController@viewCourse', 'index')->name('teacher.courses');
 
+    Route::get('/teacher/settings', 'App\Http\Controllers\TeacherController@settings')->name('teacher.settings');
+
     Route::get('/get-students/{courseId}', 'App\Http\Controllers\TeacherController@getStudentsByCourse');
 
     Route::post('/teacher/materials/add', 'App\Http\Controllers\TeacherController@addMaterial')->name('teacher.material.add');
@@ -79,7 +81,7 @@ Route::middleware(['developer'])->group(function () {
 });
 
 Route::post("/sendMessage",[AdminController::class,"sendMessage"]);
-Route::post("/changePassword/{id}",[AdminController::class,"changePassword"]);
+Route::post("/changePassword/{id}",[AdminController::class,"changePassword"])->name('change-password');
 
 // Admin dashboard and other admin routes
 Route::middleware(['admin'])->group(function () {

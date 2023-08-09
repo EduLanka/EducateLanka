@@ -375,7 +375,11 @@ public function update(Request $request)
             'password' => Hash::make($request->newpw),
         ]);
         
+        Session::flash('success', 'Password updated successfully!');
+        Auth::logout();
+
         return redirect()->back();
+        // return redirect('/login');
     }
 
 
