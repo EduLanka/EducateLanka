@@ -49,7 +49,7 @@ Route::middleware(['teacher'])->group(function () {
 
     Route::get('/delete-material/{materialId}', 'App\Http\Controllers\TeacherController@deleteCourseMaterial')->name('teacher.material.delete');
 
-    Route::post('/edit-material', 'App\Http\Controllers\TeacherController@editCourseMaterial')->name('teacher.material.edit');
+    Route::put('/edit-material', 'App\Http\Controllers\TeacherController@editCourseMaterial')->name('teacher.material.edit');
 
     Route::get('/get-submissions/{courseId}', 'App\Http\Controllers\TeacherController@getSubmissions');
 

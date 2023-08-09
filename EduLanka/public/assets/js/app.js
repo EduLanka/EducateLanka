@@ -110,23 +110,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   // Function to open the edit modal and populate form fields
   function openEditModal(material) {
-      // var typeField = document.getElementById("materialType");
       var titleField = document.getElementById("materialTitle");
       var typeField = document.getElementById("materialType");
-      var materialIdField = document.getElementById("materialId"); // Add this line
+      var materialIdField = document.getElementById("materialId"); 
 
-      // Populate form fields with material details
-      // typeField.value = materialType;
       titleField.value = material.title;
       materialIdField.value = material.id;
+      typeField.value = material.material_type;
       console.log(material.id);
 
-      // var baseRoute = document.getElementById("baseRoute").value;
-      // // Update the form's action attribute
-      // var editMaterialForm = document.getElementById("editMaterialForm");
-      // editMaterialForm.action = baseRoute.replace('material_id_placeholder', material.id);
-      // Open the modal
-      // modal.style.display = "block";
       var myModal = new bootstrap.Modal(document.getElementById('editMaterialModal'));
       myModal.show();
   }

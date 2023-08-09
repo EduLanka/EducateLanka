@@ -13,6 +13,7 @@ use App\Models\CourseMaterial;
 use App\Models\Advert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
 
 class TeacherController extends Controller
 {
@@ -91,36 +92,62 @@ class TeacherController extends Controller
         return response()->json(['submission_details' => $submission_details]);
     }
 
+    public function addSubLink(Request $request){
+        SubmissionLink::create([
+            'title' => $request->title,
+            'description' => $request->desc,
+            'dueDate' => $request->date,
+            'marks_available' => $request->marks,
+            'course_id' => $request->course,
+        ]);
+
+        Session::flash('success', 'Assignment Submission Link has been added successfully!');
+
+        return redirect('/teacher');
+    }
+
+    
+    public function downloadSubmission($subId)
+    {
+        $submission = Submission::find($subId);
+
+        if (!$submission) {
+            // Handle material not found, return an error response or redirect
+        }
+
+        $filePath = public_path('EduLanka/public/submissions/' . $submission->content);
+        
+        return response()->download($filePath, $submission->title . '.' . pathinfo($filePath, PATHINFO_EXTENSION));
+    }
+
     
 
     public function markSubmission(Request $request)
-{
-    try {
-        $request->validate([
-            'marks' => 'required|integer',
-            'grade' => 'required|string',
-            'feedback' => 'required|string',
-        ]);
+    {
+        try {
+            $request->validate([
+                'marks' => 'required|integer',
+                'grade' => 'required|string',
+                'feedback' => 'required|string',
+            ]);
 
-        $submissionId = $request->input('id');
-        $submission = Submission::findOrFail($submissionId);
+            $submissionId = $request->input('id');
+            $submission = Submission::findOrFail($submissionId);
 
-        $submission->update([
-            'total_marks' => $request->marks,
-            'grade' => $request->grade,
-            'feedback'=> $request->feedback
-        ]);
+            $submission->update([
+                'total_marks' => $request->marks,
+                'grade' => $request->grade,
+                'feedback'=> $request->feedback
+            ]);
 
-        Session::flash('success', 'Submission marked successfully');
+            Session::flash('success', 'Submission marked successfully');
 
-        return redirect('/teacher/courses');
-    } catch (\Exception $e) {
-        // Log the error or handle it in some way
-        return response()->json(['error' => 'An error occurred while updating submission details.']);
+            return redirect('/teacher/courses');
+        } catch (\Exception $e) {
+            // Log the error or handle it in some way
+            return response()->json(['error' => 'An error occurred while updating submission details.']);
+        }
     }
-}
-
-
 
 
     public function addMaterial(Request $request){
@@ -137,51 +164,6 @@ class TeacherController extends Controller
         Session::flash('success', 'Course material has been uploaded successfully!');
 
         return redirect()->back();
-    }
-
-
-    public function addLink(Request $request){
-        CourseMaterial::create([
-            'material_type' => $request->type,
-            'title' => $request->title,
-            'content' => $request->content,
-            'course_id' => $request->course,
-        ]);
-
-        Session::flash('success', 'External Link has been added successfully!');
-
-        return redirect('/teacher');
-    }
-
-    public function addannounce(Request $request)
-    {
-    
-        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-        $request->image->move(public_path('EduLanka\public\advert'), $imageName);
-    
-        Advert::create([
-            'name' => $request->name,
-            'description' => $request->desc,
-            'image' => $imageName,
-        ]);
-    
-        Session::flash('success', 'Announcement has been added successfully!');
-
-        return redirect('/teacher');
-    }
-
-    public function addSubLink(Request $request){
-        SubmissionLink::create([
-            'title' => $request->title,
-            'description' => $request->desc,
-            'dueDate' => $request->date,
-            'marks_available' => $request->marks,
-            'course_id' => $request->course,
-        ]);
-
-        Session::flash('success', 'Assignment Submission Link has been added successfully!');
-
-        return redirect('/teacher');
     }
 
     public function getCourseMaterials($courseId, $materialType)
@@ -215,35 +197,75 @@ class TeacherController extends Controller
         
     }
 
-    //not workingggggg
+    
     public function editCourseMaterial(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string',
+        try {
+            $request->validate([
+                'materialType' => 'required|string',
+                'materialTitle' => 'required|string',
+            ]);
+
+            $materialId = $request->input('materialId');
+            $material = CourseMaterial::findOrFail($materialId);
+
+            if ($request->hasFile('materialContent')) {
+                
+                // Delete the old file
+                File::delete(public_path('EduLanka\public\materials') . '/' . $material->content);
+
+                $newFileName = time() . '.' . $request->materialContent->getClientOriginalExtension();
+                $request->materialContent->move(public_path('EduLanka\public\materials'), $newFileName);
+                $material->update([
+                    'content' => $newFileName,
+                ]);
+            }
+
+            $material->update([
+                'material_type' => $request->materialType,
+                'title' => $request->materialTitle,
+            ]);
+
+            Session::flash('success', 'Course material has been updated successfully');
+
+            return redirect('/teacher/courses');
+        } catch (\Exception $e) {
+            // Log the error or handle it in some way
+            return response()->json(['error' => 'An error occurred while updating material details.']);
+        }
+    }
+
+    public function addLink(Request $request){
+        CourseMaterial::create([
+            'material_type' => $request->type,
+            'title' => $request->title,
+            'content' => $request->content,
+            'course_id' => $request->course,
         ]);
 
-        $materialId = $request->input('materialId');
-        $material = CourseMaterial::findOrFail($materialId);
+        Session::flash('success', 'External Link has been added successfully!');
 
-        $material->title = $request->input('materialTitle');
-
-        $material->save();
-
-        return redirect()->back()->with('success', 'Advertisement updated successfully.');
+        return redirect('/teacher');
     }
 
-    public function downloadSubmission($subId)
+    public function addannounce(Request $request)
     {
-        $submission = Submission::find($subId);
+    
+        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+        $request->image->move(public_path('EduLanka\public\advert'), $imageName);
+    
+        Advert::create([
+            'name' => $request->name,
+            'description' => $request->desc,
+            'image' => $imageName,
+        ]);
+    
+        Session::flash('success', 'Announcement has been added successfully!');
 
-        if (!$submission) {
-            // Handle material not found, return an error response or redirect
-        }
-
-        $filePath = public_path('EduLanka/public/submissions/' . $submission->content);
-        
-        return response()->download($filePath, $submission->title . '.' . pathinfo($filePath, PATHINFO_EXTENSION));
+        return redirect('/teacher');
     }
+
+
 
 
 }

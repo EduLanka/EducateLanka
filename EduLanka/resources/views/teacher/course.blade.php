@@ -115,29 +115,30 @@
                   <div class="modal-body">
                     <form id="editMaterialForm" action="{{ route('teacher.material.edit') }}"  method="POST" enctype="multipart/form-data">
                       @csrf
-                      <input id="materialId" name="materialId"> <!-- Add this line -->
+                      @method('PUT')
+                      <input id="materialId" name="materialId"> 
                       
 
                     <div class="mb-3">
                             <label for="materialType" class="form-label">Material Type</label>
-                            <select name="materialType" class="form-control">
+                            <select name="materialType" id="materialType"  class="form-control">
                               <option value="Presentation">Presentation</option>
                               <option value="Document">Document</option>
-                              <option value="Document">Web Link</option>
-                              <option value="Document">Video</option>
-                              <option value="Document">Image</option>
+                              <option value="Web Link">Web Link</option>
+                              <option value="Video">Video</option>
+                              <option value="Image">Image</option>
                               
                           </select>
                           </div>
 
                           <div class="mb-3">
-                            <label for="materialTitle" class="form-label">Title</label>
+                            <label for="materialTitle"  class="form-label">Title</label>
                             <input type="text" class="form-control" id="materialTitle" name="materialTitle" required>
                           </div>
 
                           <div class="mb-3">
-                            <label for="content" class="form-label">Content</label>
-                            <input type="file" class="form-control" id="content"  name="content">
+                            <label for="materialContent" class="form-label">Content</label>
+                            <input type="file" class="form-control" id="materialContent"  name="materialContent">
                           </div>
 
                       <br>
