@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
-
   //selecting material type icons and displaying material accordingly
   document.querySelectorAll(".materialType i").forEach(function(icon) {
       icon.addEventListener("click", function() {
