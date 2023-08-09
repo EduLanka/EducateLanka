@@ -27,6 +27,21 @@ Route::middleware(['student'])->group(function () {
     Route::get('student', function () {
         return view('student');
     })->name('student');
+
+    Route::get('/student/courses', 'App\Http\Controllers\StudentController@viewCourses')->name('student.courses');
+
+    Route::post('/enroll/{courseId}', 'App\Http\Controllers\StudentController@enroll')->name('enroll.course');
+
+    Route::delete('/enroll/{courseId}', 'App\Http\Controllers\StudentController@unenroll')->name('unenroll.course');
+
+    Route::get('/courses/view/{courseId}', 'App\Http\Controllers\StudentController@viewCourse')->name('viewCourse');
+
+    Route::get('/download/{materialId}', 'App\Http\Controllers\StudentController@downloadCourseMaterial')->name('download');
+
+    Route::post('/add-submission/{courseId}/{linkId}', 'App\Http\Controllers\StudentController@addSubmission')->name('student.submission.add');
+
+
+
 });
 
 Route::middleware(['teacher'])->group(function () {
@@ -41,7 +56,7 @@ Route::middleware(['teacher'])->group(function () {
 
     Route::post('/teacher/materials/addlink', 'App\Http\Controllers\TeacherController@addLink')->name('teacher.material.addlink');
 
-    Route::post('/teacher//announcements/add', 'App\Http\Controllers\TeacherController@addannounce')->name('teacher.announce.add');
+    Route::post('/teacher/announcements/add', 'App\Http\Controllers\TeacherController@addannounce')->name('teacher.announce.add');
 
     Route::post('/teacher/submission/addlink', 'App\Http\Controllers\TeacherController@addSubLink')->name('teacher.sublink.add');
 
