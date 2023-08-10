@@ -3,7 +3,7 @@
 @section('content')
 <p><b>MY COURSES</b></p> 
 <div class="student-courses">
-    <div class="my-courses">
+    <div class="my-courses1">
         @foreach($courses as $course)
         <a href="{{route('viewCourse', $course->id)}}">
             <div class="acourse">

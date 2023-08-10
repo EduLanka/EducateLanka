@@ -831,9 +831,12 @@ button[type="submit"]:hover {
   height: fit-content;
   background: #ffffff; 
   border-radius: 20px;
-  align-items: center;
   padding: 2em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile{
+  
 }
 
 .basics{
@@ -851,12 +854,14 @@ button[type="submit"]:hover {
   display: grid;
    grid-template-columns: 1fr 1fr 1fr;
    grid-gap: 15px;
+   
 }
 
 .coursee{
   color: white;
   padding: 1em;
   border-radius: 20px;
+  height: fit-content;
 }
 
 .info{
@@ -873,7 +878,15 @@ button[type="submit"]:hover {
    grid-gap: 15px;
 }
 
-.my-courses, .all-courses{
+.back{
+  cursor: pointer;
+}
+
+.back-link{
+  text-decoration: none;
+}
+
+.my-courses1, .all-courses{
   position: relative;
   height: 100vh;
   background: #ffffff; 
@@ -882,13 +895,13 @@ button[type="submit"]:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.my-courses{
+.my-courses1{
   display: grid;
    grid-template-columns: 1fr 1fr 1fr;
    grid-gap: 15px;
 }
 
-.my-course a{
+.my-courses1 a{
   text-decoration: none;
   color: inherit; /* Preserve the card's text color */
 }

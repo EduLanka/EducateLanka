@@ -36,11 +36,10 @@
 
                   <a href="#" title="Forums" class="nav_link"> <i class='bx bx-conversation nav_icon'></i> <span class="nav_name">Forums</span> </a> 
 
-                  <a href="#" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
+                  <a href="/chatify" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
 
                   <a href="{{route('teacher.settings')}}" title="Settings" class="nav_link {{ request()->is('teacher/settings') ? 'active' : '' }}"> <i class='bx bx-cog nav_icon'></i> <span class="nav_name">Settings</span> </a> 
-                  <!-- <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a> 
-                  <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>  -->
+
                 </div>
             </div>
             <a class="nav_link" title="SignOut" href="{{ route('logout') }}"

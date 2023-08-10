@@ -16,7 +16,19 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    if (auth()->check()) {
+        if (auth()->user()->role == 2) {
+            return redirect()->route('student');
+        } elseif (auth()->user()->role == 3) {
+            return redirect()->route('teacher.index');
+        } elseif (auth()->user()->role == 4) {
+            return redirect()->route('parent');
+        }  elseif (auth()->user()->role == 1) {
+            return redirect()->route('admin.index');
+        }
+    }
+    
+    return redirect()->route('login'); // Redirect to login if not authenticated
 });
 
 Auth::routes();

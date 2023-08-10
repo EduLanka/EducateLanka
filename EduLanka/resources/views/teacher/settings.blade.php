@@ -23,7 +23,7 @@
         <p><b>My Courses:</b></p>
         <div class="my-courses">
             @foreach($courses as $course)
-            <div class="coursee" style="background-color: {{ '#' . substr(md5(rand()), 0, 6) }}">
+            <div class="coursee" style="background-color: {{ '#' . substr(md5(rand()), 0, 6) }};height:fit-content;">
                 <p>{{$course -> level}} : {{$course -> subject}}</p>
             </div>
             @endforeach

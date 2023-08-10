@@ -2,6 +2,7 @@
 
 @section('content')
 <div id="course-data" data-course-id="{{ $courseId }}"></div>
+<a class="back-link" href="{{route('student.courses')}}"><p class="back"><b>< BACK TO MY COURSES</b></p></a>
 <h3><b>{{ $course->level }} {{ $course->subject }}</b></h3>
 
 @if ($instructor)
