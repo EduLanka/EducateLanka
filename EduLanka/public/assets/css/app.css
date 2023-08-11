@@ -1033,3 +1033,127 @@ input:checked ~ .slider {
   cursor: pointer;width: fit-content;
   height: fit-content;
 }
+
+.forum-container{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px;
+}
+
+.forum-nav{
+  position: relative;
+}
+
+.forum-btn{
+  background-color: #243164;
+  color: white;
+  padding: 2%;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  /* border-radius: 20%; */
+}
+
+.forum-view{
+  position: relative;
+}
+
+.btn-share{
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background-color: #243164;
+  padding: 1%;
+  color: white;
+  display: none;
+}
+
+.forum-nav, .forum-view{
+  background: #ffffff; 
+  border-radius: 20px;
+  padding: 2em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; 
+  overflow-y: scroll;
+}
+
+.forum-view .creator-details, .nposts{
+display: none;
+}
+
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.post {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.postup{
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.post-user {
+    max-width: 70px;
+    max-height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.post h3 {
+    margin-top: 0;
+}
+
+.post p {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    /* font-weight: bolder; */
+}
+
+.post i {
+    margin-right: 5px;
+    color: red;
+    cursor: pointer;
+}
+
+.post-image{
+  width: fit-content;
+  height: fit-content;
+}
+
+.creator-details {
+    font-style: italic;
+    color: #888;
+}
+
+
+
+.forum-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.forum-button:hover {
+  background-color: #2980b9;
+}
