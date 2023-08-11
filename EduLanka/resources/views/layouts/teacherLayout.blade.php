@@ -34,7 +34,7 @@
 
                   <a href="{{route('teacher.courses')}}" title="Courses" class="nav_link {{ request()->is('teacher/courses') ? 'active' : '' }}"> <i class='bx bx-book nav_icon'></i> <span class="nav_name">Courses</span> </a> 
 
-                  <a href="#" title="Forums" class="nav_link"> <i class='bx bx-conversation nav_icon'></i> <span class="nav_name">Forums</span> </a> 
+                  <a href="{{route('forum')}}" title="Forums" class="nav_link {{ request()->is('forums') ? 'active' : '' }}"> <i class='bx bx-conversation nav_icon'></i> <span class="nav_name">Forums</span> </a> 
 
                   <a href="/chatify" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
 

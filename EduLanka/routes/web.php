@@ -149,3 +149,11 @@ Route::middleware(['admin'])->group(function () {
 
    
 });
+
+//forum
+Route::get('/forums', 'App\Http\Controllers\ForumController@index')->name('forum');
+Route::get('/forums/{id}', 'App\Http\Controllers\ForumController@show');
+Route::get('/forums/{id}/posts', 'App\Http\Controllers\ForumController@getPosts');
+Route::post('/forums/create', 'App\Http\Controllers\ForumController@create')->name('create-forum');
+Route::post('/forums/post/{forumId}', 'App\Http\Controllers\ForumController@sharePost')->name('share-post');
+
