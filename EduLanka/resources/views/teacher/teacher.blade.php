@@ -602,7 +602,7 @@
 
               <label for="topic" class="form-label">Reason of contact</label>
 
-              <select name="topic" id="topic" class="form-control">
+              <select name="topic" id="topic" class="form-control" required>
                 <option value="Ask a question" class="form-control" name="topic">Ask a question</option>
                 <option value="Leave a comment" class="form-control" name="topic">Leave a comment</option>
                 <option value="Report a bug" class="form-control" name="topic">Report a bug</option>

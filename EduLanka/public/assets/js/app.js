@@ -97,7 +97,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
           // Create the delete button as a link with an icon
           var deleteButton = document.createElement("a");
           deleteButton.title = "Delete";
-          deleteButton.className = "delete-btn"; // Use a danger class for delete actions
+          deleteButton.className = "delete-btn"; 
+
+          deleteButton.href = "/delete-material/" + material.id;
+
           deleteButton.addEventListener("click", function() {
               // Display a confirmation dialog before proceeding with deletion
               var confirmation = confirm("Do you want to delete this?");
