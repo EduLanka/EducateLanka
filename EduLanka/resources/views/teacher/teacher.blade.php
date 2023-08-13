@@ -612,7 +612,7 @@
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" required></textarea>
             </div>
                     <!-- end of form -->
 

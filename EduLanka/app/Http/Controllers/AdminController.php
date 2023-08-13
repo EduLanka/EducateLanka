@@ -318,7 +318,7 @@ public function update(Request $request)
         $data->description=$request->description;
         $data->sender=Auth::user()->id;
         $data->save();
-
+        session::flash('success', 'Message sent successfully');
         return redirect()->back();
     }
 //admin profile update
