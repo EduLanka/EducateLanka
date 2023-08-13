@@ -14,7 +14,7 @@
 <br>
 <div class="coursesgrid">
     <div class="material">
-        <p><b>COURSE MATERIAL</b></p>
+        <p><b>COURSE MATERIALS</b></p>
         <button type="button" id="addM" data-bs-toggle="modal" data-bs-target="#staticBackdropAdd">
                    <i class="bx bx-plus"></i>
                 </button>
