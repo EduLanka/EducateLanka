@@ -2,48 +2,54 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div style="background-color: rgba(225, 225, 225, 0.5); backdrop-filter: blur(10px);" class="card">
-                <div class="card-header bg-black text-white">{{ __('Login User') }}</div>
-                <div class="card-body text-black">
+    <div class="login-image">
+        <img src="{{ asset('assets/images/s4.jpg') }}" alt="image" class="loginss">
+    </div>
+    <div class="card-container">
+        <div class="card">
+            <center><img src="{{ asset('assets/images/Logo.jpg') }}" alt="logo" class="logo"></center>
+            <center><h3><b>Welcome Back!</b></h3></center>
+            <!-- <div class="card-header bg-black text-white">{{ __('Login User') }}</div> -->
+            <div class="card-body text-black">              
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
 
-
-
-              
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <!-- Display error message -->
-                        @if(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-
-                        <!-- Email Address -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autofocus>
-        
+                    <!-- Display error message -->
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
                         </div>
+                    @endif
 
-                        <!-- Password -->
-                        <div class="mb-3">
-                            <label for="password" class="form-label">{{ __('Password') }}</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-                            
+                    <!-- Email Address -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Email Address">
                         </div>
+                    </div>
 
-                    
+                    <div class="mb-3">
+    <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password">
+        <span class="input-group-text toggle-password"><i class="fas fa-eye"></i></span>
+    </div>
+</div>
 
-                        <!-- Login Button -->
-                        <button type="submit" class="btn btn-danger">{{ __('Continue') }}</button>
 
-                    </form>
-                </div>
+
+
+                
+                    <br>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="btn-login">{{ __('CONTINUE') }}</button>
+
+                </form>
             </div>
         </div>
     </div>
+    
 </div>
 @endsection

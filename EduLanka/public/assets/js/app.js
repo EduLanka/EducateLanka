@@ -106,7 +106,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
               var confirmation = confirm("Do you want to delete this?");
               if (confirmation) {
                   window.location.href = deleteLink.href; // Proceed with deletion
-              }
+                } else {
+                console.log("Deletion was canceled.");
+                }
           });
           deleteButton.appendChild(deleteIcon);
 
