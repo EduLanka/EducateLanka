@@ -9,11 +9,14 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
-use App\Models\Gurdian;
+use App\Models\Guardian;
 use App\Models\Message;
 use App\Models\Advert;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 
 class AdminController extends Controller
@@ -22,7 +25,7 @@ class AdminController extends Controller
         $studentCount = Student::where('role', 2)->count();
         $teacherCount = Teacher::where('role', 3)->count();
         $adminCount = User::where('role', 1)->count();
-        $parentCount = Gurdian::count();
+        $parentCount = Guardian::count();
         $messageCount = Message::count();
         $courseCount = Course::count();
         $bannerCount = Advert::count();
@@ -31,7 +34,7 @@ class AdminController extends Controller
         $Student = Student::all();
         $Teacher = Teacher::all();
         $Admin = Admin::all();
-        $parent = Gurdian::all();
+        $parent = Guardian::all();
         $messages = Message::all();
         $course = Course :: all();
         // Retrieve all users
@@ -93,53 +96,48 @@ class AdminController extends Controller
             return redirect()->back()->withInput();
         }
 
-
-        $students = Student::all();
-        
-        $user = new user;
-        $user->name=$request->fname;
-        $user->email=$request->email;
-        $user->role=2;
-        $user->password=Hash::make('aaAA12!@');
-        $user->save();
-
-
-        $data = new student; 
-        $data -> user_id = $user->id;                                                                                                   
-        $data->first_name=$request->fname;
-        $data->last_name=$request->lname;
-        $data->email=$request->email;
-        $data->birthday=$request->bday;
-        $data->level=$request->level;
-        $data->guardian_id=$request->guardian;
-        $data->guardian_telno=$request->guardianno;
-        $data->guardian_busniess=$request->guardian_busniess;
-        $data->guardian_email=$request->guardian_email;
-        $data->role=2;
-        $data->password=Hash::make('aaAA12!@');
-        $data->save();
     
+        try {
+            $user = new User;
+            $user->name = $request->fname;
+            $user->email = $request->email;
+            $user->role = 2;
+            $user->password = Hash::make('aaAA12!@');
+            $user->save();
+            
+            $guardian = new Guardian;
+            $guardian->guardian_name = $request->guardian;
+            $guardian->guardian_telno=$request->guardianno;
+            $guardian->guardian_busniess=$request->guardian_busniess;
+            $guardian->guardian_email=$request->guardian_email;
+            $guardian->save();
+            
+            $student = new Student;
+            $student->user_id = $user->id;
+            $student->first_name = $request->fname;
+            $student->last_name = $request->lname;
+            $student->email = $request->email;
+            $student->birthday = $request->bday;
+            $student->level = $request->level;
+            $student->guardian_id = $guardian->id;
+            $user->role = 2;
+            $user->password = Hash::make('aaAA12!@');
+            $student->save();
+            
 
-        Session::flash('student_added_success', 'Student added successfully.');
+            
+            Session::flash('student_added_success', 'Student added successfully.');
+        } catch (\Exception $e) {
 
-        $parent = new gurdian;
-        $parent -> student_id = $data->id;
-        $parent->guardian_name=$request->guardian;
-        $parent->guardian_telno=$request->guardianno;
-        $parent->guardian_busniess=$request->guardian_busniess;
-        $parent->guardian_email=$request->guardian_email;
-        $parent->role=4;
-        $parent->password=Hash::make('aaAA12!@');
-        $parent->save();
-      
-
-
-
-       
-
+            
+            // Handle the error here
+            // You might want to show an error message or log the error
+            Log::error($e->getMessage());
+            
+            Session::flash('student_added_error', 'An error occurred while adding the student.');
+        }
+    
         return redirect()->back();
-
-
     }
 
 

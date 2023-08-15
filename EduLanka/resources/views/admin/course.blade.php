@@ -257,15 +257,15 @@
                   <div class="form-group">
                      <label for="editLevel">Level</label>
                      <select class="form-control" id="editLevel" name="level" >
-                     <option value="grade5">Grade 5</option>
-                     <option value="grade6">Grade 6</option>
-                     <option value="grade7">Grade 7</option>
-                     <option value="grade8">Grade 8</option>
-                     <option value="grade9">Grade 9</option>
-                     <option value="grade10">Grade 10</option>
-                     <option value="grade11">Grade 11</option>
-                     <option value="grade12">Grade 12</option>
-                     <option value="grade13">Grade 13</option>
+                     <option value="Grade 5">Grade 5</option>
+                     <option value="Grade 6">Grade 6</option>
+                     <option value="Grade 7">Grade 7</option>
+                     <option value="Grade 8">Grade 8</option>
+                     <option value="Grade 9">Grade 9</option>
+                     <option value="Grade 10">Grade 10</option>
+                     <option value="Grade 11">Grade 11</option>
+                     <option value="Grade 12">Grade 12</option>
+                     <option value="Grade 13">Grade 13</option>
                   </div>
                </div>
                <div class="mb-3">

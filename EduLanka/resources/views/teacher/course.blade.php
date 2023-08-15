@@ -1,7 +1,7 @@
 @extends('layouts.teacherLayout')
 
 @section('content')
-<p>MY COURSES : Select a course to view details</p>
+<p><b>MY COURSES : Select a course to view details</b></p>
 <div class="option-container">
     <div class="option-selection">
         @foreach($courses as $course)
@@ -190,6 +190,7 @@
         </thead>
         <tbody id="course-sub">
             <!-- Assignment rows will be dynamically added here -->
+           
         </tbody>
     </table>
 

@@ -8,13 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-    public function gurdian()
-    {
-        return $this->hasOne(Gurdian::class);
-    }
+    protected $fillable = ['user_id', 'first_name', 'last_name','email','birthday','level','guardian_id','role','password'];
 }

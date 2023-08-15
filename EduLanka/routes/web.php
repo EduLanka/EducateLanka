@@ -42,6 +42,8 @@ Route::middleware(['student'])->group(function () {
 
     Route::get('/student/courses', 'App\Http\Controllers\StudentController@viewCourses')->name('student.courses');
 
+    Route::get('/student/settings', 'App\Http\Controllers\StudentController@settings')->name('student.settings');
+
     Route::post('/enroll/{courseId}', 'App\Http\Controllers\StudentController@enroll')->name('enroll.course');
 
     Route::delete('/enroll/{courseId}', 'App\Http\Controllers\StudentController@unenroll')->name('unenroll.course');

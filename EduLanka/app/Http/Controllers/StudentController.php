@@ -65,6 +65,20 @@ class StudentController extends Controller
        
     }
 
+    public function settings()
+    {    
+        $user = Auth::user();
+        $studentdetails = Student::where('user_id',$user->id)->get();
+        // $courses = StudentCourse::where('student_id', $user->id)->get();
+        $courses = StudentCourse::where('student_id', $user->id)
+            ->join('courses', 'student_courses.course_id', '=', 'courses.id')
+            ->select('courses.level','courses.subject')
+            ->get(); 
+
+        return view('student.settings', compact('studentdetails','courses'));
+    }
+
+
     public function viewCourse($courseId) {
         $course = Course::find($courseId);
     

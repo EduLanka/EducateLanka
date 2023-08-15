@@ -186,15 +186,15 @@
 			<label for="level" class="form-label">Level</label>
 			<select class="form-control" id="exampleFormControlInput1" name="level"  required>
 			<option selected disable>Choose your grade</option>
-			<option value="grade5">Grade 5</option>
-  <option value="grade6">Grade 6</option>
-  <option value="grade7">Grade 7</option>
-  <option value="grade8">Grade 8</option>
-  <option value="grade9">Grade 9</option>
-  <option value="grade10">Grade 10</option>
-  <option value="grade11">Grade 11</option>
-  <option value="grade12">Grade 12</option>
-  <option value="grade13">Grade 13</option>
+			<option value="Grade 5">Grade 5</option>
+			<option value="Grade 6">Grade 6</option>
+			<option value="Grade 7">Grade 7</option>
+			<option value="Grade 8">Grade 8</option>
+			<option value="Grade 9">Grade 9</option>
+			<option value="Grade 10">Grade 10</option>
+			<option value="Grade 11">Grade 11</option>
+			<option value="Grade 12">Grade 12</option>
+			<option value="Grade 13">Grade 13</option>
   <!-- Add more options as needed -->
 </select>
 		</div>
@@ -203,17 +203,17 @@
 			<input type="text" class="form-control" name="guardian" id="exampleFormControlInput1" placeholder="Mr/Mrs john" required>
 		</div>
 		<div class="mb-3">
-			<label for="guardian" class="form-label">Guardian Telno</label>
+			<label for="guardianno" class="form-label">Guardian Telno</label>
 			<input type="text" class="form-control" name="guardianno" id="exampleFormControlInput1" placeholder="0716655452" required>
 		</div>
 		
 		<div class="mb-3">
-			<label for="guardian" class="form-label">Guardian Occupation</label>
+			<label for="guardian_busniess" class="form-label">Guardian Occupation</label>
 			<input type="text" class="form-control" name="guardian_busniess" id="exampleFormControlInput1" placeholder="Occupation" required>
 		</div>
 		<div class="mb-3">
-			<label for="guardian" class="form-label">Guardian Email</label>
-			<input type="text" class="form-control" name="guardian_email" id="exampleFormControlInput1" placeholder="gurdian@gmail.com" >
+			<label for="guardian_email" class="form-label">Guardian Email</label>
+			<input type="text" class="form-control" name="guardian_email" id="exampleFormControlInput1" placeholder="gurdian@gmail.com" required>
 		</div>
                 <!-- end of form -->
 

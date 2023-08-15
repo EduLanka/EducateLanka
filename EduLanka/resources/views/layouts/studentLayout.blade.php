@@ -13,6 +13,7 @@
       <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+      
 
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -21,16 +22,16 @@
       <header class="header" id="header">
          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Student's Workspace</div>
          
-         <a href="{{route('teacher.settings')}}">
+         <a href="{{route('student.settings')}}">
          <div class="header_img"><img src="https://static.vecteezy.com/system/resources/previews/007/296/443/original/user-icon-person-icon-client-symbol-profile-icon-vector.jpg" alt="user-im" title="{{Auth::user()->name}}"> </div>
          </a>
       </header>
       <div class="l-navbar" id="nav-bar">
          <nav class="nav">
             <div>
-               <a href="{{route('teacher.index')}}" class="nav_logo" style="text-decoration: none;"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">EduLanka</span> </a>
+               <a href="{{route('student')}}" class="nav_logo" style="text-decoration: none;"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">EduLanka</span> </a>
                <div class="nav_list">
-                  <a href="{{route('teacher.index')}}" title="Dashboard" class="nav_link {{ request()->is('teacher') ? 'active' : '' }}"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Dashboard</span></a>
+                  <a href="{{route('student')}}" title="Dashboard" class="nav_link {{ request()->is('student') ? 'active' : '' }}"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Dashboard</span></a>
 
                   <a href="{{route('student.courses')}}" title="Courses" class="nav_link {{ request()->is('student/courses') ? 'active' : '' }}"> <i class='bx bx-book nav_icon'></i> <span class="nav_name">Courses</span> </a> 
 
@@ -38,7 +39,7 @@
                   
                   <a href="/chatify" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
 
-                  <a href="{{route('teacher.settings')}}" title="Settings" class="nav_link {{ request()->is('teacher/settings') ? 'active' : '' }}"> <i class='bx bx-cog nav_icon'></i> <span class="nav_name">Settings</span> </a> 
+                  <a href="{{route('student.settings')}}" title="Settings" class="nav_link {{ request()->is('student/settings') ? 'active' : '' }}"> <i class='bx bx-cog nav_icon'></i> <span class="nav_name">Settings</span> </a> 
 
                 </div>
             </div>

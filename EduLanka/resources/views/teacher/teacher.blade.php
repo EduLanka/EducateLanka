@@ -452,12 +452,9 @@
 
                           <div class="mb-3">
                             <label for="marks" class="form-label">Total Marks Avaliable</label>
-                            <input type="number" class="form-control" id="marks" name="marks" required>
+                            <input type="number" class="form-control" id="marks" name="marks" min="1" required>
                           </div>
 
-                          
-
-                          
                                   <!-- end of form -->
 
                         </div>
@@ -508,25 +505,6 @@
                     <!-- <th scope="col">Handle</th> -->
                   </tr>
                 </thead>
-                <!-- <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    
-                  </tr>
-                </tbody> -->
                 <tbody id="student-table-body">
                   <!-- Students will be dynamically added here -->
               </tbody>

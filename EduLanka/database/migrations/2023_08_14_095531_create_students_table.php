@@ -20,13 +20,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->date('birthday');
             $table->string('level');
-            $table->string('guardian_id');
-            $table->string('guardian_telno');
-            $table->string('guardian_busniess');                                    
-            $table->string('guardian_email');
+            $table->unsignedBigInteger('guardian_id');
             $table->integer('role')->default(2);
             $table->string('password')->default('aaAA12!@');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('guardian_id')->references('id')->on('guardians')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

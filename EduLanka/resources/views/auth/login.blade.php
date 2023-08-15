@@ -30,12 +30,12 @@
                     </div>
 
                     <div class="mb-3">
-    <div class="input-group">
-        <span class="input-group-text"><i class="fas fa-lock"></i></span>
-        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password">
-        <span class="input-group-text toggle-password"><i class="fas fa-eye"></i></span>
-    </div>
-</div>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password">
+                            <span class="input-group-text toggle-password"><i class="fas fa-eye"></i></span>
+                        </div>
+                    </div>
 
 
 
