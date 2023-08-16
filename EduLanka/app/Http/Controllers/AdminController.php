@@ -111,7 +111,15 @@ class AdminController extends Controller
             $guardian->guardian_busniess=$request->guardian_busniess;
             $guardian->guardian_email=$request->guardian_email;
             $guardian->save();
-            
+
+            $parentUser = new User;
+            $parentUser->id = $guardian->id;
+            $parentUser->name = $guardian->guardian_name;
+            $parentUser->email = $guardian->guardian_email;
+            $parentUser->role = 4;
+            $parentUser->password = Hash::make('ggGG12!@');
+            $parentUser->save();
+
             $student = new Student;
             $student->user_id = $user->id;
             $student->first_name = $request->fname;

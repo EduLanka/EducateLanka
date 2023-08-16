@@ -86,7 +86,7 @@ class TeacherController extends Controller
         //using join to get the student name from the student table using foreign keys
         $students = StudentCourse::where('course_id', $courseId)
             ->join('students', 'student_courses.student_id', '=', 'students.user_id')
-            ->select('students.first_name','students.last_name', 'students.user_id as id')
+            ->select('students.first_name','students.last_name','students.guardian_id', 'students.user_id as id')
             ->get();            
 
         foreach ($students as $student) {

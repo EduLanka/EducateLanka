@@ -116,7 +116,7 @@
                     <form id="editMaterialForm" action="{{ route('teacher.material.edit') }}"  method="POST" enctype="multipart/form-data">
                       @csrf
                       @method('PUT')
-                      <input id="materialId" name="materialId"> 
+                      <input id="materialId" name="materialId" type="hidden"> 
                       
 
                     <div class="mb-3">
@@ -158,18 +158,47 @@
     <div class="participants">
         <p><b>COURSE PARTICIPANTS</b></p>
         <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>Student ID</th>
-                <th>Student Name</th>
-            </tr>
-        </thead>
-        <tbody id="course-parti">
-            <!-- Student rows will be dynamically added here -->
-        </tbody>
-    </table>
+          <thead>
+              <tr>
+                  <th>Student ID</th>
+                  <th>Student Name</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody id="course-parti">
+              <!-- Student rows will be dynamically added here -->
+          </tbody>
+       </table>
     </div>
 </div>
+
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+   
+        <span class="close" id="closeModal1">&times;</span>
+        <br>
+        <br>
+        <div class="contactbtns">
+          <div class="btn1">
+            <i class="bx bx-user" title="Contact Student"></i>
+            <br>
+            <br>
+            <a id="contact-s" class="contact-icon" data-student-id=""><b>Contact Student</b></a>
+          </div>
+          <div class="btn2">
+            <i class="bx bx-user" title="Contact Parent"></i>
+            <br>
+            <br>
+            <a id="contact-p" class="contact-icon" data-guardian-id=""><b>Contact Parent</b></a>
+          </div>
+        </div>
+        <!-- <a id="contact-s" class="btn btn-primary contact-icon" data-student-id="">Contact Student</a>
+        <br>
+        <a id="contact-p" class="btn btn-primary contact-icon" data-guardian-id="">Contact Parent</a> -->
+    </div>
+</div>
+
+
 <br>
 <div class="submissions">
     <p><b>SUBMISSIONS</b></p>
@@ -189,7 +218,7 @@
             </tr>
         </thead>
         <tbody id="course-sub">
-            <!-- Assignment rows will be dynamically added here -->
+           
            
         </tbody>
     </table>
