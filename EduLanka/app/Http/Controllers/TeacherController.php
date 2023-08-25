@@ -83,12 +83,13 @@ class TeacherController extends Controller
 
     public function getStudentsByCourse($courseId)
     {
-        //using join to get the student name from the student table using foreign keys
+        //using join to get the specific student's details from the student table using foreign keys
         $students = StudentCourse::where('course_id', $courseId)
             ->join('students', 'student_courses.student_id', '=', 'students.user_id')
             ->select('students.first_name','students.last_name','students.guardian_id', 'students.user_id as id')
             ->get();            
 
+        //calculating average marks
         foreach ($students as $student) {
             $submissionsCount = Submission::where('student_id', $student->id)
                 ->where('course_id', $courseId)

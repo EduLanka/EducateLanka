@@ -1185,3 +1185,7 @@ cursor: pointer;
   border-radius: 50%;
   cursor: auto;
 }
+
+.bx-message-square-detail{
+  font-size: 20px;
+}
