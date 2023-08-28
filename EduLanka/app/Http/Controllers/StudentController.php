@@ -20,7 +20,17 @@ class StudentController extends Controller
      */
     public function index()
     {
-       
+        $user = Auth::user();
+
+        // Courses of the logged-in student
+        $courses = StudentCourse::where('student_id', Auth::user()->id)
+        ->join('courses', 'student_courses.course_id', '=', 'courses.id')
+        ->select('courses.level','courses.subject', 'courses.id')
+        ->get();
+
+        $courseCount = StudentCourse::where('student_id', Auth::user()->id)->count();
+        return view('student.student', compact('courses','courseCount'));
+
     }
 
     public function viewCourses(){

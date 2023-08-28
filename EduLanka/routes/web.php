@@ -36,9 +36,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['student'])->group(function () {
-    Route::get('student', function () {
-        return view('student');
-    })->name('student');
+    Route::get('student', 'App\Http\Controllers\StudentController@index')
+    ->name('student');
 
     Route::get('/student/courses', 'App\Http\Controllers\StudentController@viewCourses')->name('student.courses');
 

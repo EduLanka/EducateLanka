@@ -17,10 +17,51 @@
 
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+      <style>
+        .search {
+  display: inline-block;
+  position: relative;
+}
+
+.search input[type="text"] {
+  width: 350px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search button[type="submit"] {
+  background-color: #4e99e9;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: .9s ease;
+}
+
+.search button[type="submit"]:hover {
+  transform: scale(1.1);
+  color: rgb(255, 255, 255);
+  background-color: blue;
+}
+
+    </style>
    </head>
    <body id="body-pd">
       <header class="header" id="header">
          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Student's Workspace</div>
+
+         <div class="search">
+        <input placeholder="Search..." type="text">
+        <button type="submit"> <i class="bx bx-search"></i></button>
+      </div>
+   
          
          <a href="{{route('student.settings')}}">
          <div class="header_img"><img src="https://static.vecteezy.com/system/resources/previews/007/296/443/original/user-icon-person-icon-client-symbol-profile-icon-vector.jpg" alt="user-im" title="{{Auth::user()->name}}"> </div>
