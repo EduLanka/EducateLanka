@@ -37,7 +37,7 @@
 <!-- resources/views/students/search.blade.php -->
 <div class="search">
     <form id="search-form">
-        <input name="query" placeholder="Search..." type="search">
+        <input name="query" placeholder="Search Course..." type="search">
         <button type="submit"><i class="bx bx-search"></i></button>
     </form>
 </div>
@@ -55,17 +55,6 @@
         </div>
     </div>
 </div>
-
-
-
-         <!--View Results-->
-         <button class="learn-more">
-         <span class="circle" aria-hidden="true">
-         <span class="icon arrow"></span>
-         </span>
-         <span class="button-text">View Results</span>
-         </button>
-
 
          <!--Student Setting-->
          <a href="{{route('student.settings')}}">
@@ -152,6 +141,47 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const viewResultsButton = document.querySelector('.learn-more1');
+
+        viewResultsButton.addEventListener('click', function () {
+
+            const courseId = this.getAttribute('data-course-id');
+            const studentId = this.getAttribute('data-student-id');
+
+            console.log(courseId);
+            console.log(studentId);
+
+            // Use courseId and studentId to fetch submission results data
+            // For example, you can make an AJAX request to retrieve the data
+
+            // After retrieving the data, populate the modal with submission titles
+            const modalContent = document.querySelector('.modal-content');
+            modalContent.innerHTML = ''; // Clear previous content
+
+            // Assuming you have fetched the submission data as an array of objects
+            const submissionData = [
+                // Sample data objects with title properties
+                { title: 'Submission 1 Title' },
+                { title: 'Submission 2 Title' },
+                // ...more submission data
+            ];
+
+            submissionData.forEach(submission => {
+                const submissionTitleElement = document.createElement('p');
+                submissionTitleElement.textContent = submission.title;
+                modalContent.appendChild(submissionTitleElement);
+            });
+
+            // Open the modal
+            const modal = new bootstrap.Modal(document.getElementById('resultsModal'));
+            modal.show();
+        });
+    });
+</script>
+
 
 
 

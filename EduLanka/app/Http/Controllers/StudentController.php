@@ -23,17 +23,25 @@ class StudentController extends Controller
     public function index()
     {
         $user = Auth::user();
-
+    
         // Courses of the logged-in student
-        $courses = StudentCourse::where('student_id', Auth::user()->id)
-        ->join('courses', 'student_courses.course_id', '=', 'courses.id')
-        ->select('courses.level','courses.subject', 'courses.id')
-        ->get();
+        $courses = StudentCourse::where('student_id', $user->id)
+            ->join('courses', 'student_courses.course_id', '=', 'courses.id')
+            ->select('courses.level', 'courses.subject', 'courses.id')
+            ->get();
+    
+        $courseCount = StudentCourse::where('student_id', $user->id)->count();
+        
+        // Calculate the count of due assignments not submitted by the student
+        $notSubmittedCount = SubmissionLink::whereHas('submissions', function ($query) use ($user) {
+            $query->where('student_id', $user->id);
+        }, '<', 1)->count();
 
-        $courseCount = StudentCourse::where('student_id', Auth::user()->id)->count();
-        return view('student.student', compact('courses','courseCount'));
 
+    
+        return view('student.student', compact('courses', 'courseCount', 'notSubmittedCount'));
     }
+    
 
     public function viewCourses(){
 
@@ -97,12 +105,19 @@ class StudentController extends Controller
         if (!$course) {
             return abort(404);
         }
+
+        $user = Auth::user();
+
+        $submissions = Submission::where('course_id', $courseId)
+        ->where('student_id', $user->id)
+        ->whereNotNull('total_marks') // Only fetch submissions with non-null marks
+        ->get();
     
         $instructor = Teacher::where('user_id', $course->teacher_id)->first();
         $coursematerials = CourseMaterial::where('course_id',$courseId)->get();
         $links = SubmissionLink::where('course_id',$courseId)->get();
     
-        return view('student.courseView', compact('course', 'instructor','courseId','coursematerials','links'));
+       return view('student.courseView', compact('course', 'instructor', 'courseId', 'coursematerials', 'links', 'submissions'));
     }
 
     public function downloadCourseMaterial($materialId)
@@ -158,6 +173,19 @@ class StudentController extends Controller
         return response()->json(['courses' => $courses]);
     }
 
+    public function getSubmissionData(Request $request)
+{
+    $courseId = $request->input('courseId');
+    $studentId = $request->input('studentId');
 
-    
+    // Fetch submission data from the database based on courseId and studentId
+    $submissionData = Submission::where('course_id', $courseId)
+        ->where('student_id', $studentId)
+        ->get();
+
+    return response()->json($submissionData);
+}
+
+
+
 }

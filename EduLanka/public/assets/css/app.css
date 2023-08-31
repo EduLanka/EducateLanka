@@ -1197,30 +1197,34 @@ cursor: pointer;
 .search form {
   display: flex;
   align-items: center;
+  position: relative; /* Add position relative for icon positioning */
 }
 
 .search input[type="search"] {
   width: 350px;
-  padding: 10px;
+  padding: 10px 40px 10px 10px; /* Added padding for the icon */
   border: none;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .search button[type="submit"] {
-  background-color: #4e99e9;
+ 
   border: none;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 7px;
+  margin-right: 10px;
   border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.9s ease, background-color 0.9s ease;
+  position: absolute; /* Position the button absolutely */
+  right: 0;
 }
 
 .search button[type="submit"]:hover {
   transform: scale(1.1);
-  background-color: blue;
+  background-color: #8DA399;
 }
 
 button {
@@ -1400,4 +1404,3 @@ button {
    button:hover .button-text {
     color: #fff;
    }
-

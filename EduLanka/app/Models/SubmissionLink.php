@@ -9,4 +9,9 @@ class SubmissionLink extends Model
 {
     use HasFactory;
     protected $fillable = ['title','description', 'dueDate','marks_available','course_id'];
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'link_id');
+    }
+
 }

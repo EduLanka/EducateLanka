@@ -57,6 +57,12 @@ Route::middleware(['student'])->group(function () {
 
     Route::get('/students/search', 'App\Http\Controllers\StudentController@search')->name('students.search');
 
+    Route::get('/due-assignments-count', 'StudentController@dueAssignmentsCount')->name('due.assignments.count');
+
+    Route::get('/fetch-submission-data', 'App\Http\Controllers\StudentController@getSubmissionData')
+    ->name('fetch.submission.data');
+
+
 
 
 });

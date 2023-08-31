@@ -49,6 +49,8 @@
 <br>
 
 <div class="alinks">
+        
+
     <p><b>SUBMISSIONS</b></p>
     @foreach($links as $link)
     <div class="alink">
@@ -93,6 +95,7 @@
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
+            
             <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Upload</button>
@@ -100,9 +103,62 @@
             </div>
         </div>
         </div>
+       
     </div>
     <br>
     @endforeach
+
+      <!--View Results-->
+      <button class="learn-more1" data-course-id="{{ $courseId }}" data-student-id="{{ Auth::user()->id }}">
+    <span class="circle" aria-hidden="true">
+        <span class="icon arrow"></span>
+    </span>
+    <span class="button-text">View Results</span>
+</button>
+
+
+<div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultsModalLabel">Submission Results</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Marks</th>
+                        <th>Grade</th>
+                        <th>Feedback</th>
+                        <!-- <th></th> -->
+                    </tr>
+                </thead>
+                <tbody id="course-mat">
+                @foreach ($submissions as $submission)
+                    <tr>
+                        <td>{{$submission->title}}</td>
+                        <td>{{$submission->upload_date}}</td>
+                        <td>{{$submission->total_marks}}</td>
+                        <td>{{$submission->grade}}</td>
+                        <td>{{$submission->feedback}}</td>
+                        <!-- <td><a href="{{ route('download',$coursematerial->id) }}"><i class="bx bx-download"></i></a></td> -->
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 </div>
     
 

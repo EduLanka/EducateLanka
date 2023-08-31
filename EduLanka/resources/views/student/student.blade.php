@@ -112,13 +112,13 @@
                   <p>My Courses</p>
                 </span>
               </li>
-              <li>
+              <li class="due-count">
                 <i class='bx bx-alarm' ></i>
                 <span class="text">
-                  <h3></h3>
+                <h3>{{$notSubmittedCount}}</h3>
                   <p>Due</p>
                 </span>
-              </li>
+
               
             </ul>
         </div>
