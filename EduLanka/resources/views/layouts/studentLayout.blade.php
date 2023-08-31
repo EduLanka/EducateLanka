@@ -8,65 +8,72 @@
       
       <title>{{ config('app.name', 'Laravel') }}</title>
       <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
-      <!-- Fonts -->
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <link rel="dns-prefetch" href="//fonts.bunny.net">
       <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-      <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+      <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+
       
 
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-      <style>
-        .search {
-  display: inline-block;
-  position: relative;
-}
+      
+           <style>
 
-.search input[type="text"] {
-  width: 350px;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.search button[type="submit"] {
-  background-color: #4e99e9;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 0;
-  right: 0;
-  transition: .9s ease;
-}
-
-.search button[type="submit"]:hover {
-  transform: scale(1.1);
-  color: rgb(255, 255, 255);
-  background-color: blue;
-}
-
-    </style>
+            .modal-backdrop {
+             background-color: transparent !important;
+            }  
+           </style>    
    </head>
-   <body id="body-pd">
-      <header class="header" id="header">
+
+         <body id="body-pd">
+         <header class="header" id="header">
          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Student's Workspace</div>
 
-         <div class="search">
-        <input placeholder="Search..." type="text">
-        <button type="submit"> <i class="bx bx-search"></i></button>
-      </div>
-   
          
+<!-- resources/views/students/search.blade.php -->
+<div class="search">
+    <form id="search-form">
+        <input name="query" placeholder="Search..." type="search">
+        <button type="submit"><i class="bx bx-search"></i></button>
+    </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search Results</h5>
+            </div>
+            <div class="modal-body">
+                <ul id="search-results"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+         <!--View Results-->
+         <button class="learn-more">
+         <span class="circle" aria-hidden="true">
+         <span class="icon arrow"></span>
+         </span>
+         <span class="button-text">View Results</span>
+         </button>
+
+
+         <!--Student Setting-->
          <a href="{{route('student.settings')}}">
          <div class="header_img"><img src="https://static.vecteezy.com/system/resources/previews/007/296/443/original/user-icon-person-icon-client-symbol-profile-icon-vector.jpg" alt="user-im" title="{{Auth::user()->name}}"> </div>
          </a>
+
       </header>
+
       <div class="l-navbar" id="nav-bar">
          <nav class="nav">
             <div>
@@ -81,7 +88,6 @@
                   <a href="/chatify" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
 
                   <a href="{{route('student.settings')}}" title="Settings" class="nav_link {{ request()->is('student/settings') ? 'active' : '' }}"> <i class='bx bx-cog nav_icon'></i> <span class="nav_name">Settings</span> </a> 
-
                 </div>
             </div>
             <a class="nav_link" title="SignOut" href="{{ route('logout') }}"
@@ -109,6 +115,45 @@
       <script src="{{ asset('assets/js/password-validation.js') }}" defer></script>
       <script src="{{ asset('assets/js/navbar.js') }}" defer></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#search-form').submit(function(event) {
+            event.preventDefault();
+            
+            var query = $('input[name="query"]').val();
+            
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('students.search') }}',
+                data: { query: query },
+                success: function(response) {
+                    var courses = response.courses;
+                    var resultList = $('#search-results');
+                    resultList.empty();
+                    
+                    if (courses.length > 0) {
+                        courses.forEach(function(course) {
+                            resultList.append('<li>' + course.level + ' - Subject: ' + course.subject + '</li>');
+                        });
+                    } else {
+                        resultList.append('<li>No results found.</li>');
+                    }
+                    
+                    $('#searchModal').modal('show');
+                },
+                error: function() {
+                    console.log('Error occurred while fetching search results.');
+                }
+            });
+        });
+    });
+</script>
+
+
 
    </body>
 </html>

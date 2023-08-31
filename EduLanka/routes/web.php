@@ -52,6 +52,10 @@ Route::middleware(['student'])->group(function () {
     Route::get('/download/{materialId}', 'App\Http\Controllers\StudentController@downloadCourseMaterial')->name('download');
 
     Route::post('/add-submission/{courseId}/{linkId}', 'App\Http\Controllers\StudentController@addSubmission')->name('student.submission.add');
+    
+    // Route::get(' /search','App\Http\Controllers\StudentController@search'); 
+
+    Route::get('/students/search', 'App\Http\Controllers\StudentController@search')->name('students.search');
 
 
 

@@ -13,6 +13,8 @@ use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use Spatie\LaravelIgnition\Recorders\QueryRecorder\Query;
+
 class StudentController extends Controller
 {
     /**
@@ -132,6 +134,28 @@ class StudentController extends Controller
         Session::flash('success', 'Assignment submitted successfully! Good Luck!');
 
         return redirect()->back();
+    }
+
+    // public function search(Request $request)
+    // {
+    //     $courses = StudentCourse::where('student_id', Auth::user()->id)
+    //         ->join('courses', 'student_courses.course_id', '=', 'courses.id')
+    //         ->select('courses.level', 'courses.subject', 'courses.id')
+    //         ->get();
+    
+    //     $courseCount = StudentCourse::where('student_id', Auth::user()->id)->count();
+    //     $search_text = $request->input('query'); // Use the request helper to get the query parameter
+    // $course = Course::where('subject', 'LIKE', '%' . $search_text . '%')->get();
+    
+    //     return view('student.student', compact('course', 'courses', 'courseCount'));
+    // }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        $courses = Course::where('subject', 'like', '%' . $query . '%')->get();
+
+        return response()->json(['courses' => $courses]);
     }
 
 

@@ -1,6 +1,7 @@
 @extends('layouts.studentLayout')
 
 @section('content')
+
 <style>
     body {
         background-color: #F5F1E9;
@@ -88,6 +89,13 @@
     #calendar_header{
       background-color:black;
     }
+
+    .go-to-courses-button {
+    display: flex;
+    justify-content: flex-end; /* Move the button to the right */
+    margin-top: 1rem;
+}
+
 </style>
 
 <div class="container">
@@ -104,13 +112,6 @@
                   <p>My Courses</p>
                 </span>
               </li>
-              <!-- <li>
-                <i class='bx bxs-user' ></i>
-                <span class="text">
-                  <h3></h3>
-                  <p>My Students</p>
-                </span>
-              </li>          -->
               <li>
                 <i class='bx bx-alarm' ></i>
                 <span class="text">
@@ -121,6 +122,7 @@
               
             </ul>
         </div>
+        
         <div class="courses">
           <div class="cards" style="width: 50rem; height: fit-content;">
 
@@ -133,18 +135,20 @@
                 </span>
               </div>
           @endforeach
-        
           </div>
-          <a href="{{route('student.courses')}}">
-          <button class="learn-more">
-            <span class="circle" aria-hidden="true">
+          <a href="{{route('student.courses')}}" class="go-to-courses-button">
+    <button class="learn-more1">
+        <span class="circle" aria-hidden="true">
             <span class="icon arrow"></span>
-            </span>
-            <span class="button-text">GO TO COURSES</span>
-          </button>
-        </a>
+        </span>
+        <span class="button-text">GO TO COURSES</span>
+    </button>
+</a>
+
+
         </div>
       </div>
+      
       
       <div id="calendar">
     <div id="calendar_header"><i class="icon-chevron-left"></i>
