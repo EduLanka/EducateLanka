@@ -39,6 +39,8 @@ Route::middleware(['student'])->group(function () {
     Route::get('student', 'App\Http\Controllers\StudentController@index')
     ->name('student');
 
+    Route::get('/my-progress', 'App\Http\Controllers\MyProgressController@index')->name('my-progress');
+    
     Route::get('/student/courses', 'App\Http\Controllers\StudentController@viewCourses')->name('student.courses');
 
     Route::get('/student/settings', 'App\Http\Controllers\StudentController@settings')->name('student.settings');
@@ -98,6 +100,7 @@ Route::middleware(['teacher'])->group(function () {
     Route::get('/download-submission/{subId}', 'App\Http\Controllers\TeacherController@downloadSubmission')->name('teacher.sub.download');
 
     Route::put('/mark-submission', 'App\Http\Controllers\TeacherController@markSubmission')->name('teacher.sub.grade');
+
 
 
     // Route::post('/grade-submission/{submissionId}', 'App\Http\Controllers\TeacherController@gradeSubmission')->name('teacher.sub.grade');

@@ -76,6 +76,8 @@
                   
                   <a href="/chatify" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
 
+                  <a href="{{ route('my-progress') }}" title="My Progress" class="nav_link {{ request()->is('my-progress') ? 'active' : '' }}"> <i class='bx bx-chart nav_icon'></i> <span class="nav_name">My Progress</span> </a>
+
                   <a href="{{route('student.settings')}}" title="Settings" class="nav_link {{ request()->is('student/settings') ? 'active' : '' }}"> <i class='bx bx-cog nav_icon'></i> <span class="nav_name">Settings</span> </a> 
                 </div>
             </div>

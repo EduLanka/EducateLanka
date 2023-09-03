@@ -1,7 +1,7 @@
 @extends('layouts.studentLayout')
 
 @section('content')
-
+<p><b><h4>Dashboard</h4></b></p>
 <style>
     body {
         background-color: #F5F1E9;
@@ -177,6 +177,8 @@
   <br>
   <div class="row">
     <div class="performance">
+
+    
 
     
   <!--End of modal-->
