@@ -117,7 +117,7 @@
               <p><b>Email address:</b> <span class="label-content">{{$student->email}}</span></p>
               <p><b>Level:</b> <span class="label-content">{{$student->level}}</span></p>
           @else
-              <p>No student found.</p>
+              <p>No student found!</p>
           @endif
           </div>
         </div>
@@ -340,14 +340,6 @@ new Chart(ctx, {
         }
     }
 });
-
-
-
-
-
-
-
-
 
 </script>
 </body>
