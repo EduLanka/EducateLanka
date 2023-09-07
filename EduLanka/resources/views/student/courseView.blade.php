@@ -144,7 +144,7 @@
                         <td>{{$submission->total_marks}}</td>
                         <td>{{$submission->grade}}</td>
                         <td>{{$submission->feedback}}</td>
-                        <!-- <td><a href="{{ route('download',$coursematerial->id) }}"><i class="bx bx-download"></i></a></td> -->
+                        
                     </tr>
                     @endforeach
                 </tbody>

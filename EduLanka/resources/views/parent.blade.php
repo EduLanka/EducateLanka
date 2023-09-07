@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,223 +6,26 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-
-<style>
-    /*  import google fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
-*{
-  margin: 0;
-  padding: 0;
-  outline: none;
-  border: none;
-  text-decoration: none;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body{
-  background: #dfe9f5;
-}
-.container{
-  display: flex;
-}
-nav{
-  position: relative;
-  top: 0;
-  bottom: 0;
-  height: 100vh;
-  left: 0;
-  background: #fff;
-  width: 280px;
-  overflow: hidden;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.logo{
-  text-align: center;
-  display: flex;
-  margin: 10px 0 0 10px;
-}
-.logo img{
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
-.logo span{
-  font-weight: bold;
-  padding-left: 15px;
-  font-size: 18px;
-  text-transform: uppercase;
-}
-a{
-  position: relative;
-  color: rgb(85, 83, 83);
-  font-size: 14px;
-  display: table;
-  width: 280px;
-  padding: 10px;
-}
-nav .fas{
-  position: relative;
-  width: 70px;
-  height: 40px;
-  top: 14px;
-  font-size: 20px;
-  text-align: center;
-}
-.nav-item{
-  position: relative;
-  top: 12px;
-  margin-left: 10px;
-}
-a:hover{
-  background: #eee;
-}
-.logout{
-  position: absolute;
-  bottom: 0;
-}
-
-/* Main Section */
-.main{
-  position: relative;
-  padding: 20px;
-  width: 100%;
-}
-.main-top{
-  display: flex;
-  width: 100%;
-}
-.main-top i{
-  position: absolute;
-  right: 0;
-  margin: 10px 30px;
-  color: rgb(110, 109, 109);
-  cursor: pointer;
-}
-.main-skills{
-  display: flex;
-  margin-top: 20px;
-}
-.main-skills .card{
-  width: 25%;
-  margin: 10px;
-  background: #fff;
-  text-align: center;
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.main-skills .card h3{
-  margin: 10px;
-  text-transform: capitalize;
-}
-.main-skills .card p{
-  font-size: 12px;
-}
-.main-skills .card button{
-  background: orangered;
-  color: #fff;
-  padding: 7px 15px;
-  border-radius: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-}
-.main-skills .card button:hover{
-  background: rgba(223, 70, 15, 0.856);
-}
-.main-skills .card i{
-  font-size: 22px;
-  padding: 10px;
-}
-
-/* Courses */
-.main-course{
-  margin-top:20px ;
-  text-transform: capitalize;
-}
-.course-box{
-  width: 100%;
-  height: 300px;
-  padding: 10px 10px 30px 10px;
-  margin-top: 10px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.course-box ul{
-  list-style: none;
-  display: flex;
-}
-.course-box ul li{
-  margin: 10px;
-  color: gray;
-  cursor: pointer;
-}
-.course-box ul .active{
-  color: #000;
-  border-bottom: 1px solid #000;
-}
-.course-box .course{
-  display: flex;
-}
-.box{
-  width: 33%;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  background: rgb(235, 233, 233);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.box p{
-  font-size: 12px;
-  margin-top: 5px;
-}
-.box button{
-  background: #000;
-  color: #fff;
-  padding: 7px 10px;
-  border-radius: 10px;
-  margin-top: 3rem;
-  cursor: pointer;
-}
-.box button:hover{
-  background: rgba(0, 0, 0, 0.842);
-}
-.box i{
-  font-size: 7rem;
-  float: right;
-  margin: -20px 20px 20px 0;
-}
-.html{
-  color: rgb(25, 94, 54);
-}
-.css{
-  color: rgb(104, 179, 35);
-}
-.js{
-  color: rgb(28, 98, 179);
-}
-</style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{asset('assets/css/parent.css')}}">
 
 </head>
 <body>
   <div class="container">
     <nav>
       <ul>
-        <li><a href="#" class="logo">
-          <span class="nav-item">Edu Lanka</span>
-        </a></li>
-
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-        </form>
         <li>
-       <a href="{{ route('logout') }}" class="nav_link" title="SignOut"   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-       <i class="fas fa-sign-out-alt"></i>
-       <span class="nav-item">Sign Out</span>
-      </a>
-      </li>
-
+          <a href="#" class="logo"><span class="nav-item">Edu Lanka</span></a></li>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+          </form>
+        </li>
+        <li>
+          <a href="{{ route('logout') }}" class="nav_link" title="SignOut" id="signout"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="nav-item">Sign Out</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -234,197 +36,65 @@ a:hover{
       <h1>Parents Dashboard</h1>
       <br>
 
-      <button class="cntteacher">
+      <!-- <button class="cntteacher">
         <span class="circle" aria-hidden="true">
         <span class="icon arrow"></span>
         </span>
         <span class="button-text">Contact Teacher</span>
-      </button>
-    <style>
-        button {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-        outline: none;
-        border: 0;
-        vertical-align: middle;
-        text-decoration: none;
-        background: transparent;
-        padding: 0;
-        font-size: inherit;
-        font-family: inherit;
-        }
+      </button> -->
 
-        button.cntteacher {
-        width: 16rem;
-        height: auto;
-        }
-
-        button.cntteacher .circle {
-        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-        position: relative;
-        display: block;
-        margin: 0;
-        width: 3rem;
-        height: 3rem;
-        background: #282936;
-        border-radius: 1.625rem;
-        }
-
-        button.cntteacher .circle .icon {
-        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        background: #fff;
-        }
-
-        button.cntteacher .circle .icon.arrow {
-        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-        left: 0.625rem;
-        width: 1.125rem;
-        height: 0.125rem;
-        background: none;
-        }
-
-        button.cntteacher .circle .icon.arrow::before {
-        position: absolute;
-        content: "";
-        top: -0.29rem;
-        right: 0.0625rem;
-        width: 0.625rem;
-        height: 0.625rem;
-        border-top: 0.125rem solid #fff;
-        border-right: 0.125rem solid #fff;
-        transform: rotate(45deg);
-        }
-
-        button.cntteacher .button-text {
-        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding: 0.75rem 0;
-        margin: 0 0 0 1.85rem;
-        color: #282936;
-        font-weight: 700;
-        line-height: 1.6;
-        text-align: center;
-        text-transform: uppercase;
-        }
-
-        button:hover .circle {
-        width: 100%;
-        }
-
-        button:hover .circle .icon.arrow {
-        background: #fff;
-        transform: translate(1rem, 0);
-        }
-
-        button:hover .button-text {
-        color: #fff;
-        }
-    </style>
-
-    <button class="CntAdmin">
-      <span class="circle" aria-hidden="true">
+  <button type="button" title="Contact Admin" class="CntAdmin" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <span class="circle" aria-hidden="true">
       <span class="icon arrow"></span>
       </span>
       <span class="button-text">Contact Admin</span>
-    </button>
-        <style>
-          button {
-          position: relative;
-          display: inline-block;
-          cursor: pointer;
-          outline: none;
-          border: 0;
-          vertical-align: middle;
-          text-decoration: none;
-          background: transparent;
-          padding: 0;
-          font-size: inherit;
-          font-family: inherit;
-          }
+  </button>
 
-          button.CntAdmin {
-          width: 14rem;
-          height: auto;
-          }
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Share your thoughts</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="POST" action="{{ url('sendMessage') }}" enctype="multipart/form-data">
+          @csrf
+          
+          <div class="modal-body">
+            <p>
+            This dedicated communication channel in EduLanka ensures that any queries, concerns, or valuable input you have are channeled to our administrative team for prompt attention, enhancing the overall quality of your experience.</p>
+            <!--form start -->
+            <div class="mb-3">
 
-          button.CntAdmin .circle {
-          transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-          position: relative;
-          display: block;
-          margin: 0;
-          width: 3rem;
-          height: 3rem;
-          background: #282936;
-          border-radius: 1.625rem;
-          }
+              <label for="topic" class="form-label">Reason of contact</label>
 
-          button.CntAdmin .circle .icon {
-          transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          margin: auto;
-          background: #fff;
-          }
+              <select name="topic" id="topic" class="form-control" required>
+                <option value="Ask a question" class="form-control" name="topic">Ask a question</option>
+                <option value="Leave a comment" class="form-control" name="topic">Leave a comment</option>
+                <option value="Report a bug" class="form-control" name="topic">Report a bug</option>
+                <option value="Suggest an improvement" class="form-control" name="topic">Suggest an improvement</option>
+                <option value="other" class="form-control" name="topic">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" required></textarea>
+            </div>
+                    <!-- end of form -->
 
-          button.CntAdmin .circle .icon.arrow {
-          transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-          left: 0.625rem;
-          width: 1.125rem;
-          height: 0.125rem;
-          background: none;
-          }
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--End of modal-->
 
-          button.CntAdmin .circle .icon.arrow::before {
-          position: absolute;
-          content: "";
-          top: -0.29rem;
-          right: 0.0625rem;
-          width: 0.625rem;
-          height: 0.625rem;
-          border-top: 0.125rem solid #fff;
-          border-right: 0.125rem solid #fff;
-          transform: rotate(45deg);
-          }
 
-          button.CntAdmin .button-text {
-          transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          padding: 0.75rem 0;
-          margin: 0 0 0 1.85rem;
-          color: #282936;
-          font-weight: 700;
-          line-height: 1.6;
-          text-align: center;
-          text-transform: uppercase;
-          }
-
-          button:hover .circle {
-          width: 100%;
-          }
-
-          button:hover .circle .icon.arrow {
-          background: #fff;
-          transform: translate(1rem, 0);
-          }
-
-          button:hover .button-text {
-          color: #fff;
-          }
-        </style>
 
       <button class="settings">
         <span class="circle" aria-hidden="true">
@@ -433,124 +103,97 @@ a:hover{
         <span class="button-text">Settings</span>
       </button>
 
-      <style>
-      button {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-      outline: none;
-      border: 0;
-      vertical-align: middle;
-      text-decoration: none;
-      background: transparent;
-      padding: 0;
-      font-size: inherit;
-      font-family: inherit;
-      }
+      <br>
 
-      button.settings{
-      width: 12rem;
-      height: auto;
-      }
-
-      button.settings .circle {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      position: relative;
-      display: block;
-      margin: 0;
-      width: 3rem;
-      height: 3rem;
-      background: #282936;
-      border-radius: 1.625rem;
-      }
-
-      button.settings .circle .icon {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      background: #fff;
-      }
-
-      button.settings .circle .icon.arrow {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      left: 0.625rem;
-      width: 1.125rem;
-      height: 0.125rem;
-      background: none;
-      }
-
-      button.settings .circle .icon.arrow::before {
-      position: absolute;
-      content: "";
-      top: -0.29rem;
-      right: 0.0625rem;
-      width: 0.625rem;
-      height: 0.625rem;
-      border-top: 0.125rem solid #fff;
-      border-right: 0.125rem solid #fff;
-      transform: rotate(45deg);
-      }
-
-      button.settings .button-text {
-      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 0.75rem 0;
-      margin: 0 0 0 1.85rem;
-      color: #282936;
-      font-weight: 700;
-      line-height: 1.6;
-      text-align: center;
-      text-transform: uppercase;
-      }
-
-      button:hover .circle {
-      width: 100%;
-      }
-
-      button:hover .circle .icon.arrow {
-      background: #fff;
-      transform: translate(1rem, 0);
-      }
-
-      button:hover .button-text {
-      color: #fff;
-      }
-      </style>
-
-      <div class="main-skills">
-        <div class="card">
-          <i class="fas fa-laptop-code"></i>
-          <h3>Web developemt</h3>
-          <p>Join the course by which date.</p>
-          <button>Check Performance</button>
+      <h1>My Student</h1>
+      <div class="top">
+        <div class="my-student">
+          <div class="details">
+          
+          @if ($student)
+              <center><img src="{{ asset('assets/images/userImage.jpg') }}" alt="user image"></center> 
+              <p><b>ID:</b> <span class="label-content">{{$student->user_id}}</span></p>
+              <p><b>Full Name:</b> <span class="label-content">{{$student->first_name}} {{$student->last_name}}</span></p>
+              <p><b>Email address:</b> <span class="label-content">{{$student->email}}</span></p>
+              <p><b>Level:</b> <span class="label-content">{{$student->level}}</span></p>
+          @else
+              <p>No student found.</p>
+          @endif
+          </div>
         </div>
-        <div class="card">
-          <i class="fab fa-wordpress"></i>
-          <h3>WordPress</h3>
-          <p>Join the course by which date.</p>
-          <button>Check Performance</button>
-        </div>
-        <div class="card">
-          <i class="fas fa-palette"></i>
-          <h3>graphic design</h3>
-          <p>Join the course by which date.</p>
-          <button>Check Performance</button>
-        </div>
-        <div class="card">
-          <i class="fab fa-app-store-ios"></i>
-          <h3>IOS dev</h3>
-          <p>Join the course by which date.</p>
-          <button>Check Performance</button>
+        <div>
+         <canvas id="myChart"></canvas>
         </div>
       </div>
+      
 
-      <section class="main-course">
+     
+
+      <h1>Student Courses</h1>
+      <div class="main-skills">
+      @if($courses)
+        @foreach($courses as $course)
+        <div class="card">
+            <i class="fas fa-laptop-code"></i>
+            <h3>{{$course->subject}}</h3>
+            <p>{{$course->level}}</p>
+            <button class="check-performance-btn" data-course-id="{{$course->id}}" data-submission-ids="{{ json_encode($submissions[$course->id]->pluck('id')) }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Check Performance</button>
+            <a href="/chatify/{{$course->teacher_id}}"> <button class="contact-teacher-btn">Contact Teacher</button></a>
+           
+
+
+            <!-- Modal -->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Student Performance</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">❌</button> -->
+            </div>
+            <div class="modal-body">
+              <h6>Student Submissions</h6>
+              <div class="links">
+                <p id="total"></p>
+                <!-- <p id="done"></p> -->
+                <p id="due"></p>
+              </div>
+
+    <div id="submission-ids-list"></div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Marks</th>
+                <th>Grade</th>
+                <th>Feedback</th>
+            </tr>
+        </thead>
+        <tbody id="course-mat">
+            <!-- Content will be dynamically added here -->
+        </tbody>
+    </table>
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        @endforeach
+      @else
+          <p>No courses found for this student.</p>
+      @endif
+
+
+
+        
+
+
+      </div>
+
+      <!-- <section class="main-course">
         <h1>Student course assigment</h1>
         <div class="course-box">
           <ul>
@@ -580,81 +223,132 @@ a:hover{
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
     </section>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+$(document).ready(function () {
+    $('.check-performance-btn').click(function () {
+        const courseID = $(this).data('course-id');
+        const submissionIDs = $(this).data('submission-ids');
+
+        console.log('Course ID:', courseID);
+        console.log('Submission IDs (raw):', submissionIDs);
+
+        // Make an AJAX request to fetch the link count
+        $.ajax({
+            url: '/getCount/' + courseID, // Update the URL to your Laravel route
+            method: 'GET',
+            success: function (data) {
+                // Update the "total" <p> tag with the received link count
+                const totalP = $('#total');
+                totalP.html('Total : ' + data.linkCount);
+            },
+            error: function () {
+                // Handle the case where the link count cannot be fetched
+                console.log('Error fetching link count');
+            }
+        });
+
+
+        $.ajax({
+            url: '/getDueCount/' + courseID, // Update the URL to your Laravel route
+            method: 'GET',
+            success: function (data) {
+                // Update the "due" <p> tag with the received due link count
+                const dueP = $('#due');
+                dueP.html('Due : ' + data.dueLinkCount);
+            },
+            error: function () {
+                // Handle the case where the due link count cannot be fetched
+                console.log('Error fetching due link count');
+            }
+        });
+
+
+        // Check if submissionIDs is an array
+        if (Array.isArray(submissionIDs)) {
+            // Populate the table with submission details
+            const courseMatTable = $('#course-mat');
+            courseMatTable.empty();
+
+            submissionIDs.forEach(function (submissionID) {
+                // Make an AJAX request to fetch submission details
+                $.ajax({
+                    url: '/getSubmissionDetails/' + submissionID, // Update the URL to your Laravel route
+                    method: 'GET',
+                    success: function (data) {
+                        // Assuming the data returned is an object with submission details
+                        courseMatTable.append(
+                            '<tr>' +
+                                '<td>' + data.title + '</td>' +
+                                '<td>' + data.upload_date + '</td>' +
+                                '<td>' + data.total_marks + '</td>' +
+                                '<td>' + data.grade + '</td>' +
+                                '<td>' + data.feedback + '</td>' +
+                            '</tr>'
+                        );
+                    },
+                    error: function () {
+                        // Handle the case where submission details cannot be fetched
+                        console.log('Error fetching submission details');
+                    }
+                });
+            });
+        } else if (typeof submissionIDs === 'string' || typeof submissionIDs === 'number') {
+            // It's a single value, so display it
+            const submissionIdsList = $('#submission-ids-list');
+            submissionIdsList.html('<p>' + submissionIDs + '</p>');
+        } else {
+            // Handle other cases (e.g., display an error message)
+            const submissionIdsList = $('#submission-ids-list');
+            submissionIdsList.html('<p>No submission IDs available.</p>');
+        }
+    });
+});
+
+var courseLabels = [];
+var courseAverages = [];
+
+@foreach($courses as $course)
+    courseLabels.push("{{$course->level}} - {{$course->subject}}");
+    courseAverages.push({{ $courseAverages[$course->id] }});
+@endforeach
+
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: courseLabels,
+        datasets: [{
+            label: 'Course Average',
+            data: courseAverages,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>
-
-<!-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('parent Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div> -->
-
-            <!--contact admin-->
-            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              Contact Admin
-            </button> -->
-
-            <!-- Modal -->
-            <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Share your thoughts</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <form method="POST" action="{{ url('sendMessage') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body"> -->
-                      <!--form start -->
-                      <!-- <div class="mb-3">
-
-                        <label for="topic" class="form-label">Reason of contact</label>
-
-                        <select name="topic" id="topic" class="form-control">
-                          <option value="Ask a question" class="form-control" name="topic">Ask a question</option>
-                          <option value="Leave a comment" class="form-control" name="topic">Leave a comment</option>
-                          <option value="Report a bug" class="form-control" name="topic">Report a bug</option>
-                          <option value="Suggest an improvement" class="form-control" name="topic">Suggest an improvement</option>
-                          <option value="other" class="form-control" name="topic">Other</option>
-
-                        </select>
-                      </div>
-                      <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
-                      </div>
-                               end of form -->
-
-                    <!-- </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div> --> 
-            <!--End of modal-->
-
-
-            <!--change password-->
-            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-              Change Password
-            </button> -->
-        <!-- </div>
-    </div>
-</div> -->
