@@ -126,7 +126,7 @@
       font-size: 12px;
     }
     .main-skills .card button{
-      background: orangered;
+      background: #007FFF;
       color: #fff;
       padding: 7px 15px;
       border-radius: 10px;
@@ -134,7 +134,7 @@
       cursor: pointer;
     }
     .main-skills .card button:hover{
-      background: rgba(223, 70, 15, 0.856);
+      background: #0066b2;
     }
     .main-skills .card i{
       font-size: 22px;
