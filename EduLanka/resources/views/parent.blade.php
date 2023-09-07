@@ -129,7 +129,7 @@
 
      
 
-      <h1>Student Courses</h1>
+      <h1>Student Subjects</h1>
       <div class="main-skills">
       @if($courses)
         @foreach($courses as $course)
@@ -183,7 +183,7 @@
         </div>
         @endforeach
       @else
-          <p>No courses found for this student.</p>
+          <p>No subjects found for this student.</p>
       @endif
 
 
