@@ -30,7 +30,7 @@
     </nav>
 
     <section class="main">
-        
+
       <div class="main-top">
       </div>
       <h1>Parents Dashboard</h1>
@@ -60,7 +60,7 @@
         </div>
         <form method="POST" action="{{ url('sendMessage') }}" enctype="multipart/form-data">
           @csrf
-          
+
           <div class="modal-body">
             <p>
             This dedicated communication channel in EduLanka ensures that any queries, concerns, or valuable input you have are channeled to our administrative team for prompt attention, enhancing the overall quality of your experience.</p>
@@ -103,33 +103,96 @@
         <span class="button-text">Settings</span>
       </button>
 
-      <br>
+      <style>
+      button {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      outline: none;
+      border: 0;
+      vertical-align: middle;
+      text-decoration: none;
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
+      font-family: inherit;
+      }
 
-      <h1>My Student</h1>
-      <div class="top">
-        <div class="my-student">
-          <div class="details">
-          
-          @if ($student)
-              <center><img src="{{ asset('assets/images/userImage.jpg') }}" alt="user image"></center> 
-              <p><b>ID:</b> <span class="label-content">{{$student->user_id}}</span></p>
-              <p><b>Full Name:</b> <span class="label-content">{{$student->first_name}} {{$student->last_name}}</span></p>
-              <p><b>Email address:</b> <span class="label-content">{{$student->email}}</span></p>
-              <p><b>Level:</b> <span class="label-content">{{$student->level}}</span></p>
-          @else
-              <p>No student found.</p>
-          @endif
-          </div>
-        </div>
-        <div>
-         <canvas id="myChart"></canvas>
-        </div>
-      </div>
-      
+      button.settings{
+      width: 12rem;
+      height: auto;
+      }
 
-     
+      button.settings .circle {
+      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+      position: relative;
+      display: block;
+      margin: 0;
+      width: 3rem;
+      height: 3rem;
+      background: #282936;
+      border-radius: 1.625rem;
+      }
 
-      <h1>Student Courses</h1>
+      button.settings .circle .icon {
+      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      background: #fff;
+      }
+
+      button.settings .circle .icon.arrow {
+      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+      left: 0.625rem;
+      width: 1.125rem;
+      height: 0.125rem;
+      background: none;
+      }
+
+      button.settings .circle .icon.arrow::before {
+      position: absolute;
+      content: "";
+      top: -0.29rem;
+      right: 0.0625rem;
+      width: 0.625rem;
+      height: 0.625rem;
+      border-top: 0.125rem solid #fff;
+      border-right: 0.125rem solid #fff;
+      transform: rotate(45deg);
+      }
+
+      button.settings .button-text {
+      transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0.75rem 0;
+      margin: 0 0 0 1.85rem;
+      color: #282936;
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: center;
+      text-transform: uppercase;
+      }
+
+      button:hover .circle {
+      width: 100%;
+      }
+
+      button:hover .circle .icon.arrow {
+      background: #fff;
+      transform: translate(1rem, 0);
+      }
+
+      button:hover .button-text {
+      color: #fff;
+      }
+      </style>
+
       <div class="main-skills">
       @if($courses)
         @foreach($courses as $course)
@@ -139,7 +202,7 @@
             <p>{{$course->level}}</p>
             <button class="check-performance-btn" data-course-id="{{$course->id}}" data-submission-ids="{{ json_encode($submissions[$course->id]->pluck('id')) }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Check Performance</button>
             <a href="/chatify/{{$course->teacher_id}}"> <button class="contact-teacher-btn">Contact Teacher</button></a>
-           
+
 
 
             <!-- Modal -->
@@ -181,16 +244,6 @@
     </div>
 </div>
         </div>
-        @endforeach
-      @else
-          <p>No courses found for this student.</p>
-      @endif
-
-
-
-        
-
-
       </div>
 
       <!-- <section class="main-course">
@@ -198,7 +251,7 @@
         <div class="course-box">
           <ul>
             <li class="active">In progress</li>
-           
+
             <li>Upcoming</li>
             <li>finished</li>
           </ul>
@@ -226,129 +279,78 @@
       </section> -->
     </section>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <script>
-$(document).ready(function () {
-    $('.check-performance-btn').click(function () {
-        const courseID = $(this).data('course-id');
-        const submissionIDs = $(this).data('submission-ids');
-
-        console.log('Course ID:', courseID);
-        console.log('Submission IDs (raw):', submissionIDs);
-
-        // Make an AJAX request to fetch the link count
-        $.ajax({
-            url: '/getCount/' + courseID, // Update the URL to your Laravel route
-            method: 'GET',
-            success: function (data) {
-                // Update the "total" <p> tag with the received link count
-                const totalP = $('#total');
-                totalP.html('Total : ' + data.linkCount);
-            },
-            error: function () {
-                // Handle the case where the link count cannot be fetched
-                console.log('Error fetching link count');
-            }
-        });
-
-
-        $.ajax({
-            url: '/getDueCount/' + courseID, // Update the URL to your Laravel route
-            method: 'GET',
-            success: function (data) {
-                // Update the "due" <p> tag with the received due link count
-                const dueP = $('#due');
-                dueP.html('Due : ' + data.dueLinkCount);
-            },
-            error: function () {
-                // Handle the case where the due link count cannot be fetched
-                console.log('Error fetching due link count');
-            }
-        });
-
-
-        // Check if submissionIDs is an array
-        if (Array.isArray(submissionIDs)) {
-            // Populate the table with submission details
-            const courseMatTable = $('#course-mat');
-            courseMatTable.empty();
-
-            submissionIDs.forEach(function (submissionID) {
-                // Make an AJAX request to fetch submission details
-                $.ajax({
-                    url: '/getSubmissionDetails/' + submissionID, // Update the URL to your Laravel route
-                    method: 'GET',
-                    success: function (data) {
-                        // Assuming the data returned is an object with submission details
-                        courseMatTable.append(
-                            '<tr>' +
-                                '<td>' + data.title + '</td>' +
-                                '<td>' + data.upload_date + '</td>' +
-                                '<td>' + data.total_marks + '</td>' +
-                                '<td>' + data.grade + '</td>' +
-                                '<td>' + data.feedback + '</td>' +
-                            '</tr>'
-                        );
-                    },
-                    error: function () {
-                        // Handle the case where submission details cannot be fetched
-                        console.log('Error fetching submission details');
-                    }
-                });
-            });
-        } else if (typeof submissionIDs === 'string' || typeof submissionIDs === 'number') {
-            // It's a single value, so display it
-            const submissionIdsList = $('#submission-ids-list');
-            submissionIdsList.html('<p>' + submissionIDs + '</p>');
-        } else {
-            // Handle other cases (e.g., display an error message)
-            const submissionIdsList = $('#submission-ids-list');
-            submissionIdsList.html('<p>No submission IDs available.</p>');
-        }
-    });
-});
-
-var courseLabels = [];
-var courseAverages = [];
-
-@foreach($courses as $course)
-    courseLabels.push("{{$course->level}} - {{$course->subject}}");
-    courseAverages.push({{ $courseAverages[$course->id] }});
-@endforeach
-
-const ctx = document.getElementById('myChart');
-
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: courseLabels,
-        datasets: [{
-            label: 'Course Average',
-            data: courseAverages,
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-
-
-
-
-
-
-
-
-</script>
 </body>
 </html>
+
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('parent Dashboard') }}</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    {{ __('You are logged in!') }}
+                </div>
+            </div> -->
+
+            <!--contact admin-->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Contact Admin
+            </button> -->
+
+            <!-- Modal -->
+            <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Share your thoughts</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form method="POST" action="{{ url('sendMessage') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body"> -->
+                      <!--form start -->
+                      <!-- <div class="mb-3">
+
+                        <label for="topic" class="form-label">Reason of contact</label>
+
+                        <select name="topic" id="topic" class="form-control">
+                          <option value="Ask a question" class="form-control" name="topic">Ask a question</option>
+                          <option value="Leave a comment" class="form-control" name="topic">Leave a comment</option>
+                          <option value="Report a bug" class="form-control" name="topic">Report a bug</option>
+                          <option value="Suggest an improvement" class="form-control" name="topic">Suggest an improvement</option>
+                          <option value="other" class="form-control" name="topic">Other</option>
+
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                      </div>
+                               end of form -->
+
+                    <!-- </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div> -->
+            <!--End of modal-->
+
+
+            <!--change password-->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+              Change Password
+            </button> -->
+        <!-- </div>
+    </div>
+</div> -->
