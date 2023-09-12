@@ -1404,3 +1404,22 @@ button {
    button:hover .button-text {
     color: #fff;
    }
+
+
+   .pro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2em;
+}
+
+.chart-container {
+    width: 100%;
+    text-align: center;
+}
+
+#myChart,
+#myChart2 {
+    width: 100%;
+    height: auto;
+    max-height: 300px; /* Adjust the maximum height as needed */
+}
