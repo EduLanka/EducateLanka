@@ -28,6 +28,11 @@
     </script>
      <!-- js file for logout-->
 
+     <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
 	<title>Admin Dashborad</title>
 </head>
 <body>
@@ -101,7 +106,7 @@
 			<i class='bx bx-menu' ></i>
 			<a href="" class="nav-link">Students</a>
 			<form action="">
-				
+
 			</form>
 			<input type="checkbox" id="" hidden>
 			<label for="switch-mode" class=""></label>
@@ -134,7 +139,7 @@
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
 
 			<div class="table-data">
@@ -148,7 +153,7 @@
 					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
 				</div>
 			</form>
-                    
+
 						<!-- Button trigger modal pop up -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Register Student
@@ -206,7 +211,7 @@
 			<label for="guardianno" class="form-label">Guardian Telno</label>
 			<input type="text" class="form-control" name="guardianno" id="exampleFormControlInput1" placeholder="0716655452" required>
 		</div>
-		
+
 		<div class="mb-3">
 			<label for="guardian_busniess" class="form-label">Guardian Occupation</label>
 			<input type="text" class="form-control" name="guardian_busniess" id="exampleFormControlInput1" placeholder="Occupation" required>
@@ -218,7 +223,7 @@
                 <!-- end of form -->
 
       </div>
-	
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save</button>
@@ -229,7 +234,7 @@
   </div>
 </div>
 					</div>
-                    
+
 					<table>
 						<thead>
 							<tr>
@@ -239,7 +244,7 @@
 								<th>Birthday</th>
 								<th>Level</th>
 								<th>Guardian Name</th>
-								
+
 							</tr>
 						</thead>
 						<tbody>
@@ -251,22 +256,22 @@
 							<td>{{$student -> birthday}}</td>
 							<td>{{$student -> level}}</td>
 							<td>{{$student -> guardian_id}}</td>
-						
-							<td> 
-							<td> 
+
+							<td>
+							<td>
 							<i  class="bx bx-pencil bounce-icon" style="color: #449e3d; font-size: 24px;" onclick="openEditModal({{ $student->id }})"></i>
 							 </td>
 							<td> <a href="{{ url('/deleteStudent', $student->id) }}">
                     <i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;" onclick="confirmDelete(event)"></i>
                 </a></td>
-							<!--<td><span class="status completed">Completed</span></td>    -->             
+							<!--<td><span class="status completed">Completed</span></td>    -->
                   		</tr>
                   @endforeach
 						</tbody>
 					</table>
 				</div>
 
-          		
+
 
 			</div>
 		</main>
@@ -308,7 +313,7 @@
                     <div class="form-group">
                         <label for="editLevel">Level</label>
 						<select class="form-control" id="editLevel" name="level" >
-							
+
   <option value="grade5">Grade 5</option>
   <option value="grade6">Grade 6</option>
   <option value="grade7">Grade 7</option>
@@ -320,14 +325,14 @@
   <option value="grade13">Grade 13</option>
   <!-- Add more options as needed -->
 </select>
-						
+
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="editGuardianId">Guardian Name</label>
                         <input type="text" class="form-control" id="editGuardianId" name="guardian_id">
                     </div>
-		
+
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
@@ -340,7 +345,7 @@
 
 	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span>
 
-	
+
 </footer>
 
 <script>
@@ -352,7 +357,7 @@ function confirmLogout() {
 </script>
 
 
-	
+
 <script>
     function openEditModal(studentId) {
         var studentRow = document.getElementById('row' + studentId);
@@ -362,7 +367,7 @@ function confirmLogout() {
         var studentBirthday = studentRow.querySelector('td:nth-child(4)').textContent;
         var studentLevel = studentRow.querySelector('td:nth-child(5)').textContent;
         var studentGuardianId = studentRow.querySelector('td:nth-child(6)').textContent;
-		
+
 
 
 
@@ -373,7 +378,7 @@ function confirmLogout() {
         document.getElementById('editBirthday').value = studentBirthday;
         document.getElementById('editLevel').value = studentLevel;
         document.getElementById('editGuardianId').value = studentGuardianId;
-	
+
         var editModal = new bootstrap.Modal(document.getElementById('editModal'));
         editModal.show();
     }
@@ -423,5 +428,22 @@ function confirmLogout() {
 
 
 	<script src="assets/script.js"></script>
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+            (registration) => {
+                console.log("Service worker registration succeeded:", registration);
+            },
+            (error) => {
+                console.error(`Service worker registration failed: ${error}`);
+            },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
 </body>
 </html>

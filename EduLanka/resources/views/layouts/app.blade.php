@@ -14,6 +14,11 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
@@ -24,23 +29,23 @@
 	position: relative;
 	padding: 1em;
   }
-  
+
   /* Add a green text color and a checkmark when the requirements are right */
 .valid {
 	color: green;
   }
-  
+
   .valid:before {
 	position: relative;
 	left: -5px;
 	content: "✔";
   }
-  
+
   /* Add a red text color and an "x" when the requirements are wrong */
   .invalid {
 	color: red;
   }
-  
+
   .invalid:before {
 	position: relative;
 	left: -5px;
@@ -108,6 +113,22 @@
             @yield('content')
         </main>
     </div>
-   
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker.register("/sw.js").then(
+        (registration) => {
+            console.log("Service worker registration succeeded:", registration);
+        },
+        (error) => {
+            console.error(`Service worker registration failed: ${error}`);
+        },
+        );
+    } else {
+        console.error("Service workers are not supported.");
+    }
+</script>
 </body>
 </html>

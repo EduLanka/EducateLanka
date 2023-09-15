@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/setting.css">
     <title>Settings</title>
+
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 <body>
 <div class="container">
@@ -20,19 +25,19 @@
                             <label>Full Name</label>
                             <input type="text" placeholder="Enter your first name" name="name" value="{{ $user->name }}" required>
                         </div>
-                   
+
                         <div class="input-field">
                             <label>Email</label>
                             <input type="email" placeholder="Enter your email" name="email" value="{{ $user->email }}" required>
                         </div>
 
-   
+
                         <br><br><br>
                         <button  type="submit" class="saveBtn">
                         <span class="btnText">Save</span>
                         <i class="uil uil-navigator"></i>
                     </button>
-                       
+
                     </div>
                </form>
                 </div>
@@ -45,7 +50,7 @@
                             <label>Old Password</label>
                             <input type="password" placeholder="Enter your old password" name="current_password" required>
                         </div>
-                        
+
                         <div class="input-field">
                             <label>New Password</label>
                             <input type="password" id="psw" placeholder="Enter your new password" name="password" required>
@@ -71,14 +76,14 @@
 						<span >Cancel</span>
 						</a>
 					</button>
-                   
+
                     </div>
-					
-					
-                    
-                </div> 
+
+
+
+                </div>
             </div>
-       
+
 
             <script>
                 var myInput = document.getElementById("psw");
@@ -115,17 +120,17 @@ confirmPasswordInput.onkeyup = function () {
 myInput.onkeyup = function() {
   // Validate lowercase letters
   var lowerCaseLetters = /[a-z]/g;
-  if(myInput.value.match(lowerCaseLetters)) {  
+  if(myInput.value.match(lowerCaseLetters)) {
     letter.classList.remove("invalid");
     letter.classList.add("valid");
   } else {
     letter.classList.remove("valid");
     letter.classList.add("invalid");
   }
-  
+
   // Validate capital letters
   var upperCaseLetters = /[A-Z]/g;
-  if(myInput.value.match(upperCaseLetters)) {  
+  if(myInput.value.match(upperCaseLetters)) {
     capital.classList.remove("invalid");
     capital.classList.add("valid");
   } else {
@@ -135,7 +140,7 @@ myInput.onkeyup = function() {
 
   // Validate numbers
   var numbers = /[0-9]/g;
-  if(myInput.value.match(numbers)) {  
+  if(myInput.value.match(numbers)) {
     number.classList.remove("invalid");
     number.classList.add("valid");
   } else {
@@ -143,9 +148,9 @@ myInput.onkeyup = function() {
     number.classList.add("invalid");
   }
 
-  
-  
-  
+
+
+
   // Validate length
   if(myInput.value.length >= 8) {
     length.classList.remove("invalid");
@@ -156,15 +161,15 @@ myInput.onkeyup = function() {
   }
 
   var specialCharacters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/@#]/g;
-  if (myInput.value.match(specialCharacters)) {  
+  if (myInput.value.match(specialCharacters)) {
     specialChar.classList.remove("invalid");
     specialChar.classList.add("valid");
   } else {
     specialChar.classList.remove("valid");
     specialChar.classList.add("invalid");
   }
-  
- 
+
+
 }
             </script>
 
@@ -173,7 +178,22 @@ myInput.onkeyup = function() {
               {{session('success')}}
             </div>
             @endif
-</body>
-</html>
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker.register("/sw.js").then(
+        (registration) => {
+            console.log("Service worker registration succeeded:", registration);
+        },
+        (error) => {
+            console.error(`Service worker registration failed: ${error}`);
+        },
+        );
+    } else {
+        console.error("Service workers are not supported.");
+    }
+</script>
 </body>
 </html>

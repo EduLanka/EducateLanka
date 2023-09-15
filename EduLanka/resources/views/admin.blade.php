@@ -27,6 +27,11 @@
      <!-- js file for logout-->
 
 	<title>Admin Dashborad</title>
+
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 <body>
 
@@ -68,7 +73,7 @@
 					<span class="text">Announcement</span>
 				</a>
 			</li>
-          
+
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -99,7 +104,7 @@
 			<i class='bx bx-menu' ></i>
 			<a href="#" class="nav-link">Dashboard</a>
 			<form action="#">
-				
+
 			</form>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
@@ -128,7 +133,7 @@
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
 
 			<ul class="box-info">
@@ -146,7 +151,7 @@
 						<p>Students</p>
 					</span>
 				</li>
-                
+
 				<li>
 					<i class='bx bx-group' ></i>
 					<span class="text">
@@ -176,7 +181,7 @@
 					</span>
 				</li>
 
-                
+
 			</ul>
 
 
@@ -204,7 +209,7 @@
 								<td>{{ $Student->email }}</td>
 								<td>{{ $Student->role == 2}} Student </td>
 							</tr>
-						
+
                             @endforeach
 							@foreach ($Teacher as $Teacher)
 							<tr>
@@ -214,10 +219,10 @@
 								<td>{{ $Teacher->email }}</td>
 								<td>{{ $Teacher->role == 3}} Teacher</td>
 							</tr>
-						
+
                             @endforeach
-						
-							
+
+
 						</tbody>
 					</table>
 				</div>
@@ -251,7 +256,7 @@
 					<button type="button" class="btn btn-primary reply-btn" onclick="toggleReplyArea(this)">
 					<i class="bx bx-reply" style="font-size: 30px;"></i></button>
 				</div>
-			</div>            
+			</div>
 			<div class="reply-area">
 				@if(!is_null($message->reply))
 				<p>You have already replied to this message.</p>
@@ -267,27 +272,27 @@
 				@endif
             </div>
         </div>
-		
-		
+
+
     @endforeach
     @if ($messages->isEmpty())
         <div class="empty-state">
             <p>No messages found.</p>
         </div>
 		@endif
-					
+
 				</div>
 			</div>
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+
 <footer>
 
 	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> </marquee>
 
-	
+
 </footer>
 
 <script>
@@ -315,6 +320,23 @@ function confirmLogout() {
       });
     });
   });
+</script>
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker.register("/sw.js").then(
+        (registration) => {
+            console.log("Service worker registration succeeded:", registration);
+        },
+        (error) => {
+            console.error(`Service worker registration failed: ${error}`);
+        },
+        );
+    } else {
+        console.error("Service workers are not supported.");
+    }
 </script>
 </body>
 </html>

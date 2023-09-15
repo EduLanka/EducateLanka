@@ -28,6 +28,11 @@
          });
       </script>
       <!-- js file for logout-->
+
+      <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
       <title>Admin Dashborad</title>
    </head>
    <body>
@@ -261,7 +266,7 @@
                         <label for="no">Contact No:</label>
                         <input type="text" class="form-control" name="no" id="no">
                      </div>
-					
+
                      <div class="form-group">
                         <label for="level">Level:</label>
                         <select class="form-control selectpicker" multiple data-live-search="true" id="level" name="level[]">
@@ -277,7 +282,7 @@
                            <!-- Add more options as needed -->
                         </select>
                      </div>
-					 
+
                      <button type="submit" class="btn btn-primary">Update</button>
                   </form>
                </div>
@@ -286,7 +291,7 @@
       </div>
 
       <footer>
-         Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> 
+         Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span>
       </footer>
       <script>
       @if(Session::has('email_exists_error'))
@@ -319,31 +324,31 @@
              var teacherEmail = teacherRow.querySelector('td:nth-child(3)').textContent;
              var teacherNo = teacherRow.querySelector('td:nth-child(4)').textContent;
              var teacherLevel = teacherRow.querySelector('td:nth-child(5)').textContent.split(',');
-         
+
              document.getElementById('teacher_id').value = teacherId;
              document.getElementById('first_name').value = teacherFirstName;
              document.getElementById('last_name').value = teacherLastName;
              document.getElementById('email').value = teacherEmail;
              document.getElementById('no').value = teacherNo;
-         
+
              var levelSelect = document.getElementById('level');
-         
+
              // Reset all options in the level dropdown
              for (var i = 0; i < levelSelect.options.length; i++) {
                  levelSelect.options[i].selected = false;
              }
-         
+
              // Set selected options based on teacherLevel
              for (var i = 0; i < levelSelect.options.length; i++) {
                  if (teacherLevel.includes(levelSelect.options[i].value)) {
                      levelSelect.options[i].selected = true;
                  }
              }
-         
+
              // Add a custom class to the selected options
              $(levelSelect).selectpicker('refresh');
              $(levelSelect).find('.selected').addClass('selected-option');
-         
+
              var editModal = new bootstrap.Modal(document.getElementById('editModal'));
              editModal.show();
          }
@@ -351,24 +356,24 @@
          // Confirmation dialog for delete
          function confirmDelete(event) {
            event.preventDefault();
-         
+
            // Show the alert dialog
            if (confirm("Are you sure you want to delete this teacher?")) {
              // If the user clicks OK, proceed with the deletion
              window.location.href = event.target.parentElement.href;
-         
+
              // Display a success message
              showSuccessMessage();
            }
          }
-         
+
          // Function to show the success message
          function showSuccessMessage() {
            // You can customize the success message here
            alert("Deletion was successful!");
          }
-      
-		 
+
+
 //end of teacher1.blade.php
 
 
@@ -415,10 +420,27 @@ document.querySelector('select[name="level[]"]').addEventListener('change', func
             selectElement.appendChild(option);
         });
     }
-    
+
 	  </script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" ></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js" ></script>
       <script src="assets/script.js"></script>
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+            (registration) => {
+                console.log("Service worker registration succeeded:", registration);
+            },
+            (error) => {
+                console.error(`Service worker registration failed: ${error}`);
+            },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
    </body>
 </html>
