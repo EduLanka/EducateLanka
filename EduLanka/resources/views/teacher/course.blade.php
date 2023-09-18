@@ -202,6 +202,7 @@
 <br>
 <div class="submissions">
     <p><b>SUBMISSIONS</b></p>
+    <div class="s-table">
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -222,6 +223,8 @@
            
         </tbody>
     </table>
+    </div>
+    
 
 </div>
 

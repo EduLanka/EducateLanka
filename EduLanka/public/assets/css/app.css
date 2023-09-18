@@ -174,7 +174,7 @@ a{
  /* Add custom styles for list items */
 .container1 .box-info li {
    padding: 20px;
-   background: #ffffff; /* Change the background color as needed */
+   background: #ffffff; 
    border-radius: 20px;
    display: flex;
    align-items: center;
@@ -231,6 +231,8 @@ a{
    display: grid;
    grid-template-columns: 1fr 1fr;
    grid-gap: 15px;
+   width: 50rem;
+   height: fit-content;
  }
  .courses .cards .course{
    background-color: #ffffff;
@@ -270,6 +272,7 @@ a{
    border-radius: 20px;
    align-items: center;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   height: 38.5rem;
 }
  
  .container2 i.bx {
@@ -308,7 +311,6 @@ a{
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
    grid-gap: 20px;
-
    padding: 0;
    /* margin-top: 36px; */
  }
@@ -543,7 +545,7 @@ a{
   
  
  @media screen and (min-width: 768px) {
-   /* Add any specific styles for larger screens if needed */
+   
  }
 
 @media screen and (min-width: 768px){
@@ -672,7 +674,6 @@ a{
   background-color: #edecf1;
   border-radius: 20px;
   padding: 2em;
- 
 }
 
 .materialType i {
@@ -1404,6 +1405,27 @@ button {
    button:hover .button-text {
     color: #fff;
    }
+
+
+   .pro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2em;
+}
+
+.chart-container {
+    width: 100%;
+    text-align: center;
+}
+
+#myChart,
+#myChart2 {
+    width: 100%;
+    height: auto;
+    max-height: 300px; /* Adjust the maximum height as needed */
+}
+
+
 
 
    .pro {

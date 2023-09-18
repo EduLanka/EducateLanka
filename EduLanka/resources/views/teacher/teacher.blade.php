@@ -33,7 +33,7 @@
             </ul>
         </div>
         <div class="courses">
-          <div class="cards" style="width: 50rem; height: fit-content;">
+          <div class="cards">
           @foreach($courses as $course)
               <div class="course">             
                 <i class='bx bx-book'  style="background-color: {{ '#' . substr(md5(rand()), 0, 6) }}"></i>
@@ -56,7 +56,7 @@
       </div>
       
       <div class="container2">
-        <div class="cards" style="height: 38.5rem">
+        <div class="cards">
           <div class="card-body">
             <h5 class="card-title"><b>QUICK LINKS</b></h5>
             <br>
