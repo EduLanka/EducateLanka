@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      
+
       <title>{{ config('app.name', 'Laravel') }}</title>
       <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
 
@@ -13,27 +13,32 @@
       <link rel="dns-prefetch" href="//fonts.bunny.net">
       <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
       <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 
-      
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+
 
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-      
+
            <style>
 
             .modal-backdrop {
              background-color: transparent !important;
-            }  
-           </style>    
+            }
+           </style>
    </head>
 
          <body id="body-pd">
          <header class="header" id="header">
          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Student's Workspace</div>
 
-         
+
 <!-- resources/views/students/search.blade.php -->
 <div class="search">
     <form id="search-form">
@@ -70,15 +75,15 @@
                <div class="nav_list">
                   <a href="{{route('student')}}" title="Dashboard" class="nav_link {{ request()->is('student') ? 'active' : '' }}"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Dashboard</span></a>
 
-                  <a href="{{route('student.courses')}}" title="Courses" class="nav_link {{ request()->is('student/courses') ? 'active' : '' }}"> <i class='bx bx-book nav_icon'></i> <span class="nav_name">Courses</span> </a> 
+                  <a href="{{route('student.courses')}}" title="Courses" class="nav_link {{ request()->is('student/courses') ? 'active' : '' }}"> <i class='bx bx-book nav_icon'></i> <span class="nav_name">Courses</span> </a>
 
-                  <a href="{{route('forum')}}" title="Forums" class="nav_link {{ request()->is('forums') ? 'active' : '' }}"> <i class='bx bx-conversation nav_icon'></i> <span class="nav_name">Forums</span> </a> 
-                  
-                  <a href="/chatify" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
+                  <a href="{{route('forum')}}" title="Forums" class="nav_link {{ request()->is('forums') ? 'active' : '' }}"> <i class='bx bx-conversation nav_icon'></i> <span class="nav_name">Forums</span> </a>
+
+                  <a href="/chatify" title="Messages" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a>
 
                   <a href="{{ route('my-progress') }}" title="My Progress" class="nav_link {{ request()->is('my-progress') ? 'active' : '' }}"> <i class='bx bx-chart nav_icon'></i> <span class="nav_name">My Progress</span> </a>
 
-                  <a href="{{route('student.settings')}}" title="Settings" class="nav_link {{ request()->is('student/settings') ? 'active' : '' }}"> <i class='bx bx-cog nav_icon'></i> <span class="nav_name">Settings</span> </a> 
+                  <a href="{{route('student.settings')}}" title="Settings" class="nav_link {{ request()->is('student/settings') ? 'active' : '' }}"> <i class='bx bx-cog nav_icon'></i> <span class="nav_name">Settings</span> </a>
                 </div>
             </div>
             <a class="nav_link" title="SignOut" href="{{ route('logout') }}"
@@ -114,9 +119,9 @@
     $(document).ready(function() {
         $('#search-form').submit(function(event) {
             event.preventDefault();
-            
+
             var query = $('input[name="query"]').val();
-            
+
             $.ajax({
                 type: 'GET',
                 url: '{{ route('students.search') }}',
@@ -125,7 +130,7 @@
                     var courses = response.courses;
                     var resultList = $('#search-results');
                     resultList.empty();
-                    
+
                     if (courses.length > 0) {
                         courses.forEach(function(course) {
                             resultList.append('<li>' + course.level + ' - Subject: ' + course.subject + '</li>');
@@ -133,7 +138,7 @@
                     } else {
                         resultList.append('<li>No results found.</li>');
                     }
-                    
+
                     $('#searchModal').modal('show');
                 },
                 error: function() {
@@ -183,9 +188,22 @@
         });
     });
 </script>
-
-
-
-
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+            (registration) => {
+                console.log("Service worker registration succeeded:", registration);
+            },
+            (error) => {
+                console.error(`Service worker registration failed: ${error}`);
+            },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
    </body>
 </html>

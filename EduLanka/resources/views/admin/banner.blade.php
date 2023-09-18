@@ -17,6 +17,11 @@
     <!-- end link to jquery file for logout-->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
     <!-- js file for logout-->
     <script>
         $(document).ready(function() {
@@ -70,7 +75,7 @@
 					<span class="text">Announcements</span>
 				</a>
 			</li>
-            
+
 		</ul>
 		<ul class="side-menu">
 			<li>
@@ -101,7 +106,7 @@
 			<i class='bx bx-menu' ></i>
 			<a href="#" class="nav-link">Announcements</a>
 			<form action="">
-				
+
 			</form>
 			<input type="checkbox" id="" hidden>
 			<label for="switch-mode" class=""></label>
@@ -134,7 +139,7 @@
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
 
 			<div class="table-data">
@@ -142,14 +147,14 @@
 					<div class="head">
 						<h3>Announcements</h3>
 
-						   
+
 						<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
 					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
 				</div>
 			</form>
-			
+
 						<!-- Button trigger modal pop up -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Add Announcment
@@ -165,7 +170,7 @@
       </div>
 	<!--  form start -->
       <div class="modal-body">
-      
+
             <form  action="{{url('/uploadbanner')}}" method="Post" enctype="multipart/form-data">
              @csrf
           <div class="mb-3">
@@ -193,7 +198,7 @@
   </div>
 </div>
 					</div>
-                    
+
 					<table>
 						<thead>
 							<tr>
@@ -206,7 +211,7 @@
 						</thead>
 						<tbody>
                         @foreach($advert as $advert)
-						
+
 							<tr id="row{{ $advert->id }}">
                             <td>{{ $advert->name }}</td>
                             <td>{{ $advert->description }}</td>
@@ -220,14 +225,14 @@
 							 </td>
 							<td><a href="{{url('/deleteadvert',$advert->id)}}"> <i class="bx bx-trash bounce-icon" style="color: #FF0000; font-size: 24px;"  onclick="confirmDelete(event)" ></i></a>
                             </td>
-								
+
 							</tr>
                             @endforeach
 						</tbody>
 					</table>
 				</div>
 
-          		
+
 
 			</div>
 		</main>
@@ -276,9 +281,9 @@
 
 <footer>
 
- 	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span> 
+ 	Copyright &copy; <script>document.write(new Date().getFullYear())</script> Edu Lanka  All Right Reseved <span class="tab1">The Best Learning platform</span>
 
-	
+
 </footer>
 
 
@@ -296,7 +301,7 @@
     $( "#search_product" ).autocomplete({
       source: availableTags
     });
-  
+
   </script>-->
 
   <!-- JavaScript to handle the modal -->
@@ -337,12 +342,12 @@ function confirmLogout() {
   function confirmDelete(event) {
     event.preventDefault();
 
-    
+
     if (confirm("Are you sure you want to delete this Announcements?")) {
-    
+
       window.location.href = event.target.parentElement.href;
 
-      
+
       showSuccessMessage();
     }
   }
@@ -370,6 +375,23 @@ function confirmLogout() {
 
 
 
-	<script src="assets/script.js"></script>
+    <script src="assets/script.js"></script>
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+            (registration) => {
+                console.log("Service worker registration succeeded:", registration);
+            },
+            (error) => {
+                console.error(`Service worker registration failed: ${error}`);
+            },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
 </body>
 </html>
