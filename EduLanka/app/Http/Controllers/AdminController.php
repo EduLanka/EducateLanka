@@ -249,8 +249,8 @@ public function update(Request $request)
         return redirect()->back();
     }
 
-    public function deleteTeacher(Request $request, $teacherId){//remember to put this
-        $teacher = Teacher::findOrFail($teacherId);//remember to put this
+    public function deleteTeacher(Request $request, $teacherId){
+        $teacher = Teacher::findOrFail($teacherId);
         $userId = $teacher->user_id;
 
         // Delete the teacher from the 'teachers' table
@@ -412,7 +412,7 @@ public function update(Request $request)
         $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed image types and size as needed
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
     
         $imageName = time() . '.' . $request->image->getClientOriginalExtension();

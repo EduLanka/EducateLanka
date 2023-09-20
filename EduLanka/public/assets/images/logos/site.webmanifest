@@ -1,11 +1,6 @@
 {
-    "name": "EduLanka",
-    "short_name": "EduLanka",
-    "start_url": "/index.php",
-    "background_color": "#6777ef",
-    "description": "A platform which provides education for Sri Lankan community.",
-    "display": "fullscreen",
-    "theme_color": "#6777ef",
+    "name": "",
+    "short_name": "",
     "icons": [
         {
             "src": "/assets/images/logos/android-chrome-192x192.png",
@@ -17,5 +12,8 @@
             "sizes": "384x384",
             "type": "image/png"
         }
-    ]
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
 }

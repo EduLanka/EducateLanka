@@ -116,7 +116,7 @@ public function getDueCount($courseID) {
     public function getPerformance(Request $request)
     {
         $courseId = $request->input('courseId');
-        $studentId = auth()->user()->id; // Replace this with the actual way to get the student's ID
+        $studentId = auth()->user()->id; 
     
         
     

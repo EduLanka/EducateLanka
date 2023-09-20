@@ -24,7 +24,14 @@
     <!-- PWA  -->
     <meta name="theme-color" content="#6777ef"/>
     <link rel="apple-touch-icon" href="{{ asset('logo.svg') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+   
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/logos/apple-touch-icon.png')}}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/logos/favicon-32x32.png')}}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/logos/favicon-16x16.png')}}">
+<link rel="manifest" href="{{ asset('/manifest.json') }}">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
 
 
 
@@ -43,10 +50,7 @@
          <header class="header" id="header">
          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> EduLanka : Parent's Workspace</div>
 
-
-
-         <!--Student Setting-->
-         <a href="{{route('student.settings')}}">
+         <a href="{{route('parent.settings')}}">
          <div class="header_img"><img src="https://static.vecteezy.com/system/resources/previews/007/296/443/original/user-icon-person-icon-client-symbol-profile-icon-vector.jpg" alt="user-im" title="{{Auth::user()->name}}"> </div>
          </a>
 

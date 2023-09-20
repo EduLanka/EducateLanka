@@ -354,7 +354,6 @@ function confirmLogout() {
 
   // Function to show the success message
   function showSuccessMessage() {
-    // You can customize the success message here
     alert("Deletion was successful!");
   }
 </script>
