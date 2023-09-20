@@ -155,51 +155,51 @@
                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <form method="POST" action="{{ url('createTeacher') }}" enctype="multipart/form-data">
-    @csrf
-    <div class="modal-body">
-        <!--form start -->
-        <div class="mb-3">
-            <label for="fname" class="form-label">First Name</label>
-            <input type="text" class="form-control" name="fname" id="exampleFormControlInput1" placeholder="Enter First Name" required>
-        </div>
-        <div class="mb-3">
-            <label for="lname" class="form-label">Last Name</label>
-            <input type="text" class="form-control" name="lname" id="exampleFormControlInput1" placeholder="Enter Second Name" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="text" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" required>
-        </div>
-        <div class="mb-3">
-            <label for="guardian" class="form-label">Telno</label>
-            <input type="text" class="form-control" name="no" id="exampleFormControlInput1" placeholder="0716655452" required>
-        </div>
-        <div class="mb-3">
-            <label for="level" class="form-label">Level</label>
-            <select class="form-control selectpicker" multiple data-live-search="true" name="level[]" placeholder="A-level" required>
-                <option value="grade5">Grade 5</option>
-                <option value="grade6">Grade 6</option>
-                <option value="grade7">Grade 7</option>
-                <option value="grade8">Grade 8</option>
-                <option value="grade9">Grade 9</option>
-                <option value="grade10">Grade 10</option>
-                <option value="grade11">Grade 11</option>
-                <option value="grade12">Grade 12</option>
-                <option value="grade13">Grade 13</option>
-                <!-- Add more options as needed -->
-            </select>
-        </div>
-        <div class="mb-3" id="subject-inputs">
-            <label for="subjects" class="form-label">Subjects</label>
-            <!-- Subjects input fields will be added dynamically here -->
-        </div>
-        <!-- end of form -->
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</form>
+                                 @csrf
+                                 <div class="modal-body">
+                                    <!--form start -->
+                                    <div class="mb-3">
+                                          <label for="fname" class="form-label">First Name</label>
+                                          <input type="text" class="form-control" name="fname" id="exampleFormControlInput1" placeholder="Enter First Name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                          <label for="lname" class="form-label">Last Name</label>
+                                          <input type="text" class="form-control" name="lname" id="exampleFormControlInput1" placeholder="Enter Last Name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                          <label for="email" class="form-label">Email address</label>
+                                          <input type="text" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" required>
+                                    </div>
+                                    <div class="mb-3">
+                                          <label for="guardian" class="form-label">Telno</label>
+                                          <input type="text" class="form-control" name="no" id="exampleFormControlInput1" placeholder="0716655452" required>
+                                    </div>
+                                    <div class="mb-3">
+                                          <label for="level" class="form-label">Level</label>
+                                          <select class="form-control selectpicker" multiple data-live-search="true" name="level[]" placeholder="A-level" required>
+                                             <option value="grade5">Grade 5</option>
+                                             <option value="grade6">Grade 6</option>
+                                             <option value="grade7">Grade 7</option>
+                                             <option value="grade8">Grade 8</option>
+                                             <option value="grade9">Grade 9</option>
+                                             <option value="grade10">Grade 10</option>
+                                             <option value="grade11">Grade 11</option>
+                                             <option value="grade12">Grade 12</option>
+                                             <option value="grade13">Grade 13</option>
+                                             <!-- Add more options as needed -->
+                                          </select>
+                                    </div>
+                                    <!-- <div class="mb-3" id="subject-inputs">
+                                          <label for="subjects" class="form-label">Subjects</label>
+                                          
+                                    </div> -->
+                                    <!-- end of form -->
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                 </div>
+                              </form>
                            </div>
                         </div>
                      </div>

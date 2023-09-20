@@ -177,7 +177,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="lname" class="form-label">Last Name</label>
-			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Enter Second name" required>
+			<input type="text" class="form-control" name = "lname" id="exampleFormControlInput1" placeholder="Enter Last name" required>
 		</div>
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
