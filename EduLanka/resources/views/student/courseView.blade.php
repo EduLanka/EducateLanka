@@ -78,7 +78,6 @@
             <div class="modal-body">
                 <form id="addSubmission" action="{{ route('student.submission.add', ['courseId' => $courseId, 'linkId' => $link->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <!-- <input id="materialId" name="materialId">  -->
                     
                         <div class="mb-3">
                             <label for="title"  class="form-label">Title</label>

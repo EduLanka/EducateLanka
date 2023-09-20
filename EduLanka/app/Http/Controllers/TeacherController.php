@@ -117,10 +117,21 @@ class TeacherController extends Controller
 
     public function getSubmissions($courseId)
     {
+        $submissions = Submission::where('course_id', $courseId)
+        ->select(
+            'id',
+            'title',
+            'upload_date',
+            'student_id',
+            'link_id',
+            'total_marks',
+            'grade',
+            'feedback'
+        )
+        ->get();
 
-        $submissions = Submission::where('course_id', $courseId)->get();
-
-        return response()->json(['submissions' => $submissions]);
+        return response()->json(['submissions' => $submissions])
+            ->header('Content-Type', 'application/json; charset=utf-8');
     }
 
     public function getSubmissionDet($submissionId)

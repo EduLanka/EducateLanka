@@ -44,7 +44,7 @@
 			<img src="assets/images/Logo.jpg" alt="" style=" height:80px; min-width: 90px; display: flex; justify-content: center; ">
 			<span class="text"  style=" padding:10px; ">EduLanka</span>
 		</a>
-		<ul class="side-menu top">
+		<ul class="side-menu top" style="padding-left:1px;">
 			<li >
 				<a href="{{url('admin')}}">
 					<i class='bx bxs-dashboard' ></i>
@@ -77,7 +77,7 @@
 			</li>
 
 		</ul>
-		<ul class="side-menu">
+		<ul class="side-menu" style="padding-left:1px;">
 			<li>
 				<a href="{{url('/setting')}}">
 					<i class='bx bxs-cog' ></i>
@@ -181,7 +181,7 @@
                               </div>
                               <div class="mb-3">
                                  <label for="exampleFormControlInput1" class="form-label">Subject:</label>
-                                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Biological Science" name="subject" required>
+                                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Add Subject" name="subject" required>
                               </div>
                               <div class="mb-3">
                                  <label for="teacher_id" class="form-label"> Course Instructor

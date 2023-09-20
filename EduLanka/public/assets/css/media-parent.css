@@ -1,0 +1,30 @@
+@media screen and (max-width: 768px) {
+    .top
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .main-skills
+    {
+        flex-direction: column;
+        margin-bottom: 30%;
+    }
+
+    .main-skills .card
+    {
+        width: 95%;
+        
+    }
+
+    .settings-container{
+        display: flex !important;
+        flex-direction: column !important;
+        margin-bottom: 100% !important;
+      }
+    
+      .basics{
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Submission;
+use App\Models\Guardian;
 use App\Models\SubmissionLink;
 use App\Models\StudentCourse;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,7 @@ class GuardianController extends Controller
             }
     
             if ($courses) {
-                return view('parent', compact('courses', 'submissions','student','courseAverages'));
+                return view('parent.parent', compact('courses', 'submissions','student','courseAverages'));
             } else {
                 return 'no courses';
             }
@@ -121,6 +122,58 @@ public function getDueCount($courseID) {
     
         return view('performance', compact('submissions'));
     }
+
+    public function settings()
+    {    
+        $user = Auth::user();
+        $details = Guardian::where('id',$user->id)->get();
+         
+
+        $student = Student::where('guardian_id', $user->id)->first();
+    
+        // Check if a student was found
+        if ($student) {
+            $courses = StudentCourse::where('student_id', $student->user_id)
+                ->join('courses', 'student_courses.course_id', '=', 'courses.id')
+                ->select('courses.level', 'courses.subject', 'courses.id','courses.teacher_id')
+                ->get();
+    
+            $submissions = [];
+            $courseAverages = [];
+    
+            foreach ($courses as $course) {
+                // Retrieve submissions for each course
+                $courseSubmissions = Submission::where('course_id', $course->id)
+                    ->where('student_id', $student->user_id)
+                    ->whereNotNull('total_marks')
+                    ->get();
+
+                    $totalMarks = 0;
+                    $submissionCount = count($courseSubmissions);
+        
+                    foreach ($courseSubmissions as $submission) {
+                        $totalMarks += $submission->total_marks;
+                    }
+        
+                    $averageMarks = $submissionCount > 0 ? ($totalMarks / $submissionCount) : 0;
+        
+                    // Store course average in the courseAverages array
+                    $courseAverages[$course->id] = $averageMarks;
+    
+                // Store course submissions in the submissions array
+                $submissions[$course->id] = $courseSubmissions;
+            }
+    
+            if ($courses) {
+                return view('parent.settings', compact('courses', 'submissions','student','courseAverages', 'details'));
+            } else {
+                return 'no courses';
+            }
+        } else {
+            return 'no student';
+        }
+    }
+
     
 
     /**

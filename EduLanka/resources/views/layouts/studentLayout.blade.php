@@ -8,6 +8,8 @@
 
       <title>{{ config('app.name', 'Laravel') }}</title>
       <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
+      <link rel="stylesheet" href="{{asset('assets/css/calendar.css')}}">
+      <link rel="stylesheet" href="{{asset('assets/css/media-student.css')}}">
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -162,13 +164,11 @@
             console.log(studentId);
 
             // Use courseId and studentId to fetch submission results data
-            // For example, you can make an AJAX request to retrieve the data
-
             // After retrieving the data, populate the modal with submission titles
             const modalContent = document.querySelector('.modal-content');
             modalContent.innerHTML = ''; // Clear previous content
 
-            // Assuming you have fetched the submission data as an array of objects
+
             const submissionData = [
                 // Sample data objects with title properties
                 { title: 'Submission 1 Title' },

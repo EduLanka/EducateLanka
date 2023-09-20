@@ -2,181 +2,74 @@
 
 @section('content')
 <p><b><h4>Dashboard</h4></b></p>
-<style>
-    body {
-        background-color: #F5F1E9;
-    }
-    #calendar {
-        margin-left: auto;
-        margin-right: auto;
-        width: 150px;
-        font-family: 'Lato', sans-serif;
-    }
-    #calendar_weekdays {
-        width: 200px;
-    }
-    #calendar_weekdays div {
-        display: inline-block;
-        vertical-align: top;
-        color: blue; /* Added blue color to weekdays */
-    }
-    #calendar_content, #calendar_weekdays, #calendar_header {
-        position: relative;
-        width: 150px;
-        overflow: hidden;
-        float: left;
-        z-index: 10;
-    }
-    #calendar_weekdays div, #calendar_content div {
-        width: 30px;
-        height: 40px;
-        overflow: hidden;
-        text-align: center;
-        background-color: #FFFFFF;
-        color: #787878;
-    }
-
-    
-#calendar_weekdays div {
-    color: blue; /* Set the font color to blue */
-}
-
-    #calendar_content {
-        -webkit-border-radius: 0px 0px 12px 12px;
-        -moz-border-radius: 0px 0px 12px 12px;
-        border-radius: 0px 0px 12px 12px;
-    }
-    #calendar_content div {
-        float: left;
-    }
-    #calendar_content div:hover {
-        background-color: #F8F8F8;
-    }
-    #calendar_content div.blank {
-        background-color: #b0c7c4p;
-    }
-    #calendar_header, #calendar_content div.today {
-        zoom: 1;
-        filter: alpha(opacity=70);
-        opacity: 0.7;
-    }
-    #calendar_content div.today {
-        color: #FFFFFF;
-    }
-    #calendar_header {
-        width: 100%;
-        height: 37px;
-        text-align: center;
-        background-color: #FF6860;
-        padding: 18px 0;
-        -webkit-border-radius: 12px 12px 0px 0px;
-        -moz-border-radius: 12px 12px 0px 0px;
-        border-radius: 12px 12px 0px 0px;
-    }
-    #calendar_header h1 {
-        font-size: 1.5em;
-        color: #FFFFFF;
-        float: left;
-        width: 70%;
-    }
-    i[class^=icon-chevron] {
-        color: blue;
-        float: left;
-        width: 15%;
-        border-radius: 50%;
-    }
-
-    #calendar_header{
-      background-color:black;
-    }
-
-    .go-to-courses-button {
-    display: flex;
-    justify-content: flex-end; /* Move the button to the right */
-    margin-top: 1rem;
-}
-
-</style>
 
 <div class="container">
   <div class="row">
     <div class="main-container">
+        <div class="container1">
+            <div>
+                <ul class="box-info">
+                <li class="course-count">
+                    <i class='bx bx-book-open' ></i>
+                    <span class="text">
+                    <h3>{{$courseCount}}</h3>
+                    <p>My Courses</p>
+                    </span>
+                </li>
+                <li class="due-count">
+                    <i class='bx bx-alarm' ></i>
+                    <span class="text">
+                    <h3>{{$notSubmittedCount}}</h3>
+                    <p>Due</p>
+                    </span>
 
-      <div class="container1">
-        <div>
-            <ul class="box-info">
-              <li class="course-count">
-                <i class='bx bx-book-open' ></i>
-                <span class="text">
-                <h3>{{$courseCount}}</h3>
-                  <p>My Courses</p>
-                </span>
-              </li>
-              <li class="due-count">
-                <i class='bx bx-alarm' ></i>
-                <span class="text">
-                <h3>{{$notSubmittedCount}}</h3>
-                  <p>Due</p>
-                </span>
-
-              
-            </ul>
+                
+                </ul>
+            </div>        
+            <div class="courses">
+            <div class="cards" style="width: 50rem; height: fit-content;">
+                @foreach($courses as $course)
+                    <div class="course">             
+                        <i class='bx bx-book'  style="background-color: {{ '#' . substr(md5(rand()), 0, 6) }}"></i>
+                        <span class="text">
+                        <p><b>{{$course -> level}}</b></p>
+                        <p>{{$course -> subject}}</p>
+                        </span>
+                    </div>
+                @endforeach
+            </div>
+            <a href="{{route('student.courses')}}" class="go-to-courses-button">
+                <button class="learn-more1">
+                    <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">GO TO COURSES</span>
+                </button>
+            </a>
+            </div>
         </div>
-        
-        <div class="courses">
-          <div class="cards" style="width: 50rem; height: fit-content;">
 
-          @foreach($courses as $course)
-              <div class="course">             
-                <i class='bx bx-book'  style="background-color: {{ '#' . substr(md5(rand()), 0, 6) }}"></i>
-                <span class="text">
-                  <p><b>{{$course -> level}}</b></p>
-                  <p>{{$course -> subject}}</p>
-                </span>
-              </div>
-          @endforeach
-          </div>
-          <a href="{{route('student.courses')}}" class="go-to-courses-button">
-    <button class="learn-more1">
-        <span class="circle" aria-hidden="true">
-            <span class="icon arrow"></span>
-        </span>
-        <span class="button-text">GO TO COURSES</span>
-    </button>
-</a>
-
-
+        <div id="calendar">
+            <div id="calendar_header"><i class="icon-chevron-left"></i>
+                <h1></h1><i class="icon-chevron-right"></i>
+            </div>
+            <div id="calendar_weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div id="calendar_content">
+                <!-- Calendar content will go here -->
+            </div>
         </div>
-      </div>
-      
-      
-      <div id="calendar">
-    <div id="calendar_header"><i class="icon-chevron-left"></i>
-        <h1></h1><i class="icon-chevron-right"></i>
-    </div>
-    <div id="calendar_weekdays">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-    </div>
-    <div id="calendar_content">
-        <!-- Calendar content will go here -->
-    </div>
-</div>
-           
-          </div>
-        </div>
-      </div>
       
     </div> 
   </div>  
-  <br>
-  <div class="row">
-    <div class="performance">
+</div>
 
     
 

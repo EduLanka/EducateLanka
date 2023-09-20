@@ -251,7 +251,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                     <td>${submission.grade !== null ? submission.grade : 'N/A'}</td>
                                     <td>${submission.feedback !== null ? submission.feedback : 'N/A'}</td>
                                     <td><a href="/download-material/${submission.id}" download><i class="bx bx-download"></i></a></td>
-  
                                     <td><a href="" class="comment-icon" data-submission-id="${submission.id}"><i class="bx bx-comment-add"></i></a></td>
                                     
                                 `;

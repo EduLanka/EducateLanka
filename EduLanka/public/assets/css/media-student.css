@@ -1,0 +1,123 @@
+@media screen and (max-width: 768px) {
+    .main-container{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .courses .cards {
+        display: flex !important;
+        flex-direction: column !important;
+        width: fit-content !important;
+    }
+
+    .courses .cards .course {
+        width: 18em !important;
+    }
+
+    .container1{
+        width: fit-content !important;
+        margin-bottom: 20% !important;
+    }
+
+    #calendar {
+        /* width: 100% !important;
+        overflow-x: auto !important; */
+        display: none !important;
+    }
+
+    .search{
+        display: none !important;
+    }
+
+    .student-courses{
+        display: flex !important;
+        flex-direction: column-reverse !important;
+      }
+
+      .all-courses{
+        height: fit-content !important;
+      }
+
+      .my-courses1{
+        grid-template-columns: 1fr !important;
+        height: 100% !important;
+        padding: 0 !important;
+        text-align: center !important;
+        justify-items: center !important;
+        margin-bottom: 100% !important;
+      }
+
+      .acourse{
+        padding: 2% !important;
+      }
+
+      .coursesgrid{
+        display: grid !important;
+         grid-template-columns: 1fr !important;
+         width: 100% !important;
+      }
+
+      .material{
+        width: 85% !important;
+        padding: 2% !important;
+      }
+
+      .materialss{
+        width: 100% !important;
+        overflow-x: auto !important;
+      }
+
+      .mImage{
+        display: none !important;
+      }
+
+      .alinks{
+        padding: 1em !important;
+        margin-bottom: 150% !important;
+      }
+
+      .alink{
+        grid-template-columns: 1fr !important;
+      }
+
+      .forum-container{
+        display: flex !important;
+       flex-direction: column !important;
+      }
+    
+      .posts {
+        padding: 0 !important;
+    }
+    
+    .post {
+        padding: 20px !important;
+       
+    }
+    
+    .post-image{
+        width: 100% !important;
+      }
+    
+          
+      .forum-nav, .forum-view{
+        padding: 0.5em !important;
+      }
+
+      .pro {
+        grid-template-columns: 1fr !important;
+        margin-bottom: 100% !important;
+    }
+
+    .settings-container{
+        display: flex !important;
+        flex-direction: column !important;
+        margin-bottom: 100% !important;
+      }
+    
+      .basics{
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+
+
+}

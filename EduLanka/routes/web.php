@@ -22,7 +22,7 @@ Route::get('/', function () {
         } elseif (auth()->user()->role == 3) {
             return redirect()->route('teacher.index');
         } elseif (auth()->user()->role == 4) {
-            return redirect()->route('parent.index');
+            return redirect()->route('parent');
         }  elseif (auth()->user()->role == 1) {
             return redirect()->route('admin.index');
         }
@@ -110,15 +110,13 @@ Route::middleware(['teacher'])->group(function () {
 });
 
 Route::middleware(['parent'])->group(function () {
-    // Route::get('parent', function () {
-    //     return view('parent');
-    // })->name('parent');
 
-    Route::get('/parent', 'App\Http\Controllers\GuardianController@index')->name('parent.index');
+    Route::get('/parent', 'App\Http\Controllers\GuardianController@index')->name('parent');
     Route::get('/get-performance', 'App\Http\Controllers\GuardianController@getPerformance')->name('get-performance');
     Route::get('/getSubmissionDetails/{submissionID}', 'App\Http\Controllers\GuardianController@getSubmissionDetails')->name('get-submission-details');
     Route::get('/getCount/{courseID}', 'App\Http\Controllers\GuardianController@getCount')->name('get-count');
     Route::get('/getDueCount/{courseID}', 'App\Http\Controllers\GuardianController@getDueCount')->name('get-due-count');
+    Route::get('/parent/settings', 'App\Http\Controllers\GuardianController@settings')->name('parent.settings');
 
 });
 

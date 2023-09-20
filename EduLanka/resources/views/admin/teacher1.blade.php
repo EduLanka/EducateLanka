@@ -42,7 +42,7 @@
          <img src="assets/images/Logo.jpg" alt="" style=" height:80px; min-width: 90px; display: flex; justify-content: center; ">
          <span class="text"  style=" padding:10px; ">EduLanka</span>
          </a>
-         <ul class="side-menu top">
+         <ul class="side-menu top" style="padding-left:1px;">
             <li >
                <a href="{{url('admin')}}">
                <i class='bx bxs-dashboard' ></i>
@@ -74,7 +74,7 @@
                </a>
             </li>
          </ul>
-         <ul class="side-menu">
+         <ul class="side-menu" style="padding-left:1px;">
             <li>
                <a href="{{url('/setting')}}">
                <i class='bx bxs-cog' ></i>
@@ -160,11 +160,11 @@
         <!--form start -->
         <div class="mb-3">
             <label for="fname" class="form-label">First Name</label>
-            <input type="text" class="form-control" name="fname" id="exampleFormControlInput1" placeholder="Maryam" required>
+            <input type="text" class="form-control" name="fname" id="exampleFormControlInput1" placeholder="Enter First Name" required>
         </div>
         <div class="mb-3">
             <label for="lname" class="form-label">Last Name</label>
-            <input type="text" class="form-control" name="lname" id="exampleFormControlInput1" placeholder="Mashkoora" required>
+            <input type="text" class="form-control" name="lname" id="exampleFormControlInput1" placeholder="Enter Second Name" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
